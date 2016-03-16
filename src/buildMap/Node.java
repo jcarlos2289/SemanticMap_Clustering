@@ -41,7 +41,6 @@ public class Node {
 
 	public Node(){
 		useHisto = true;
-		useHisto = true;
 		images = new ArrayList<ImageTags>();
 		if (!useHisto) {
 			distances = new ArrayList<ArrayList<Double>>();

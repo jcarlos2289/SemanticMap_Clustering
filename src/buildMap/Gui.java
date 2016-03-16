@@ -140,7 +140,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		getContentPane().setLayout(new BorderLayout());
 		setSize(width, height);
-		setTitle(name+" TriangleZone");
+		setTitle(name+" Clustering");
 		cm = new CanvasMap(this);
 		//setTitle("Topological Mapping");
 		getContentPane().add(cm, BorderLayout.CENTER);
@@ -1179,7 +1179,7 @@ public class Gui extends JFrame implements ActionListener {
             //----------------------------------Sequence 2
             
             if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();

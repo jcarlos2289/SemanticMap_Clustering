@@ -62,7 +62,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	//JDialog graf=null;
 	
 	public CanvasMap (Gui ig) {
-		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_NotAligned.png"));
+		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_1.png"));
 		gui=ig;
 		xdesp=(gui.width/4.3)-65;
 		ydesp=(gui.height/2.68)-74;

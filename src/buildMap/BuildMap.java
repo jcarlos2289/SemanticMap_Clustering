@@ -396,19 +396,26 @@ public class BuildMap {
 			
 		// For the first image, create a node
 		Node currentNode ;//= map.createNode(imgTags.get(0));
-		for(int i = 0; i <zoneCoords.length; i++){
+	
+	/*	for(int i = 0; i <zoneCoords.length; i++){
 			//currentNode = map.createNode(String.valueOf(zoneCoords[i][8]));
 			currentNode = map.createNode(hx.format(zoneCoords[i][6]), zoneCoords[i]);
 		}
 			
-		currentNode = map.getNodeByName(hx.format(zoneCoords[0][6]));
-				
+		currentNode = map.getNodeByName(hx.format(zoneCoords[0][6]));*/
+			
+		
+		
 		for (int i=1; i<sequenceLength; i++) {
+			
+			map.createNode(imgTags.get(i));
+			
+			
 			//cont++;
 			//if ((cont%1000)==0) System.out.println("Processing img="+i);
 			// Find the closest node
 			
-			String zone = getZone(imgTags.get(i).xcoord,imgTags.get(i).ycoord);
+		/*	String zone = getZone(imgTags.get(i).xcoord,imgTags.get(i).ycoord);
 			if (zone.equals("&")){  System.out.println("Image "+i+" Not in Any Zone of the map");continue;}
 			if (currentNode.nodeName.equals(zone)){   
 				//System.out.println(i+ "Zone " + zone+ "?.....");
@@ -420,7 +427,7 @@ public class BuildMap {
 				currentNode.add(imgTags.get(i));
 				//System.out.println(i+ "Zone " + zone+ "?.....");
 			
-			}
+			}*/
 			
 		}//end for
 	

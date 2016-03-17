@@ -1246,7 +1246,7 @@ public class Gui extends JFrame implements ActionListener {
             	int o = 1;
             	for (Node nd : bm.map.nodes) {
             		FileMethods.saveFile(nd.getNodesContentRows(), "Node_" + String.valueOf(o), false);
-            		FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean_" + String.valueOf(o), false);
+            		//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean_" + String.valueOf(o), false);
             		//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean", true);
 					o++;
 				}

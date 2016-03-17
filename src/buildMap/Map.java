@@ -68,6 +68,7 @@ public class Map {
 	
 	public Node createNode (ImageTags i) {
 		Node n=new Node(useHisto, weights);
+		n.nodeName = String.valueOf(nodes.size()+1);
 		n.add(i);
 		nodes.add(n);
 		return n;

@@ -159,7 +159,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 				y = (int)selectn.representative.ycoord;
 				
 				g.setColor(new Color(0,193,0));
-				g.drawPolygon(selectn.limits.getXArray(), selectn.limits.getYArray(), 3);
+				//g.drawPolygon(selectn.limits.getXArray(), selectn.limits.getYArray(), 3);
 				
 				g.setColor(new Color(0,255,255));
 		        g.drawOval(x, y, radius-4, radius-4);
@@ -203,77 +203,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 			else {
 				
 				
-				if(gui.zoneGenerated){
-					//---------------------------------------------------
-					//System.out.print("Drawing Zones");
-					ArrayList<String> cats = new ArrayList<String>();
-					for(Zone zn : gui.bm.map.zones){
-						if(!cats.contains(zn.name))						
-						   cats.add(zn.name);
-					}
-					
-					
-					/*
-					 * 1	650	441
-                       2	652	469
-					 * 
-					 * */
-					HashMap<String, Color> clave = new HashMap<String,Color>();
-									
-					
-					int colors[][] = new int[cats.size()][3];  //modifique la longuitud del arreglo anteriormente era gui.bm.map.zones.size()
-					
-					for (int i = 0; i <colors.length ; i++) {
-						for (int j = 0; j < colors[i].length; j++) {
-							colors [i][j] = (int)(Math.random()*255);
-							}
-						}
-					
-					
-					for (int i = 0; i < cats.size(); i++) {
-						clave.put(cats.get(i), (new Color(colors[i][0],colors[i][1],colors[i][2])));
-					} 
-						
-					int coord_y = 440;
-					for (java.util.Map.Entry<String, Color> entry : clave.entrySet()) {
-					    
-						g.setColor(entry.getValue());
-						g.drawOval(650, coord_y, radius, radius);
-						g.fillOval(650, coord_y, radius, radius);
-						g.setColor(new Color(0,0,0));
-						g.drawString(entry.getKey(), (int) (650+1.5*radius), coord_y+15);
-						coord_y+= 20;
-					}
-					
-					
-					
-					
-					//	int o = 0;			
-					for(Zone zn : gui.bm.map.zones){
-						// g.setColor(new Color(colors[o][0],colors[o][1],colors[o][2]));					
-								 
-						 for(Node nd : zn.areas){
-							g.setColor(clave.get(zn.name));
-							//int w = (int) (nd.limits.getX4()-nd.limits.getX3());
-							//int h = (int) (nd.limits.getY2()-nd.limits.getY3());
-							
-							g.drawPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
-							g.fillPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
-							
-							//g.drawRect((int)nd.limits.getX3(), (int) nd.limits.getY3(), w, h);
-							//g.fillRect((int)nd.limits.getX3(), (int) nd.limits.getY3(), w, h);
-						}
-					//o++;
-					
-					}
-					
-				}
-				
-				
-				
-				
-				
-				
+			
 				
 				for (Map.Edge e:gui.bm.map.edges) {
 					//xAnt=(int)(zoomFactor*(e.a.representative.xcoord-xmean)+xdesp);
@@ -313,13 +243,86 @@ public class CanvasMap extends JPanel implements MouseListener {
 			        g.drawString(n.nodeName, x+3, y+10);
 			      //  number++;
 			        
-			        g.drawPolygon(n.limits.getXArray(), n.limits.getYArray(), 3);
+			      //  g.drawPolygon(n.limits.getXArray(), n.limits.getYArray(), 3);
 					//g.fillPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
 			        
 			        
 				}
 
 				}
+				
+				if(gui.zoneGenerated){
+					//---------------------------------------------------
+					//System.out.print("Drawing Zones");
+					ArrayList<String> cats = new ArrayList<String>();
+					for(Zone zn : gui.bm.map.zones){
+						if(!cats.contains(zn.name))						
+						   cats.add(zn.name);
+					}
+					
+				
+					HashMap<String, Color> clave = new HashMap<String,Color>();
+									
+					
+					int colors[][] = new int[cats.size()][3];  //modifique la longuitud del arreglo anteriormente era gui.bm.map.zones.size()
+					
+					for (int i = 0; i <colors.length ; i++) {
+						for (int j = 0; j < colors[i].length; j++) {
+							colors [i][j] = (int)(Math.random()*255);
+							}
+						}
+					
+					
+					for (int i = 0; i < cats.size(); i++) {
+						clave.put(cats.get(i), (new Color(colors[i][0],colors[i][1],colors[i][2])));
+					} 
+						
+					int coord_y = 440;
+					int coord_x = 255;
+					 Font oldFont2=getFont();
+				        Font fuente=new Font("Monospaced", Font.PLAIN, 12);
+				        g.setFont(fuente);
+				       
+				       
+					
+					
+					for (java.util.Map.Entry<String, Color> entry : clave.entrySet()) {
+					    
+						g.setColor(entry.getValue());
+						g.drawOval(coord_x, coord_y, radius, radius);
+						g.fillOval(coord_x, coord_y, radius, radius);
+						g.setColor(new Color(0,0,0));
+						g.drawString(entry.getKey(), (int) (coord_x+1.5*radius), coord_y+15);
+						coord_y+= 20;
+					}
+					 g.setFont(oldFont2);
+					
+					//	int o = 0;			
+					for(Zone zn : gui.bm.map.zones){
+						// g.setColor(new Color(colors[o][0],colors[o][1],colors[o][2]));					
+								 
+						 for(Node nd : zn.areas){
+							g.setColor(clave.get(zn.name));
+							
+							
+							 g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius+2, radius+2);
+							 g.fillOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius+2, radius+2);
+							// g.drawString(zn.name, (int)nd.representative.xcoord,  (int)nd.representative.ycoord);
+							//System.out.println(String.valueOf(nd.representative.xcoord));
+							
+							//g.drawPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
+							//g.fillPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
+							
+						}
+					//o++;
+					
+					}
+				}
+				
+				
+				
+				
+				
 			}
 			
 			
@@ -478,11 +481,6 @@ public class CanvasMap extends JPanel implements MouseListener {
 			
 			}
 		}
-		
-		
-		
-		
-		
 	        //Recorro para encontrar el mayor
 	        //Recorro para ver en quje nodo esta el tag
 	        //busco su indice y uso el valor para generar la escala termica

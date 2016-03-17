@@ -808,7 +808,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	}
 	
 	
-	public void showHierCluster(){
+	public void showHierCluster(JScrollPane scroll){
 		if(clusterDialog!=null){
 			clusterDialog.dispose();
 			clusterDialog=null;
@@ -819,8 +819,8 @@ public class CanvasMap extends JPanel implements MouseListener {
 		JButton k = new JButton("Save as Image...");
 		k.setSize(new Dimension(50, 20));	
 		clusterDialog = new JDialog(gui);
-		JScrollPane scroll = new JScrollPane();
-		scroll = gui.bm.map.getHierCluster();
+		//JScrollPane scroll = new JScrollPane();
+		//scroll = gui.bm.map.getHierCluster();
 		
 		
 		k.addActionListener(new ActionListener() {
@@ -865,21 +865,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 			     		}
 				        
 				        
-				        //return img;
-				  
-				/* else {
-				    	scroll.setSize(scroll.getPreferredSize());
-				        layoutComponent(scroll);
-				        BufferedImage img = new BufferedImage(scroll.getWidth(), scroll.getHeight(), BufferedImage.TRANSLUCENT);
-				        CellRendererPane crp = new CellRendererPane();
-				        crp.add(scroll);
-				        crp.paintComponent(img.createGraphics(), scroll, crp, scroll.getBounds());
-				        return img;
-				    }*/
-				 
-				 
-				 
-	     	    
+			     	    
 			}
 		});
 		

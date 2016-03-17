@@ -60,7 +60,7 @@ public class Gui extends JFrame implements ActionListener {
 	String name ;
 	
 	 JMenu jmOperations, jmShows;
-	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, jmiNodeComposition;
+	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, jmiNodeComposition,  jmiGenFullHierCluster;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -183,6 +183,12 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiGenZone.addActionListener(this);
 	        jmiGenZone.setEnabled(false);
 	        jmOperations.add(jmiGenZone);
+	        
+	        
+	        jmiGenFullHierCluster = new JMenuItem("Gen Full Hierarchical Clustering");
+	        jmiGenFullHierCluster.addActionListener(this);
+	        //jmiGenFullHierCluster.setEnabled(false);
+	        jmOperations.add(jmiGenFullHierCluster);
 	           
 	        jmiGenHierCluster = new JMenuItem("Gen Hierarchical Clustering");
 	        jmiGenHierCluster.addActionListener(this);
@@ -1073,6 +1079,13 @@ public class Gui extends JFrame implements ActionListener {
 	  			return;
 	  		}
 	  		
+	  		
+	  		if(e.getSource()==  jmiGenFullHierCluster){
+	  			HierClustering hc = new HierClustering(bm.dimension, bm.imgTags);
+	  			cm.showHierCluster(hc.cluster());
+	  		}
+	  			
+	  		
             
              //Sequence1 Vidrilo
             if(e.getSource() == jMiHybrid_Sq1){
@@ -1179,7 +1192,7 @@ public class Gui extends JFrame implements ActionListener {
             //----------------------------------Sequence 2
             
             if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1250,7 +1263,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource()==jmiGenHierCluster){
-            	cm.showHierCluster();
+            	cm.showHierCluster(bm.map.getHierCluster());
             }
             
             

@@ -819,7 +819,10 @@ public class Map {
 				zones.add(auxZone);
 			}
 		//Nuevo Metodo de Generacion de Zonas basado en similitud evaluada en cada nodo.	
-			
+			//Si no es similar se pasara a otra zona
+			// pero se debe buscar siempre si dentro 
+			// de las existentes se puede agregar
+			//
 			
 			
 			//Zone g = zones.add(currentZone);
@@ -854,7 +857,7 @@ public class Map {
 					currentZone.addNode(nodes.get(i));
 				}else
 				{
-					if(minDist<dist && minDist < 0.09){ //th1
+					if(minDist<dist && minDist < 0.4){ //th1 = 0.09
 						//foundZone = true;
 						currentZone= auxZone2;
 						currentZone.addNode(nodes.get(i));
@@ -864,13 +867,14 @@ public class Map {
 					}
 				}
 			}	
-				
-				
 			
-			//Si no es similar se pasara a otra zona
-			// pero se debe buscar siempre si dentro 
-			// de las existentes se puede agregar
-			//
+			
+			//------------------------------------------------------
+			
+			
+			
+			
+		
 			
 			
 			ArrayList<String> zNames = new ArrayList<String>();

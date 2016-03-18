@@ -37,26 +37,23 @@ public class Kmeans {
 			means = new Point[k];
 			nPointsMean = new int[k];
 			Set<String> hs1;
-			hs1 = ImageList.get(0).tags.keySet();
-
+			hs1 = ImageList.get(0).tags.keySet(); 
+			//for(int i =0; i<hs1.size();++i)System.out.println("");
 			obtained = new ArrayList<Point>();
 
 			near = new ArrayList<Integer>();
 			dist = new ArrayList<Double>();
 
 			double dataTags[] = new double[hs1.size()];
-			for (Iterator<ImageTags> iterator = ImageList.iterator(); iterator
-					.hasNext();) {
+			for (Iterator<ImageTags> iterator = ImageList.iterator(); iterator.hasNext();) {
 				ImageTags auxImage = (ImageTags) iterator.next();
 				int h = 0;
-				for (Iterator<String> itKey = hs1.iterator(); itKey
-						.hasNext();) {
+				for (Iterator<String> itKey = hs1.iterator(); itKey.hasNext();) {
 					String key = (String) itKey.next();
 					dataTags[h] = auxImage.getValue(key);
 					++h;
-				}
-				obtained.add(new Point(dim, dataTags, auxImage.xcoord,
-						auxImage.ycoord));
+				}  //System.out.println("Cantidad de tags "+ dataTags.length);
+				obtained.add(new Point(dim, dataTags, auxImage.xcoord,auxImage.ycoord));
 				near.add(0);
 				dist.add(0.0);
 

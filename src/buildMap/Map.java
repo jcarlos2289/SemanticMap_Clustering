@@ -82,6 +82,15 @@ public class Map {
 		return z;
 	}
 	
+	public Zone createZone(String n){
+		Zone z = new Zone(n);
+		zones.add(z);
+		
+		return z;
+	}
+	
+	
+	
 	public Node createNode (String name){
 		Node n=new Node(useHisto, weights);
 		n.nodeName = name;
@@ -708,7 +717,7 @@ public class Map {
 		nodesByCat.clear();
 		catID.clear();
 		
-		int catCount = 1;
+	/*	int catCount = 1;
 		
 		for(String hj : ol){
 			if(hj.contains("&")){
@@ -795,10 +804,10 @@ public class Map {
 			ArrayList<String> maxTag = new ArrayList<>();
 	        maxTag = ListMethods.getTopXNodes(1, probTopTags);
 	        
-	       /* if(catIdentifiedTags2.containsValue(maxTag.get(0))){
-	        	catIdentifiedTags2.put(resumeCats.get(i), maxTag.get(0)+"_"+String.valueOf(i));  // diferencio los corredores identificados cada uno con numero diferente al final
-	        }
-	        else*/
+	      // if(catIdentifiedTags2.containsValue(maxTag.get(0))){
+	      //  	catIdentifiedTags2.put(resumeCats.get(i), maxTag.get(0)+"_"+String.valueOf(i));  // diferencio los corredores identificados cada uno con numero diferente al final
+	      //  }
+	      //  else
 	        	 catIdentifiedTags2.put(resumeCats.get(i), maxTag.get(0));
 			
 		}
@@ -817,7 +826,7 @@ public class Map {
 					}
 				}
 				zones.add(auxZone);
-			}
+			}*/
 		//Nuevo Metodo de Generacion de Zonas basado en similitud evaluada en cada nodo.	
 			//Si no es similar se pasara a otra zona
 			// pero se debe buscar siempre si dentro 
@@ -827,7 +836,7 @@ public class Map {
 			
 			//Zone g = zones.add(currentZone);
 					
-			zones.clear();
+		/*	zones.clear();
 			
 			
 			auxZone = new Zone("aa");
@@ -867,16 +876,41 @@ public class Map {
 					}
 				}
 			}	
-			
+			*/
 			
 			//------------------------------------------------------
-			
-			
-			
-			
+			//Generacion de zonas mediante clusters(KMeans)
 		
+			ArrayList<ImageTags> ramList = new ArrayList<ImageTags>();
+			zones.clear();
 			
+			//acumulo los representativos
+			for(Node n: nodes){
+				ramList.add(n.representative);
+				//System.out.println("Tags en el Representativo" +String.valueOf(n.representative.getKeys().size()));
+			}
+			//System.out.println(nodes.size());
+			//System.out.println(ramList.size());
 			
+			//ramList.get(0).tags.size()
+			Kmeans km2;
+  			km2 = new Kmeans(5,ramList.get(0).tags.size(),ramList);
+			km2.findMeans();
+			
+  			//creacion de zonas 
+			Zone current ;
+  			for (int i = 0; i< km2.k;i++){
+  				current = createZone(String.valueOf(i));
+  			}
+  		
+  			for(int i = 0; i< nodes.size();++i){
+  				current = getZone(km2.near.get(i));
+  				current.addNode(nodes.get(i));
+  			}
+  				
+  			//km2.near.get(index)
+  			 		
+			//-------------------------------------------------------
 			ArrayList<String> zNames = new ArrayList<String>();
 			for(int i = 0; i< zones.size();i++){
 				String ram =  zones.get(i).name;

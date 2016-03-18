@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 import buildMap.Map.AreaCoords;
 import buildMap.Map.Edge;
 import wordcloud.CollisionMode;
@@ -332,6 +333,10 @@ public class Node {
 				representative.xcoord = auxx;
 				representative.ycoord = auxy;
 				
+				
+				
+				//representative.tags= (ConcurrentHashMap<String, Float>) histoMean;
+				
 				if(limits != null){
 				representative.xcoord=(limits.A.x+limits.B.x+limits.C.x)/3;
 				representative.ycoord=(limits.A.y+limits.B.y+limits.C.y)/3;
@@ -347,6 +352,10 @@ public class Node {
 		for (Entry<String, Float> e : histoVariance.entrySet()) {
 			nodeVariance += e.getValue();
 		}
+		
+		representative.tags.putAll(histoMean);
+		//histoMean.putAll(representative.tags);
+		
 	}
 
 	public double distance(ImageTags t1, ImageTags t2) {

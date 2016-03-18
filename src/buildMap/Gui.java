@@ -1191,6 +1191,74 @@ public class Gui extends JFrame implements ActionListener {
             
             //----------------------------------Sequence 2
             
+       /*     if(e.getSource() == jMIPlaAlex_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_PlacesAlexNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }*/
+            
+            
+            
+            if(e.getSource() == jMiHybrid_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
+	  			name= "VidriloSeq2_HybridAlexNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            if(e.getSource() == jMIImgAlex_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetAlexNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            if(e.getSource() == jMIImgCaff_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetCaffeNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetCaffeNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            if(e.getSource() == jMIImgGNet_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetGoogLeNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            if(e.getSource() == jMIImgVGG_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetVGG/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetVGG";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            
             if(e.getSource() == jMIPlaAlex_Sq2){
             	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
@@ -1201,6 +1269,45 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
+            
+            if(e.getSource() == jMIPlaGNet_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_PlacesGoogLeNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            if(e.getSource() == jMIImgMX_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetMXNet";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            
+            if(e.getSource() == jMIImgMX21K_Sq2){
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K/sequence2visual", 0.0000000, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
+	  			name= "VidriloSeq2_ImageNetMXNet21K";
+	  			setTitle(name);      
+            	cm.repaint();
+            	statusLabel.setText("Sequence : "+name+" selected.");
+            	seqNumber=2;
+            	jmiGenMap.setEnabled(true);
+                return;
+            }
+            
+            
+            //---------------------------------------------------SEQ2---END-------------------------------
+            
+            
             
             
             

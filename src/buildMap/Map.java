@@ -21,6 +21,8 @@ import com.apporiented.algorithm.clustering.visualization.DendrogramPanel;
 
 import java.util.Map.Entry;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
@@ -590,11 +592,18 @@ public class Map {
 		
 		DendrogramPanel dp = new DendrogramPanel();
 		dp.setBackground(new Color(255,255,255));
-		dp.setSize(500, 3000);
+		dp.setSize(500, 9000);
+		dp.setScaleTickLength(1);
+		dp.setScaleValueDecimals(0);
+		dp.setScaleValueInterval(1);
 		dp.setModel(cluster);
 		JScrollPane pane = new JScrollPane(dp);
-		
-		
+		 
+		/*JFrame hj = new JFrame();
+		hj.setSize(500, 9000);
+		//hj.setContentPae(pane);
+		hj.add(dp);
+		hj.setVisible(true);*/
 		return pane;
 		
 		
@@ -623,23 +632,128 @@ public class Map {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String printCluster(Cluster cs){
+		
+		
+		
+		
 		String result="";
 		if(cs.countLeafs()>2){
+			//if(cs.getDistance()> 0.09 && cs.getDistance()<0.11)
+				//result+="\n-------------";
 			for(Cluster c : cs.getChildren()){
-				result += printCluster(c);
+				//if(c.getDistance()!=null) 	if(c.getDistance()> 0.09 && c.getDistance()<0.11) result+="\n-------------";
+				result += printCluster(c); if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
 				//if(c.isLeaf())
 					//result+="\n-------------";
 					}
 		}
 		else{
 			result += "\n|"+cs.getName()+"| ";//Dist: "+ String.valueOf(cs.getDistance())+"\n";
-			if(cs.getDistance()!=null)
-				if(cs.getDistance()> 0.1 && cs.getDistance()<0.18)//if(!cs.isLeaf())
-				result+="\n-------------";
+			//if(cs.getDistance()!=null)
+				//if(cs.getDistance()> 0.03 && cs.getDistance()<0.05)//if(!cs.isLeaf())
+				//result+="\n-------------";
 		}
+		
+		
+		
+		
+				
+		
+		
+		
+		
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public ArrayList<String> getClusterArray(Cluster cs){
@@ -653,8 +767,9 @@ public class Map {
 		}
 		else{
 			result.add(cs.getName());//Dist: "+ String.valueOf(cs.getDistance())+"\n";
-			if(!cs.isLeaf())//if(cs.getDistance()!=null)
-				//if(cs.getDistance()> 0.12 && cs.getDistance()<0.15)//if(!cs.isLeaf())
+			//if(!cs.isLeaf())
+			if(cs.getDistance()!=null)
+				if(cs.getDistance()> 0.03 && cs.getDistance()<0.05)//if(!cs.isLeaf())
 				result.add("#");
 			}
 		return result;
@@ -714,10 +829,12 @@ public class Map {
 		ArrayList<String> ol = new ArrayList<String>();
 		ol = getClusterArray(cluster); // gets an array list with the leafs of cluster separing cluster by #
 		
+		System.out.println(printCluster(cluster));//imprimir clusters separados segun la distancia
+		//cluster.toConsole(4);
 		nodesByCat.clear();
 		catID.clear();
-		
-	/*	int catCount = 1;
+		//Metodo 1 mediante analisis de dendrograma
+		int catCount = 1;
 		
 		for(String hj : ol){
 			if(hj.contains("&")){
@@ -734,7 +851,7 @@ public class Map {
 				nodesByCat.add(hj);
 				catID.add(String.valueOf(catCount));
 			}
-			//System.out.println(hj);
+			
 		}
 
 		
@@ -826,7 +943,11 @@ public class Map {
 					}
 				}
 				zones.add(auxZone);
-			}*/
+			}
+	
+		
+		
+		//Metodo Dos basado en similitud y 2 thresholds---------------------------------
 		//Nuevo Metodo de Generacion de Zonas basado en similitud evaluada en cada nodo.	
 			//Si no es similar se pasara a otra zona
 			// pero se debe buscar siempre si dentro 
@@ -878,10 +999,10 @@ public class Map {
 			}	
 			*/
 			
-			//------------------------------------------------------
+			//----------Metodo 3--------------------------------------------
 			//Generacion de zonas mediante clusters(KMeans)
 		
-			ArrayList<ImageTags> ramList = new ArrayList<ImageTags>();
+		/*	ArrayList<ImageTags> ramList = new ArrayList<ImageTags>();
 			zones.clear();
 			
 			//acumulo los representativos
@@ -889,10 +1010,7 @@ public class Map {
 				ramList.add(n.representative);
 				//System.out.println("Tags en el Representativo" +String.valueOf(n.representative.getKeys().size()));
 			}
-			//System.out.println(nodes.size());
-			//System.out.println(ramList.size());
-			
-			//ramList.get(0).tags.size()
+		
 			Kmeans km2;
   			km2 = new Kmeans(5,ramList.get(0).tags.size(),ramList);
 			km2.findMeans();
@@ -909,7 +1027,7 @@ public class Map {
   			}
   				
   			//km2.near.get(index)
-  			 		
+  			 		*/
 			//-------------------------------------------------------
 			ArrayList<String> zNames = new ArrayList<String>();
 			for(int i = 0; i< zones.size();i++){
@@ -932,8 +1050,12 @@ public class Map {
 				text+=z.name +"</td> <td>";
 				text+=String.valueOf(z.getSize()) +"</td> <td>";
 				
-				for(Node n : z.areas)
+				int jk = 1;
+				for(Node n : z.areas){
+					if(jk%14==0)text+="<br>";
 					text+= "-"+String.valueOf(n.nodeName)+"&nbsp;";
+					jk++;
+				}
 				
 				text +="</td></tr>\n";
 				p++;

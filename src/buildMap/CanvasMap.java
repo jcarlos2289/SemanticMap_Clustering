@@ -933,7 +933,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		zoneDialog = new JDialog(gui);
 		JLabel dat = new JLabel(gui.bm.map.generateZones());
 		JScrollPane scroll = new JScrollPane(dat);
-		zoneDialog.setSize(600, 500);
+		zoneDialog.setSize(900, 500);
 		zoneDialog.setContentPane(scroll);
 		zoneDialog.setLocationRelativeTo(null);
 		zoneDialog.setVisible(true);

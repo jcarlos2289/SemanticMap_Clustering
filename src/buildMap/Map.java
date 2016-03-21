@@ -668,21 +668,31 @@ public class Map {
 	
 	
 	
-	public String printCluster(Cluster cs){
+	public String printCluster(Cluster cs, boolean fatherFound){
 		
-		
+		boolean found = false;
 		
 		
 		String result="";
+		
+		if (fatherFound){  //cuando no he encontrado el padre compruebo la distancia para saber si este es padre
+			found = true;
+		}
+		 else{
+				if(cs.getDistance()!=null &&cs.getTotalDistance()> 0.12 && cs.getTotalDistance()<0.14){
+					found = true; // si la distancia cae en el umbral hago found true para que de ahora en adelante cuando se haga el llamado recursivo se sepa que ya no debe hacer comprobacion de distancia 
+					System.out.println("Encontrado es true en al cooresponder con la distancia: Total Distance "+ cs.getTotalDistance()+" Distance "+ cs.getDistance());
+					result+="Encontrado es true en al cooresponder con la distancia\n";
+					result+="\n------h-------";
+					}
+				}
+	
+		
 		if(cs.countLeafs()>2){
-			//if(cs.getDistance()> 0.09 && cs.getDistance()<0.11)
 				//result+="\n-------------";
 			for(Cluster c : cs.getChildren()){
-				//if(c.getDistance()!=null) 	if(c.getDistance()> 0.09 && c.getDistance()<0.11) result+="\n-------------";
-				result += printCluster(c); if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
-				//if(c.isLeaf())
-					//result+="\n-------------";
-					}
+				result += printCluster(c, found); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
+			}
 		}
 		else{
 			result += "\n|"+cs.getName()+"| ";//Dist: "+ String.valueOf(cs.getDistance())+"\n";
@@ -829,7 +839,7 @@ public class Map {
 		ArrayList<String> ol = new ArrayList<String>();
 		ol = getClusterArray(cluster); // gets an array list with the leafs of cluster separing cluster by #
 		
-		System.out.println(printCluster(cluster));//imprimir clusters separados segun la distancia
+		System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
 		//cluster.toConsole(4);
 		nodesByCat.clear();
 		catID.clear();

@@ -277,7 +277,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 						clave.put(cats.get(i), (new Color(colors[i][0],colors[i][1],colors[i][2])));
 					} 
 						
-					int coord_y = 440;
+					int coord_y = 300;
 					int coord_x = 255;
 					 Font oldFont2=getFont();
 				        Font fuente=new Font("Monospaced", Font.PLAIN, 12);
@@ -933,7 +933,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		zoneDialog = new JDialog(gui);
 		JLabel dat = new JLabel(gui.bm.map.generateZones());
 		JScrollPane scroll = new JScrollPane(dat);
-		zoneDialog.setSize(900, 500);
+		zoneDialog.setSize(1000, 800);
 		zoneDialog.setContentPane(scroll);
 		zoneDialog.setLocationRelativeTo(null);
 		zoneDialog.setVisible(true);

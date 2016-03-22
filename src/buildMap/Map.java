@@ -13,11 +13,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+/*
 import com.apporiented.algorithm.clustering.Cluster;
+import com.apporiented.algorithm.clustering.ClusterPair;
 import com.apporiented.algorithm.clustering.ClusteringAlgorithm;
 import com.apporiented.algorithm.clustering.CompleteLinkageStrategy;
 import com.apporiented.algorithm.clustering.DefaultClusteringAlgorithm;
-import com.apporiented.algorithm.clustering.visualization.DendrogramPanel;
+import com.apporiented.algorithm.clustering.visualization.DendrogramPanel;*/
+
+import hierClustering.*;
+import hierClustering.visualization.*;
 
 import java.util.Map.Entry;
 
@@ -623,8 +629,31 @@ public class Map {
 		if(distanceMatrix==null)
 			generateDistanceMatrix();
 		
-		ClusteringAlgorithm alg = new DefaultClusteringAlgorithm();
-		Cluster cluster = alg.performClustering(distanceMatrix, names, new CompleteLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy()
+		
+		int size = 0;
+		
+		for (int i = 0; i < names.length; i++) {
+			size +=i;
+		}
+		
+		double [][] pdistMatrix = new double[1][size];
+		
+		int o =0;
+		
+		for (int i = 0; i < distanceMatrix.length;i ++) {
+			for (int j = i+1; j < distanceMatrix.length; j++) {
+				pdistMatrix[0][o]= distanceMatrix[i][j];
+				o++;
+			}
+		}
+		
+		
+		
+		//ClusteringAlgorithm alg = new DefaultClusteringAlgorithm();
+		ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
+		Cluster cluster = alg.performClustering(pdistMatrix, names, new CompleteLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy()
+		
+		
 				
 		//cluster.toConsole(1);
 		//System.out.println(printCluster(cluster));
@@ -653,27 +682,48 @@ public class Map {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public String printCluster(Cluster cs, boolean fatherFound){
 		
 		boolean found = false;
-		
-		
 		String result="";
+		
+		
+		
+		if(cs.getDistance()!=null &&  cs.getTotalDistance()<0.4){//cs.getTotalDistance()> 0.09 &&
+			List<String> nam = new ArrayList<String>();
+			nam = cs.getLeafNames();
+			String ram = "";
+			for (String string : nam) {
+				ram+= string+" ";
+			}
+			ram.trim();
+			//result += "\n|"+cs.getName()+ " Leafs" +  cs.getLeafNames().size()+"| ";
+			result += "\n|"+ram.trim()+"| ";
+			result+="\n------:(:-------";
+			return result;
+		}
+			else{
+				if(cs.countLeafs()>0){
+					for(Cluster c : cs.getChildren()){
+						result += printCluster(c, true); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
+					}
+				}else
+						result+="\n|"+cs.getName()+"| ";
+				
+			}
+		
+				
+		return result;	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		/*		
 		
 		if (fatherFound){  //cuando no he encontrado el padre compruebo la distancia para saber si este es padre
 			found = true;
@@ -695,79 +745,34 @@ public class Map {
 			}
 		}
 		else{
-			result += "\n|"+cs.getName()+"| ";//Dist: "+ String.valueOf(cs.getDistance())+"\n";
+			List<String> nam = new ArrayList<String>();
+			nam = cs.getLeafNames();
+			String ram = "";
+			for (String string : nam) {
+				ram+= string+" ";
+			}
+			ram.trim();
+			
+			result += "\n|"+ram+"| ";//Dist: "+ String.valueOf(cs.getDistance())+"\n";
 			//if(cs.getDistance()!=null)
 				//if(cs.getDistance()> 0.03 && cs.getDistance()<0.05)//if(!cs.isLeaf())
 				//result+="\n-------------";
 		}
+		*/
+		
+		
+			
 		
 		
 		
-		
-				
-		
-		
-		
-		
-		return result;
+		//return result;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public ArrayList<String> getClusterArray(Cluster cs){
+		public ArrayList<String> getClusterArray(Cluster cs){
 		ArrayList<String> result= new ArrayList<String>();
+		
+		//metodo Anteriror
+		/*------------------------------------------------------------------------
 		if(cs.countLeafs()>2){
 			for(Cluster c : cs.getChildren()){
 				result.addAll(getClusterArray(c));
@@ -779,10 +784,54 @@ public class Map {
 			result.add(cs.getName());//Dist: "+ String.valueOf(cs.getDistance())+"\n";
 			//if(!cs.isLeaf())
 			if(cs.getDistance()!=null)
-				if(cs.getDistance()> 0.03 && cs.getDistance()<0.05)//if(!cs.isLeaf())
+				if(cs.getDistance().getDistance()> 0.03 && cs.getDistance().getDistance()<0.05)//if(!cs.isLeaf())
 				result.add("#");
 			}
 		return result;
+		*/
+		//-------------------------------------------------------------------------------------------------------
+		
+		if(cs.getDistance()!=null &&  cs.getTotalDistance()<0.8){//cs.getTotalDistance()> 0.09 &&
+			List<String> nam = new ArrayList<String>();
+			nam = cs.getLeafNames();
+			String ram = "";
+			for (String string : nam) {
+				ram+= string+" ";
+			}
+			ram.trim();
+			//result += "\n|"+cs.getName()+ " Leafs" +  cs.getLeafNames().size()+"| ";
+			result.addAll(nam) ;    //+= "\n|"+ram.trim()+"| ";
+			result.add("#");//+="\n------:(:-------";
+			return result;
+		}
+			else{
+				if(cs.countLeafs()>0){
+					for(Cluster c : cs.getChildren()){
+						result.addAll(getClusterArray(c));; //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
+					}
+				}else
+						result.add(cs.getName());//+="\n|"+cs.getName()+"| ";
+				
+			}
+		
+				
+		return result;	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -840,6 +889,9 @@ public class Map {
 		ol = getClusterArray(cluster); // gets an array list with the leafs of cluster separing cluster by #
 		
 		System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
+		System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////");
+		
+		
 		//cluster.toConsole(4);
 		nodesByCat.clear();
 		catID.clear();
@@ -1049,6 +1101,7 @@ public class Map {
 			
 			String text = "<html>\n";
 			text +="<h1> Identified zones in the map</h1><br>";
+			text+="<h2>Numeber of zones: "+ zones.size()+"</h2><br>";
 						
 			text += "<table border=\"1\"   style=\"font-size:12px\"    >";
 			text +="<tr><th>Zone</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";
@@ -1062,7 +1115,7 @@ public class Map {
 				
 				int jk = 1;
 				for(Node n : z.areas){
-					if(jk%14==0)text+="<br>";
+					if(jk%20==0)text+="<br>";
 					text+= "-"+String.valueOf(n.nodeName)+"&nbsp;";
 					jk++;
 				}

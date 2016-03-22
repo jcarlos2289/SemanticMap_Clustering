@@ -389,13 +389,13 @@ public class BuildMap {
 		map.setWeights(cutNode);
 		//double minDist, dist;
 		//int cont=0;
-		Node  auxNode2;
+		//Node  auxNode2;
 		@SuppressWarnings("unused")
 		boolean foundNode, foundEdge;
 				///-------------------------------------------------------------------------------
 			
 		// For the first image, create a node
-		Node currentNode ;//= map.createNode(imgTags.get(0));
+//		Node currentNode ;//= map.createNode(imgTags.get(0));
 	
 	/*	for(int i = 0; i <zoneCoords.length; i++){
 			//currentNode = map.createNode(String.valueOf(zoneCoords[i][8]));
@@ -457,13 +457,13 @@ public class BuildMap {
 			System.out.println("nodos vacios " + integer);
 		}*/
 		
-		System.out.println("Node Amaount " + map.nodes.size());
+	//	System.out.println("Node Amaount " + map.nodes.size());
 		
 		if(!errase.isEmpty()){
 			map.nodes.removeAll(xNodes);
 			System.out.println("Deleted Nodes  " + errase.size());}
 		
-		System.out.println("\n\nNode Amaount " + map.nodes.size());
+		//System.out.println("\n\nNode Amaount " + map.nodes.size());
 			
 	
 		

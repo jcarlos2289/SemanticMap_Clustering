@@ -277,7 +277,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 						clave.put(cats.get(i), (new Color(colors[i][0],colors[i][1],colors[i][2])));
 					} 
 						
-					int coord_y = 300;
+					int coord_y = 390;
 					int coord_x = 255;
 					 Font oldFont2=getFont();
 				        Font fuente=new Font("Monospaced", Font.PLAIN, 12);
@@ -289,10 +289,10 @@ public class CanvasMap extends JPanel implements MouseListener {
 					for (java.util.Map.Entry<String, Color> entry : clave.entrySet()) {
 					    
 						g.setColor(entry.getValue());
-						g.drawOval(coord_x, coord_y, radius, radius);
-						g.fillOval(coord_x, coord_y, radius, radius);
+						g.drawOval(coord_x, coord_y, radius-1, radius-1);
+						g.fillOval(coord_x, coord_y, radius-1, radius-1);
 						g.setColor(new Color(0,0,0));
-						g.drawString(entry.getKey(), (int) (coord_x+1.5*radius), coord_y+15);
+						g.drawString(entry.getKey(), (int) (coord_x+1.5*(radius-1)), coord_y+12);
 						coord_y+= 20;
 					}
 					 g.setFont(oldFont2);
@@ -318,12 +318,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 					
 					}
 				}
-				
-				
-				
-				
-				
-			}
+				}
 			
 			
 			
@@ -916,7 +911,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		clusterDialog.setTitle("Hierchical Cluster of the Nodes en the Map");
 		
 		//clusterDialog.setContentPane(scroll);
-		clusterDialog.setSize(570, 1050);
+		clusterDialog.setSize(570, 1055);
 		clusterDialog.setLocationRelativeTo(null);
 		clusterDialog.setVisible(true);
 		
@@ -933,7 +928,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		zoneDialog = new JDialog(gui);
 		JLabel dat = new JLabel(gui.bm.map.generateZones());
 		JScrollPane scroll = new JScrollPane(dat);
-		zoneDialog.setSize(1000, 800);
+		zoneDialog.setSize(1040, 800);
 		zoneDialog.setContentPane(scroll);
 		zoneDialog.setLocationRelativeTo(null);
 		zoneDialog.setVisible(true);

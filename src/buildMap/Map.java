@@ -27,8 +27,6 @@ import hierClustering.visualization.*;
 
 import java.util.Map.Entry;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
@@ -651,7 +649,7 @@ public class Map {
 		
 		//ClusteringAlgorithm alg = new DefaultClusteringAlgorithm();
 		ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
-		Cluster cluster = alg.performClustering(pdistMatrix, names, new CompleteLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy()
+		Cluster cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
 		
 		
 				
@@ -660,31 +658,10 @@ public class Map {
 		return cluster;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	public String printCluster(Cluster cs, boolean fatherFound){
 		
-		boolean found = false;
+		//boolean found = false;
 		String result="";
 		
 		
@@ -715,14 +692,7 @@ public class Map {
 				
 		return result;	
 				
-				
-				
-				
-				
-				
-				
-				
-				
+			
 		/*		
 		
 		if (fatherFound){  //cuando no he encontrado el padre compruebo la distancia para saber si este es padre
@@ -791,7 +761,7 @@ public class Map {
 		*/
 		//-------------------------------------------------------------------------------------------------------
 		
-		if(cs.getDistance()!=null &&  cs.getTotalDistance()<0.8){//cs.getTotalDistance()> 0.09 &&
+		if(cs.getDistance()!=null &&  cs.getTotalDistance()<0.5){//cs.getTotalDistance()> 0.09 &&
 			List<String> nam = new ArrayList<String>();
 			nam = cs.getLeafNames();
 			String ram = "";
@@ -817,21 +787,7 @@ public class Map {
 				
 		return result;	
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 	}
 	
 	
@@ -888,8 +844,8 @@ public class Map {
 		ArrayList<String> ol = new ArrayList<String>();
 		ol = getClusterArray(cluster); // gets an array list with the leafs of cluster separing cluster by #
 		
-		System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
-		System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////");
+	//	System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
+		//System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////");
 		
 		
 		//cluster.toConsole(4);
@@ -1101,7 +1057,7 @@ public class Map {
 			
 			String text = "<html>\n";
 			text +="<h1> Identified zones in the map</h1><br>";
-			text+="<h2>Numeber of zones: "+ zones.size()+"</h2><br>";
+			text+="<h2>Number of zones: "+ zones.size()+"</h2><br>";
 						
 			text += "<table border=\"1\"   style=\"font-size:12px\"    >";
 			text +="<tr><th>Zone</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";

@@ -60,12 +60,12 @@ public class Gui extends JFrame implements ActionListener {
 	String name ;
 	
 	 JMenu jmOperations, jmShows;
-	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, jmiNodeComposition,  jmiGenFullHierCluster;
+	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
      JLabel statusLabel;
-     
+          
      JMenuItem jMiHybrid_Sq1;
      JMenuItem jMiHybrid_Sq2;
      JMenuItem jMiHybrid_Sq3;
@@ -113,7 +113,6 @@ public class Gui extends JFrame implements ActionListener {
      JMenuItem jMIImgMX21K_Sq3;
      JMenuItem jMIImgMX21K_Sq4;
      JMenuItem jMIImgMX21K_Sq5;
-
      
      JMenuItem jMIImgAlex_Sq6;
      JMenuItem jMIImgCaff_Sq6;
@@ -123,21 +122,19 @@ public class Gui extends JFrame implements ActionListener {
      JMenuItem jMIImgMX21K_Sq6;
      JMenu jMRelation;
      JPopupMenu.Separator jSeparator1;
-     JMenuItem jMIGetNodesContent;
      
-     
+          
      JMenu jMVidrilo;
      JMenu jMSeq1,jMSeq2, jMSeq3, jMSeq4, jMSeq5;
      
     
 	
 	public Gui() {
-		threshold1 = 0.001;
-		threshold2 = 0.05;
+		threshold1 = 0.5;
+		threshold2 = 0.0;
 		cutNode = 1;
 		bm = new BuildMap(threshold1, threshold2, cutNode);
-	
-		
+			
 		getContentPane().setLayout(new BorderLayout());
 		setSize(width, height);
 		setTitle(name+" Clustering");
@@ -148,8 +145,7 @@ public class Gui extends JFrame implements ActionListener {
 		getContentPane().add(getStatusBar(), BorderLayout.SOUTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(true);
-		
-		
+				
 	}
 	
 	
@@ -183,8 +179,7 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiGenZone.addActionListener(this);
 	        jmiGenZone.setEnabled(false);
 	        jmOperations.add(jmiGenZone);
-	        
-	        
+	        	        
 	        jmiGenFullHierCluster = new JMenuItem("Gen Full Hierarchical Clustering");
 	        jmiGenFullHierCluster.addActionListener(this);
 	        //jmiGenFullHierCluster.setEnabled(false);
@@ -231,9 +226,7 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIImgGNet_Sq6.addActionListener(this);
 	        jMIImgVGG_Sq6.addActionListener(this);
 	        jMIImgMX21K_Sq6.addActionListener(this);
-	        
-	        
-	        
+	        	        
 	        jmOperations.add(jSeparator1);
 
 	        jMRelation.setText("Get Relationship with");
@@ -256,8 +249,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	        jMIImgVGG_Sq6.setText("ImageNet_VGG");
 	        jMRelation.add(jMIImgVGG_Sq6);
-	        
-	        
+	        	        
 	        jmOperations.add(jMRelation);
 	        
 	        jmiNodeComposition = new JMenuItem("Node Composition");
@@ -280,19 +272,16 @@ public class Gui extends JFrame implements ActionListener {
 	        graphCB.addActionListener(this);
 	        graphCB.setSelected(true);
 	        graphCB.setEnabled(mapGenerated);
-	        
-	        
+	        	        
 	        backCB = new javax.swing.JCheckBoxMenuItem("Background Image");
 	        backCB.setSelected(true);
 	        backCB.addActionListener(this);
-	        
-	           
+	        	           
 	        showNodesCB = new javax.swing.JCheckBoxMenuItem("Show Nodes");
 	        showNodesCB.setSelected(false);
 	        showNodesCB.setEnabled(false);
 	        showNodesCB.addActionListener(this);
-	        
-	        
+	        	        
 	        clustersCB =new JCheckBoxMenuItem("Clusters");
 	        clustersCB.addActionListener(this);
 	        clustersCB.setSelected(false);
@@ -303,8 +292,7 @@ public class Gui extends JFrame implements ActionListener {
 			highTagsCB.setSelected(false);
 			highTagsCB.setToolTipText("A termic color scale for the whole map");
 			highTagsCB.setEnabled(false);
-			
-			
+						
 			thTagsCB = new JCheckBoxMenuItem("Show High Threshold Tags");
 			thTagsCB.addActionListener(this);
 			thTagsCB.setSelected(false);
@@ -315,8 +303,7 @@ public class Gui extends JFrame implements ActionListener {
 			zoneCB.addActionListener(this);
 			zoneCB.setSelected(false);
 			zoneCB.setEnabled(false);
-					
-	                
+				                
 	        jmShows.add(originalCB);
 	        jmShows.add(graphCB);
 	        jmShows.add(backCB);
@@ -330,14 +317,12 @@ public class Gui extends JFrame implements ActionListener {
 	        JMenuBar jMenuBar1 = new JMenuBar();
 	        jMenuBar1.add(jmOperations);
 	        jMenuBar1.add(jmShows);
-	        
-	          
+	        	          
 	        jMDataSet = new javax.swing.JMenu();
 	        
 	        
 	        jMDataSet.setText("Select Data");
-     
-	        
+     	        
 	        jMSeq1 = new JMenu();
 	        jMiHybrid_Sq1 = new JMenuItem();
 	        jMIImgAlex_Sq1 = new JMenuItem();
@@ -392,10 +377,7 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIImgMX21K_Sq3= new JMenuItem();
 	        jMIImgMX21K_Sq4= new JMenuItem();
 	        jMIImgMX21K_Sq5= new JMenuItem();
-	       
-	        
-	        
-	        
+	       	        
 	        jMVidrilo.setText("Vidrilo");
 
 	        jMSeq1.setText("Sequence1");
@@ -450,7 +432,6 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIImgMX_Sq5.addActionListener(this);
 	        jMIImgMX21K_Sq5.addActionListener(this);
 	        
-
 	        jMiHybrid_Sq1.setText("Hybrid");
 	        jMSeq1.add(jMiHybrid_Sq1);
 	        
@@ -571,7 +552,6 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIImgMX21K_Sq4.setText("ImageNet_MXNet21K");
 	        jMSeq4.add(jMIImgMX21K_Sq4);
 	        
-
 	        jMVidrilo.add(jMSeq4);
 
 	        jMSeq5.setText("Sequence5");
@@ -617,42 +597,37 @@ public class Gui extends JFrame implements ActionListener {
 		jp.setSize(width, 100);
 		jp.setLayout(new BoxLayout(jp, BoxLayout.LINE_AXIS));
 		jp.setAlignmentX(LEFT_ALIGNMENT);
+				
 		
-		
-		
-		JLabel lab1 = new JLabel("Threshold1");
+		JLabel lab1 = new JLabel("Clustering Group Cut ");
 		jp.add(lab1);
 		th1 = new JTextField(String.valueOf(threshold1));
 		th1.addActionListener(this);
 		jp.add(th1);
-		JLabel lab2 = new JLabel("Threshold2");
-		jp.add(lab2);
-		th2 = new JTextField(String.valueOf(threshold2));
-		th2.addActionListener(this);
-		jp.add(th2);
-		JLabel lab3 = new JLabel("CutNode");
-		jp.add(lab3);
-		th3 = new JTextField(String.valueOf(cutNode));
-		th3.addActionListener(this);
-		jp.add(th3);
+		//JLabel lab2 = new JLabel("Threshold2");
+		//jp.add(lab2);
+		//th2 = new JTextField(String.valueOf(threshold2));
+		//th2.addActionListener(this);
+		//jp.add(th2);
+		//JLabel lab3 = new JLabel("CutNode");
+		//jp.add(lab3);
+		///th3 = new JTextField(String.valueOf(cutNode));
+		//th3.addActionListener(this);
+		//jp.add(th3);
 		
 		//th1.setEnabled(false);
 		//th2.setEnabled(false);
 		//th3.setEnabled(false);
-		
-		
+				
 		
 		JLabel lab4 = new JLabel("TagThreshold");
 		jp.add(lab4);
 		thTagTF=new JTextField(String.valueOf(thTag));
 		thTagTF.addActionListener(this);
 		thTagTF.setEnabled(false);
-		
-	
+			
 		jp.add(thTagTF);
-		
-	
-		
+				
 		String[] aux = {"Select Node"};
 		nodes = new JComboBox<String>(aux);
 		nodes.addActionListener(this);
@@ -711,8 +686,7 @@ public class Gui extends JFrame implements ActionListener {
 		for (int i = 1; i < size + 1; i++) {
 			aux[i] =keys.get(i-1);
 		}
-		
-	
+			
 		tagList.setModel(new DefaultComboBoxModel<String>(aux));
 		tagList.setSelectedIndex(0);
 		
@@ -1084,8 +1058,7 @@ public class Gui extends JFrame implements ActionListener {
 	  			HierClustering hc = new HierClustering(bm.dimension, bm.imgTags);
 	  			cm.showHierCluster(hc.cluster());
 	  		}
-	  			
-	  		
+	  			 		
             
              //Sequence1 Vidrilo
             if(e.getSource() == jMiHybrid_Sq1){
@@ -1175,8 +1148,7 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
-            
-            
+                        
             if(e.getSource() == jMIImgMX21K_Sq1){
             	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K/sequence1visual", 0.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq1_ImageNetMXNet21K";
@@ -1187,8 +1159,7 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
-            
-            
+                        
             //----------------------------------Sequence 2
             
        /*     if(e.getSource() == jMIPlaAlex_Sq2){
@@ -1201,8 +1172,7 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }*/
-            
-            
+                        
             
             if(e.getSource() == jMiHybrid_Sq2){
             	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
@@ -1257,8 +1227,7 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
-            
-            
+                        
             if(e.getSource() == jMIPlaAlex_Sq2){
             	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
@@ -1291,8 +1260,7 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
-            
-            
+                        
             if(e.getSource() == jMIImgMX21K_Sq2){
             	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K/sequence2visual", 0.0000000, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_ROT.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetMXNet21K";
@@ -1303,14 +1271,8 @@ public class Gui extends JFrame implements ActionListener {
             	jmiGenMap.setEnabled(true);
                 return;
             }
-            
-            
+                        
             //---------------------------------------------------SEQ2---END-------------------------------
-            
-            
-            
-            
-            
             
             ///Para generacion de relacion entre modelos 
             if(e.getSource() == jMIImgAlex_Sq6){
@@ -1360,7 +1322,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource()== jmiGenZone){
-            	cm.showZoneInfomation();
+            	cm.showZoneInfomation( Double.parseDouble(th1.getText()));
             	//bm.map.generateZones();
             	zoneGenerated = true;
             	zoneCB.setSelected(true);
@@ -1372,14 +1334,12 @@ public class Gui extends JFrame implements ActionListener {
             if(e.getSource()==jmiGenHierCluster){
             	cm.showHierCluster(bm.map.getHierCluster());
             }
-            
-            
+                        
             if(e.getSource()==jmiNodeComposition){
             	cm.showNodeComposition();
             	//cm.showNodeDetails(); //top10
             }
-            
-		
+          		
 	}
 
 	private void generate12ImagesMaps() {
@@ -1416,8 +1376,7 @@ public class Gui extends JFrame implements ActionListener {
 	        date = new Date();
 	        imgName = name+"_"+formateador.format(bm.threshold1)+"_"+formateador.format(bm.threshold2)+"_"+hourdateFormat.format(date);
 	        cm.createImage(imgName);
-		
-		
+				
 	}
 
 }

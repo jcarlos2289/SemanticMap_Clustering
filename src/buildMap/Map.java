@@ -738,7 +738,7 @@ public class Map {
 		//return result;
 	}
 	
-		public ArrayList<String> getClusterArray(Cluster cs){
+		public ArrayList<String> getClusterArray(Cluster cs, double th1){
 		ArrayList<String> result= new ArrayList<String>();
 		
 		//metodo Anteriror
@@ -761,7 +761,7 @@ public class Map {
 		*/
 		//-------------------------------------------------------------------------------------------------------
 		
-		if(cs.getDistance()!=null &&  cs.getTotalDistance()<0.5){//cs.getTotalDistance()> 0.09 &&
+		if(cs.getDistance()!=null &&  cs.getTotalDistance()<th1){//cs.getTotalDistance()> 0.09 &&
 			List<String> nam = new ArrayList<String>();
 			nam = cs.getLeafNames();
 			String ram = "";
@@ -777,7 +777,7 @@ public class Map {
 			else{
 				if(cs.countLeafs()>0){
 					for(Cluster c : cs.getChildren()){
-						result.addAll(getClusterArray(c));; //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
+						result.addAll(getClusterArray(c, th1)); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
 					}
 				}else
 						result.add(cs.getName());//+="\n|"+cs.getName()+"| ";
@@ -836,13 +836,13 @@ public class Map {
 					
 		}
 		
-	public String generateZones(){
+	public String generateZones(double th1){
 		
 		
 		Cluster cluster = generateHierCluster();
 		
 		ArrayList<String> ol = new ArrayList<String>();
-		ol = getClusterArray(cluster); // gets an array list with the leafs of cluster separing cluster by #
+		ol = getClusterArray(cluster, th1); // gets an array list with the leafs of cluster separing cluster by #
 		
 	//	System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
 		//System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////");

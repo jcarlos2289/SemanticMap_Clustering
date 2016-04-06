@@ -963,6 +963,11 @@ public class Map {
 				zones.add(auxZone);
 			}
 	
+			
+			for (Zone z:zones){
+				z.udpateStatus();
+			}
+				
 		
 		
 		//Metodo Dos basado en similitud y 2 thresholds---------------------------------

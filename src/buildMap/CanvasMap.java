@@ -232,15 +232,15 @@ public class CanvasMap extends JPanel implements MouseListener {
 			       
 					
 			        g.setColor(new Color(255,255,255));
-			        g.fillOval(x, y, radius+6, radius+6);
+			        g.fillOval(x, y, radius-5, radius-5);
 			        
 			        g.setColor(new Color(0,0,255));
-			        g.drawOval(x, y, radius+6, radius+6);
+			        g.drawOval(x, y, radius-5, radius-5);
 			        
-			        g.setColor(new Color(0,0,0));
-			        Font oldFont=new Font("Monospaced", Font.PLAIN, 8);
-			        g.setFont(oldFont);
-			        g.drawString(n.nodeName, x+3, y+10);
+			      //  g.setColor(new Color(0,0,0));
+			      //  Font oldFont=new Font("Monospaced", Font.PLAIN, 8);
+			       // g.setFont(oldFont);
+			       // g.drawString(n.nodeName, x+3, y+10);
 			      //  number++;
 			        
 			      //  g.drawPolygon(n.limits.getXArray(), n.limits.getYArray(), 3);
@@ -291,6 +291,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 						g.setColor(entry.getValue());
 						g.drawOval(coord_x, coord_y, radius-1, radius-1);
 						g.fillOval(coord_x, coord_y, radius-1, radius-1);
+						
 						g.setColor(new Color(0,0,0));
 						g.drawString(entry.getKey(), (int) (coord_x+1.5*(radius-1)), coord_y+12);
 						coord_y+= 20;
@@ -305,8 +306,9 @@ public class CanvasMap extends JPanel implements MouseListener {
 							g.setColor(clave.get(zn.name));
 							
 							
-							 g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius+2, radius+2);
-							 g.fillOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius+2, radius+2);
+							 g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius, radius);
+							 g.fillOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius, radius);
+							 g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, 1, 1);
 							// g.drawString(zn.name, (int)nd.representative.xcoord,  (int)nd.representative.ycoord);
 							//System.out.println(String.valueOf(nd.representative.xcoord));
 							
@@ -984,14 +986,16 @@ public class CanvasMap extends JPanel implements MouseListener {
 	      
 	}
 	
-		
-
-		
+			
 	public void mousePressed(MouseEvent evt) {
 		Node sel=null;
+		Zone selZone =null;
 		///System.out.println("click ");
 		
-		if (gui.mapGenerated && gui.showMap) {
+		
+		//para ver la informacion de un nodo particular
+		if (gui.mapGenerated && gui.showMap && !gui.zoneGenerated) {
+			
 			if (tags!=null) {
 				tags.dispose();
 				nodeInfo.dispose();
@@ -1010,13 +1014,64 @@ public class CanvasMap extends JPanel implements MouseListener {
 			//	System.out.println(distance(evt, n));
 				if (distance(evt, n) < radius) {
 					sel=n;
-					System.out.print(gui.bm.map.nodes.indexOf(n)+" ");
+					//System.out.print(gui.bm.map.nodes.indexOf(n)+" ");
 				}
 			}
 			if (sel!=null)  {
 				showInfo(sel);
 			}
 		}
+		
+		
+		//para informacion sobre las zonas
+		
+		
+       if (gui.mapGenerated && gui.showMap && gui.zoneGenerated) {
+			
+			if (tags!=null) {
+				tags.dispose();
+				nodeInfo.dispose();
+				//graf.dispose();
+				top.dispose();
+				tagCloudDialog.dispose();
+				gui.nodes.setSelectedIndex(0);
+				tags=null;
+				nodeInfo=null;
+				//graf=null;
+				top = null;
+				tagCloudDialog=null;
+				
+			}
+			
+			
+			for(Zone z:gui.bm.map.zones){
+				for (Node n:z.areas) {
+					//	System.out.println(distance(evt, n));
+						if (distance(evt, n) < radius) {
+							selZone=z;
+							continue;
+							//System.out.print(gui.bm.map.nodes.indexOf(n)+" ");
+						}
+					}
+				if(selZone != null)
+					continue;
+				
+			}
+				
+			if (selZone!=null)  {
+				System.out.println(selZone.toString());
+				showInfo(selZone.representative);
+				
+				
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
 	}
 	
 	public void mouseClicked (MouseEvent evt) {

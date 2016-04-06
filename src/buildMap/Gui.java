@@ -981,6 +981,7 @@ public class Gui extends JFrame implements ActionListener {
 	  			thTagsCB.setSelected(false);
 	  			tagMode =true;
 	  			mapGenerated = true;
+	  			zoneGenerated = false;
 	  			cm.repaint();
 	  			Date date = new Date();
 	        	DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss");

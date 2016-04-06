@@ -62,18 +62,42 @@ public class Zone {
 		return name;
 	}
 	
+	public String toString(){
+		String result="";
+		
+		result = "Zone Category Tag:\t " +this.getName();
+		result +="\nNodes in this zone:\t " + String.valueOf(this.areas.size());
+		
+		
+		
+		return result;
+	}
+	
+	
 	public void addNode(Node n){
 		areas.add(n);
-	   calcRepresentative();
-	   name = calcZoneName();
+		//calcRepresentative();
+		 //  name = calcZoneName();
+	}
+	
+	public void udpateStatus(){
+		calcRepresentative();
+		   name = calcZoneName();
 	}
 
 	private void calcRepresentative() {
 		// TODO Auto-generated method stub
 		ZoneHistoMean = new HashMap<String, Float>();
 		Node auxNode = new Node();
+		representative = new Node();
+		
 		for (Node no : areas) {
-			for (Entry<String, Float> g: no.histoMean.entrySet()){
+			representative.add(no.representative);
+			
+			
+			
+			
+		/*	for (Entry<String, Float> g: no.histoMean.entrySet()){
 				
 				//System.out.println(g.getKey());
 				
@@ -82,11 +106,11 @@ public class Zone {
 				else
 				 ZoneHistoMean.put(g.getKey(),g.getValue()/areas.size()); //g.getValue()/areas.size() g.getKey()
 				
-			}
+			}*/
 				
 		}
-		auxNode.histoMean= ZoneHistoMean;
-		representative = auxNode;
+		//auxNode.histoMean= ZoneHistoMean;
+		//representative = auxNode;
 		
 	}
 	

@@ -3,8 +3,13 @@ package buildMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 public class Zone {
 	String name ="";
@@ -67,10 +72,17 @@ public class Zone {
 		
 		result = "Zone Category Tag:\t " +this.getName();
 		result +="\nNodes in this zone:\t " + String.valueOf(this.areas.size());
-		
-		
+			
 		
 		return result;
+	}
+	
+	public String toWebString(){
+		String text = "<html>\n";
+		text +="<h1> Zone Asigned Class: " +this.getName() +"</h1>";
+			text+="<h2>Nodes in this Zone: "+ String.valueOf(this.areas.size())+"</h2>";
+			text += "\n</html>";
+		return text;
 	}
 	
 	
@@ -88,7 +100,7 @@ public class Zone {
 	private void calcRepresentative() {
 		// TODO Auto-generated method stub
 		ZoneHistoMean = new HashMap<String, Float>();
-		Node auxNode = new Node();
+		//Node auxNode = new Node();
 		representative = new Node();
 		
 		for (Node no : areas) {
@@ -114,5 +126,25 @@ public class Zone {
 		
 	}
 	
+	public PieDataset getChartDataset(){
+		
+		ArrayList<String> originalClass = new ArrayList<String>();
+		
+		for(ImageTags imt: representative.images)
+			originalClass.add(imt.category);
+		
+		 Set<String> data = new HashSet<>(originalClass);
+
+	
+	     DefaultPieDataset dataset = new DefaultPieDataset( );
+		  for (String key : data) 
+	    	 dataset.setValue( key , new Double( Collections.frequency(originalClass, key) ) );
+		
+		  
+		  return dataset;  
+	    
+	     
+			
+	}
 
 }

@@ -1056,7 +1056,7 @@ public class Map {
 			for(int i = 0; i< zones.size();i++){
 				String ram =  zones.get(i).name;
 				zNames.add(ram);
-				zones.get(i).name = ram+"_"+String.valueOf(Collections.frequency(zNames, ram));
+				zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
 			}
 			
 			

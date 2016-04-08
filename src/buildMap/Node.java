@@ -148,7 +148,8 @@ public class Node {
 		} else {// The processes begin here
 			if (images.size() == 0) { // When the node is created, only one image is present
 				images.add(img);
-				representative = new ImageTags("aux");
+				representative = new ImageTags(img.imageName);
+				representative.category = img.category;
 				representative.xcoord = img.xcoord;
 				representative.ycoord = img.ycoord;
 				iterator = img.getKeys().iterator();
@@ -332,15 +333,15 @@ public class Node {
 				}
 				representative.xcoord = auxx;
 				representative.ycoord = auxy;
-				
+				//representative.category = images.get(0).category;
 				
 				
 				//representative.tags= (ConcurrentHashMap<String, Float>) histoMean;
 				
-				if(limits != null){
+				/*if(limits != null){
 				representative.xcoord=(limits.A.x+limits.B.x+limits.C.x)/3;
 				representative.ycoord=(limits.A.y+limits.B.y+limits.C.y)/3;
-				}
+				}*/
 				
 				
 			}

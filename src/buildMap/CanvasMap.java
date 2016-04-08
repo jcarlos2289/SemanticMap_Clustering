@@ -33,6 +33,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.PieDataset;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -59,7 +65,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	int radius=15;
 	
 	JDialog tags=null, nodeInfo=null, top=null, nodeDetailsDialog =null, mapInfoDialog=null, tagCloudDialog=null, clusterDialog=null, zoneDialog=null, nodeRelationDialog=null, compositionDialog=null;
-	//JDialog graf=null;
+	JDialog grafDialog=null, zoneInfo=null;
 	
 	public CanvasMap (Gui ig) {
 		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_1.png"));
@@ -738,6 +744,183 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 	}
 	
+	public void showZoneAditionalInfo(Zone selZone){
+		if(grafDialog!=null){
+			grafDialog.dispose();
+			grafDialog=null;
+		}	
+		
+		PieDataset dataset = selZone.getChartDataset();
+		
+		JFreeChart chart = ChartFactory.createPieChart(      
+		         "Category Distribution in Zone",  // chart title 
+		         dataset,        // data    
+		         true,           // include legend   
+		         true, 
+		         false);
+		
+	chart.setBackgroundPaint(Color.white);
+            
+    final ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new Dimension(500, 270));
+    JButton j = new JButton("Save Image");
+    
+    j.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			//System.out.println("aloha world");
+			try {
+				saveClusterImage();
+			} catch (DocumentException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+
+		private void saveClusterImage() throws DocumentException, IOException {
+		
+			  int width = 1024; /* Width of the image */
+		      int height = 1024; /* Height of the image */ 
+		     
+		      
+			        
+		      Date date = new Date();
+	        	 DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+	        	 String imgName = gui.name+"_Clusters_Zone_"+selZone.getName()+"_"+hourdateFormat.format(date);
+		      
+		      
+		      File miDir = new File(".");
+	        	 String c = miDir.getAbsolutePath();
+	        	 String ruta = c.substring(0, c.length() - 1);
+	              ruta += "resultados/" + imgName.trim() + ".png";
+	              File fichero = new File(ruta);
+	              
+		     	    try {
+		     	    	ChartUtilities.saveChartAsPNG( fichero , chart , width , height );
+		     			System.out.println("Image " +imgName +" Saved");
+		     		} catch (IOException e) {
+		     			System.out.println("Writing Error");
+		     		}
+	              
+	              
+	        	    
+		}
+	});
+    
+	JPanel panel = new JPanel();
+	
+       
+   // panel2.setBackground(new java.awt.Color(20, 148, 0));
+
+   // javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(chartPanel);
+ /*   panel2.setLayout(panel2Layout);
+    panel2Layout.setHorizontalGroup(
+        panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 574, Short.MAX_VALUE)
+    );
+    panel2Layout.setVerticalGroup(
+        panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 1026, Short.MAX_VALUE)
+    );*/
+/*
+    javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+    panel.setLayout(panelLayout);
+  
+    panelLayout.setHorizontalGroup(
+        panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(panelLayout.createSequentialGroup()
+            .addGap(249, 249, 249)
+            .addComponent(j)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(panelLayout.createSequentialGroup()
+            .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE))
+    );
+    panelLayout.setVerticalGroup(
+        panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+            .addComponent(j)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+*/
+	
+   
+	   panel.setAutoscrolls(true);
+       panel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+       panel.setLayout(new java.awt.BorderLayout());
+
+       chartPanel.setBackground(new java.awt.Color(20, 148, 0));
+
+       javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
+       chartPanel.setLayout(chartPanelLayout);
+       chartPanelLayout.setHorizontalGroup(
+           chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGap(0, 934, Short.MAX_VALUE)
+       );
+       chartPanelLayout.setVerticalGroup(
+           chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGap(0, 532, Short.MAX_VALUE)
+       );
+
+       panel.add(chartPanel, java.awt.BorderLayout.CENTER);
+
+       //j.setText("jButton1");
+
+       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
+       panel.setLayout(layout);
+       layout.setHorizontalGroup(
+           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+           .addGroup(layout.createSequentialGroup()
+               .addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addGap(0, 0, Short.MAX_VALUE))
+       );
+       layout.setVerticalGroup(
+           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+               .addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+               .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addContainerGap())
+       );
+	
+	
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    grafDialog = new JDialog(gui);
+    chartPanel.add(j);
+    //grafDialog.setContentPane(chartPanel);
+    grafDialog.add(panel);
+    grafDialog.setLocation(1050,650);
+   grafDialog.setSize(500, 500);
+    grafDialog.setTitle("Distribution Pie Chart");
+    grafDialog.setVisible(true);
+	
+    JLabel dat = new JLabel(selZone.toWebString());
+    
+    zoneInfo=new JDialog(gui);
+    zoneInfo.add(dat);
+    zoneInfo.setTitle("Zone Information");
+    zoneInfo.setSize(500, 100);
+    zoneInfo.setLocation(750,750);
+    zoneInfo.setVisible(true);
+			
+	}
+	
+	
+	
 	public void showMapInfo(){
 		if(mapInfoDialog!=null){
 			mapInfoDialog.dispose();
@@ -752,8 +935,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 			mapInfoDialog.setContentPane(scroll);
 			mapInfoDialog.setLocationRelativeTo(null);
 			mapInfoDialog.setVisible(true);
-		
-	}
+		}
 	
 	
 	public void showNodeDetails() {
@@ -999,13 +1181,13 @@ public class CanvasMap extends JPanel implements MouseListener {
 			if (tags!=null) {
 				tags.dispose();
 				nodeInfo.dispose();
-				//graf.dispose();
+				//grafDialog.dispose();
 				top.dispose();
 				tagCloudDialog.dispose();
 				gui.nodes.setSelectedIndex(0);
 				tags=null;
 				nodeInfo=null;
-				//graf=null;
+				//grafDialog=null;
 				top = null;
 				tagCloudDialog=null;
 				
@@ -1031,15 +1213,17 @@ public class CanvasMap extends JPanel implements MouseListener {
 			if (tags!=null) {
 				tags.dispose();
 				nodeInfo.dispose();
-				//graf.dispose();
+				grafDialog.dispose();
 				top.dispose();
 				tagCloudDialog.dispose();
-				gui.nodes.setSelectedIndex(0);
+				zoneInfo.dispose();
+				//gui.nodes.setSelectedIndex(0);
 				tags=null;
 				nodeInfo=null;
-				//graf=null;
+				grafDialog=null;
 				top = null;
 				tagCloudDialog=null;
+				zoneInfo=null;
 				
 			}
 			
@@ -1061,8 +1245,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 			if (selZone!=null)  {
 				System.out.println(selZone.toString());
 				showInfo(selZone.representative);
-				
-				
+				showZoneAditionalInfo(selZone);//funcion adicional para pie chart
 				
 			}
 		}

@@ -7,6 +7,7 @@ import java.awt.Font;
 //import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.PieDataset;
 
 import com.itextpdf.text.Document;
@@ -752,17 +756,43 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 		PieDataset dataset = selZone.getChartDataset();
 		
-		JFreeChart chart = ChartFactory.createPieChart(      
+		JFreeChart chart = ChartFactory.createPieChart3D(      
 		         "Category Distribution in Zone",  // chart title 
 		         dataset,        // data    
 		         true,           // include legend   
 		         true, 
 		         false);
 		
+		
+		PiePlot3D plot = (PiePlot3D) chart.getPlot();
+     //   plot.setStartAngle(290);
+       // plot.setDirection(Rotation.CLOCKWISE);
+        plot.setForegroundAlpha(0.5f);
+       // plot.setBackgroundAlpha(1.0f);
+        
+		chart.getPlot().setBackgroundPaint(Color.white);
+		chart.getPlot().setBackgroundAlpha(0.5f);
+		chart.getPlot().setOutlineVisible(false);
+		plot.setLabelFont(new Font("Droid Sans", Font.PLAIN, 15));
+		
+		final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {1}({2})");
+		plot.setLabelGenerator(labelGenerator);
+		
+		
+		 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    ge.getAllFonts();
+
+		    Font font = new Font("Droid Sans", Font.PLAIN, 35);
+		    
+		
+		chart.getTitle().setFont(font);
+		//Cuadro Leyenda
+		chart.getLegend().setItemFont(new Font("Droid Sans", Font.ITALIC, 15));
+		
 	chart.setBackgroundPaint(Color.white);
             
     final ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setPreferredSize(new Dimension(500, 270));
+    chartPanel.setPreferredSize(new Dimension(600, 500));
     JButton j = new JButton("Save Image");
     
     j.addActionListener(new ActionListener() {
@@ -782,9 +812,9 @@ public class CanvasMap extends JPanel implements MouseListener {
 
 		private void saveClusterImage() throws DocumentException, IOException {
 		
-			  int width = 1024; /* Width of the image */
-		      int height = 1024; /* Height of the image */ 
-		     
+			 
+		      int height = 1080; /* Height of the image */ 
+		      int width = (int) (height*1.7786458333); /* Width of the image */
 		      
 			        
 		      Date date = new Date();
@@ -904,7 +934,7 @@ public class CanvasMap extends JPanel implements MouseListener {
     //grafDialog.setContentPane(chartPanel);
     grafDialog.add(panel);
     grafDialog.setLocation(1050,650);
-   grafDialog.setSize(500, 500);
+   grafDialog.setSize(600, 500);
     grafDialog.setTitle("Distribution Pie Chart");
     grafDialog.setVisible(true);
 	

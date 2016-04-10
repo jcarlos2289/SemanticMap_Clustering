@@ -29,6 +29,10 @@ import java.util.Map.Entry;
 
 import javax.swing.JScrollPane;
 
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 
 
 
@@ -835,6 +839,22 @@ public class Map {
 			
 					
 		}
+	
+	public CategoryDataset getZonesDataset(){
+		
+		
+		DefaultCategoryDataset fullDataset = new DefaultCategoryDataset();
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		
+		for(Zone z: zones){
+			dataset = (DefaultPieDataset) z.getChartDataset();
+			for(int i = 0; i < dataset.getItemCount();++i){
+				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), z.getName());
+			    //System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
+			}
+		}
+			return fullDataset;
+	}
 		
 	public String generateZones(double th1){
 		

@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -154,11 +155,14 @@ public class Zone {
 		
 		 Set<String> data = new HashSet<>(originalClass);
 
-	
-	     DefaultPieDataset dataset = new DefaultPieDataset( );
+		 
+			     DefaultPieDataset dataset = new DefaultPieDataset( );
 		  for (String key : data) 
 	    	 dataset.setValue( key , new Double( Collections.frequency(originalClass, key) ) );
 		
+		//System.out.println("Tamaño de Dataset "+  dataset.getItemCount());
+		
+		  
 		  
 		  return dataset;  
 	    

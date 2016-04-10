@@ -60,7 +60,8 @@ public class Gui extends JFrame implements ActionListener {
 	String name ;
 	
 	 JMenu jmOperations, jmShows;
-	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent;
+	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, 
+	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -220,6 +221,7 @@ public class Gui extends JFrame implements ActionListener {
 	        
 	        jMIGetNodesContent = new JMenuItem();
 	        jMIGetZonesContent = new JMenuItem();
+	        jmiShowZoneChart = new JMenuItem();
 	        
 	        jMIImgMX_Sq6.addActionListener(this);
 	        jMIImgAlex_Sq6.addActionListener(this);
@@ -267,6 +269,11 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIGetZonesContent.addActionListener(this);
 	        jMIGetZonesContent.setEnabled(false);
 	        jmOperations.add(jMIGetZonesContent);
+	        
+	        jmiShowZoneChart.setText("Zones Pie Chart");
+	        jmiShowZoneChart.addActionListener(this);
+	        jmiShowZoneChart.setEnabled(false);
+	        jmOperations.add(jmiShowZoneChart);
 	        
 	       
 	        jmShows = new JMenu("View");
@@ -1336,6 +1343,7 @@ public class Gui extends JFrame implements ActionListener {
             	zoneCB.setSelected(true);
             	zoneCB.setEnabled(true);
             	jMIGetZonesContent.setEnabled(true);
+            	 jmiShowZoneChart.setEnabled(true);
             	statusLabel.setText("Zones have been generated.");
             	cm.repaint();
             }
@@ -1358,15 +1366,19 @@ public class Gui extends JFrame implements ActionListener {
             	}
             	h+="\n";
             	
-            	FileMethods.saveFile(h, "ZonesContent" , false);
+            	FileMethods.saveFile(h, "ZonesContent_"+ name , false);
             	
             	int g =1;
             	for(Zone z: bm.map.zones){
-            		FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n", "ZonesContent" , true);
+            		FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n", "ZonesContent_"+ name , true);
             		g++;
             	}
             	
             	
+            }
+            
+            if (e.getSource() ==  jmiShowZoneChart){
+            	cm.showZonesCharts();
             }
           		
 	}

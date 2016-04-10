@@ -40,8 +40,13 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.MultiplePiePlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.util.TableOrder;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -69,7 +74,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	int radius=15;
 	
 	JDialog tags=null, nodeInfo=null, top=null, nodeDetailsDialog =null, mapInfoDialog=null, tagCloudDialog=null, clusterDialog=null, zoneDialog=null, nodeRelationDialog=null, compositionDialog=null;
-	JDialog grafDialog=null, zoneInfo=null;
+	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null;
 	
 	public CanvasMap (Gui ig) {
 		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_1.png"));
@@ -757,7 +762,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		PieDataset dataset = selZone.getChartDataset();
 		
 		JFreeChart chart = ChartFactory.createPieChart3D(      
-		         "Category Distribution in Zone",  // chart title 
+		         "Category Distribution in the Zone",  // chart title 
 		         dataset,        // data    
 		         true,           // include legend   
 		         true, 
@@ -1138,6 +1143,61 @@ public class CanvasMap extends JPanel implements MouseListener {
 		zoneDialog.setVisible(true);
 		
 		
+		
+	}
+	
+	public void showZonesCharts(){
+		if(zoneChartDialog!=null){
+			zoneChartDialog.dispose();
+			zoneChartDialog=null;
+		}
+		
+		zoneChartDialog = new JDialog(gui);
+		CategoryDataset fDataset = gui.bm.map.getZonesDataset();
+		//fDataset = gui.bm.map.getZonesDataset();
+		
+		
+	
+		
+		final JFreeChart chart = ChartFactory.createMultiplePieChart(
+	            "Class composition of the Zones", fDataset, TableOrder.BY_COLUMN, true, true, false
+	        ); 
+	        chart.setBackgroundPaint(Color.white);
+	        final MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
+	        final JFreeChart subchart = plot.getPieChart();
+//	        final StandardLegend legend = new StandardLegend();
+	  //      legend.setItemFont(new Font("SansSerif", Font.PLAIN, 8));
+	    //    legend.setAnchor(Legend.SOUTH);
+	      //  subchart.setLegend(legend);
+	        plot.setLimit(0.10);
+	        final PiePlot p = (PiePlot) subchart.getPlot();
+	        final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {1}({2})");
+	        
+	        p.setLabelGenerator(labelGenerator);
+	        p.setLabelFont(new Font("SansSerif", Font.PLAIN, 8));
+	        p.setInteriorGap(0.30);
+	        
+	        chart.getPlot().setBackgroundPaint(Color.white);
+			chart.getPlot().setBackgroundAlpha(0.5f);
+			chart.getPlot().setOutlineVisible(false);
+			p.setLabelFont(new Font("Droid Sans", Font.PLAIN, 8));
+	        chart.getTitle().setFont(new Font("Droid Sans", Font.PLAIN, 20));
+	        //chart.getCategoryPlot().setBackgroundPaint(Color.white);
+	        
+	       
+	        p.setBackgroundPaint(null);
+	       // p.setOutlineStroke(null);
+	        
+	        
+	        
+	        
+	        final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, false, true);
+	        //chartPanel.setPreferredSize(new java.awt.Dimension(1000, 700));
+	        zoneChartDialog.setSize(800, 800);
+	        zoneChartDialog.setContentPane(chartPanel);
+	        zoneChartDialog.setLocationRelativeTo(null);
+	        zoneChartDialog.setVisible(true);
+	        
 		
 	}
 	

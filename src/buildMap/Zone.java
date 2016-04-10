@@ -85,6 +85,26 @@ public class Zone {
 		return text;
 	}
 	
+	public String getZoneContent(String[] tags){
+		String text ="";
+		
+		text += ";" +this.getName();
+		String[]ram = this.getName().split(" ");
+		text += ";" +ram[1];
+		text += ";" +String.valueOf(this.areas.size());
+		
+		ArrayList<String> originalClass = new ArrayList<String>();
+		for(ImageTags imt: representative.images)
+			originalClass.add(imt.category);
+		
+	    
+		  for (String key :tags) 
+	    	text += ";" +Collections.frequency(originalClass, key);
+		
+		
+		return text;
+	}
+	
 	
 	public void addNode(Node n){
 		areas.add(n);
@@ -129,7 +149,6 @@ public class Zone {
 	public PieDataset getChartDataset(){
 		
 		ArrayList<String> originalClass = new ArrayList<String>();
-		
 		for(ImageTags imt: representative.images)
 			originalClass.add(imt.category);
 		

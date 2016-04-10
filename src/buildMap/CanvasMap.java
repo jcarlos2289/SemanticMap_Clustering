@@ -919,22 +919,12 @@ public class CanvasMap extends JPanel implements MouseListener {
                .addContainerGap())
        );
 	
-	
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    grafDialog = new JDialog(gui);
+	grafDialog = new JDialog(gui);
     chartPanel.add(j);
     //grafDialog.setContentPane(chartPanel);
     grafDialog.add(panel);
     grafDialog.setLocation(1050,650);
-   grafDialog.setSize(600, 500);
+    grafDialog.setSize(600, 500);
     grafDialog.setTitle("Distribution Pie Chart");
     grafDialog.setVisible(true);
 	

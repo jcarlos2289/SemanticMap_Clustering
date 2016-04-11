@@ -65,7 +65,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	int radius=15;
 	
 	JDialog tags=null, nodeInfo=null, top=null, nodeDetailsDialog =null, mapInfoDialog=null, tagCloudDialog=null, clusterDialog=null, zoneDialog=null, nodeRelationDialog=null, compositionDialog=null;
-	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null;
+	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null, zoneRelationDialog = null;
 	
 	public CanvasMap (Gui ig) {
 		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_1.png"));
@@ -274,6 +274,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 									top.dispose();
 									tagCloudDialog.dispose();
 									zoneInfo.dispose();
+									zoneRelationDialog.dispose();
 									//gui.nodes.setSelectedIndex(0);
 									tags=null;
 									nodeInfo=null;
@@ -281,6 +282,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 									top = null;
 									tagCloudDialog=null;
 									zoneInfo=null;
+									zoneRelationDialog= null;
 								}
 								showInfo(selectZone.representative);
 								gui.selectZoneChanged=false;
@@ -746,7 +748,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 	}
 	
-	public void showZoneAditionalInfo(Zone selZone){
+	public void showZoneAditionalInfo(Zone selZone, String name, int seqNumber){
 		if(grafDialog!=null){
 			grafDialog.dispose();
 			grafDialog=null;
@@ -934,7 +936,28 @@ public class CanvasMap extends JPanel implements MouseListener {
     zoneInfo.setSize(500, 100);
     zoneInfo.setLocation(750,750);
     zoneInfo.setVisible(true);
-			
+	
+    
+    
+    if(zoneRelationDialog!=null){
+		zoneRelationDialog.dispose();
+		zoneRelationDialog=null;
+	}
+	
+	//String text = gui.bm.map.getMapInfo(gui.name, String.valueOf(gui.bm.threshold1), String.valueOf(gui.bm.threshold2), String.valueOf(gui.bm.cutNode));
+	String text = gui.bm.map.getZoneTagsRelation(name, seqNumber,selZone);
+	zoneRelationDialog = new JDialog(gui);
+	zoneRelationDialog.setSize(700, 600);
+	
+	JLabel data = new JLabel(text);
+	JScrollPane scroll = new JScrollPane(data);
+	zoneRelationDialog.setTitle("Objects Identified in the Zone");
+	zoneRelationDialog.setContentPane(scroll);
+	zoneRelationDialog.setLocationRelativeTo(null);
+	zoneRelationDialog.setVisible(true);
+    
+    
+    
 	}
 		
 	public void showMapInfo(){
@@ -1306,7 +1329,8 @@ public class CanvasMap extends JPanel implements MouseListener {
 				gui.selectZone = gui.bm.map.zones.indexOf(selZone);
 				System.out.println(selZone.toString());
 				showInfo(selZone.representative);
-				showZoneAditionalInfo(selZone);//funcion adicional para pie chart
+				showZoneAditionalInfo(selZone, gui.name, gui.seqNumber);//funcion adicional para pie chart
+				
 				}else{
 					gui.selectZone=-1;
 					gui.zoneSelectedMode = false;

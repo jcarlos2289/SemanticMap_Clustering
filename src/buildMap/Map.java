@@ -421,6 +421,209 @@ public class Map {
 		return text;
 		
 	}
+	
+	public String getZoneTagsRelation (String name, int seqNumber, Zone selectZone ){
+		
+		
+		String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+		String [] ram = modelPath.split("/");
+		String text = "<html>\n";
+		text +="<h1> Sequence: "+ name+"</h1>";
+		text +="<h1> Relation with Sequence: <br>"+ ram[ram.length-1]+"</h1>";
+		text += "<h2> Zone : "+selectZone.getName()+"</h2> "
+			  + "<h2 style=\"color:rgb("+ String.valueOf(selectZone.zoneColor.getRed())+","+String.valueOf(selectZone.zoneColor.getGreen())+","+ String.valueOf(selectZone.zoneColor.getBlue())+ ");\"> &diams;&diams;&diams;&diams; </h2><br>\n";
+		
+		
+		text += "<table border=\"1\"   style=\"font-size:12px\"    >";
+		text += "<tr><th>#</th><th>Object</th><th>Prob</th></tr>";
+		
+		String modelo2Path = modelPath;
+		int topModelo2 = 10;
+		ArrayList<Node> virtualMap = new ArrayList<Node>();
+		
+		ArrayList<Node> representativeNodeOfZones = new ArrayList<Node>();
+		
+		//for(Zone z : zones){
+			representativeNodeOfZones.add(selectZone.representative);
+		//}
+			
+		
+		for (Iterator<Node> iterator = representativeNodeOfZones.iterator(); iterator.hasNext();) {
+			
+			Node node =  iterator.next();
+		
+			ArrayList<String> imageTop10 = new ArrayList<String>();
+						
+			for (ImageTags img : node.images ) {
+				imageTop10.add(img.imageName);
+			}
+			
+						
+			Node AuxNode = new Node();
+			//List<String> topsTags = new ArrayList<>();
+			ArrayList<String> top5Modelo2 = new ArrayList<String>();
+			ArrayList<Float> topModelo2Prob = new ArrayList<Float>();
+			if(!imageTop10.isEmpty()){
+			
+				for (String lin : imageTop10) {
+					//System.out.println(lin);
+					
+			        int lastIndex = 0;
+
+			        lastIndex = lin.lastIndexOf("/");
+			        lastIndex++; // Si es -1 se vuelve 0 y es un valor numerico le aumento 1 para que no se incluya en la cadena nueva
+
+			        String seqName = lin.substring(lastIndex, lin.length());
+			       // System.out.println(seqName);
+			     
+			        List<String> imgtagList = new ArrayList<>();
+			        imgtagList =FileMethods.processFile(modelo2Path+seqName);
+			        
+			        ImageTags imgData = new ImageTags(seqName);
+			        for (String line : imgtagList) {
+						imgData.addTag(line);
+						}
+			         AuxNode.add(imgData);    
+			      
+			      	
+			        }
+				}
+			
+			top5Modelo2 = AuxNode.getTopXNodes(topModelo2);
+			topModelo2Prob = AuxNode.getTopXNodesValues(topModelo2);
+			virtualMap.add(AuxNode);
+			//-------------------------------------------
+					
+			
+			for (int i =0; i < top5Modelo2.size();++i) {
+				text +="<tr><td>"+String.valueOf(i+1) +"</td><td>"+top5Modelo2.get(i)+"</td><td>"+String.valueOf(topModelo2Prob.get(i)) +"</td></tr>\n";
+			}
+			
+			
+			
+			}//End of the for of the Nodes
+			
+		text += "</table>";
+		text += "\n</html>\n\n";
+System.out.println(text);
+		
+		return text;
+		
+	
+	}
+	
+	
+	
+	public String getFullZoneTagsRelation (String name, int seqNumber ){
+		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas
+		
+		String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+		String [] ram = modelPath.split("/");
+		String text = "<html>\n";
+		text +="<h1> Sequence: "+ name+"</h1><br>";
+		text +="<h1> Relation with Sequence: "+ ram[ram.length-1]+"</h1><br>";
+		text += "<p> Zones: "+this.zones.size()+"</p><br>";
+		text += "<table border=\"1\"   style=\"font-size:8px\"    >";
+		text += "<tr><th> </th> <th colspan=\"3\">Top 3 Places Model </th><th>æææææ</th> <th colspan=\"5\">Top 5 ImageNet Model</th> </tr> "	;
+		text += "<tr><th>Node</th>";
+		
+		for(int i = 0;i < 3; ++i )
+			text+="<th>Tag "+ String.valueOf(i+1)+ "</th>";
+		text+="<th>æææææ</th>";
+		for(int i = 0;i < 5; ++i )
+			text+="<th>Tag "+ String.valueOf(i+1)+ "</th>";
+		text +="</tr>\n";
+		
+		
+		int h = 0;
+		//String modelo2Path = "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/";
+		 String modelo2Path = modelPath;
+		int topModelo2 = 5;
+		ArrayList<Node> virtualMap = new ArrayList<Node>();
+		
+		
+		
+		ArrayList<Node> representativeNodeOfZones = new ArrayList<Node>();
+		
+		for(Zone z : zones){
+			representativeNodeOfZones.add(z.representative);
+		}
+			
+		
+		for (Iterator<Node> iterator = representativeNodeOfZones.iterator(); iterator.hasNext();) {
+			
+			Node node =  iterator.next();
+			
+			ArrayList<String> imageTop3Tag = node.getTopXNodes(3);
+
+			text +="<tr>";
+			text +="<td>" + ++h +"</td>";
+			for (String tag : imageTop3Tag) {
+				text +="<td>"+tag +"</td>";
+			}
+			text+="<td>ææ"+ h +"æææ</td>";
+			//-----------------------------------------
+			ArrayList<String> imageTop10 = new ArrayList<String>();
+			
+			
+			for (ImageTags img : node.images ) {
+				imageTop10.add(img.imageName);
+			}
+			
+			
+			float [] we = new float[weights.length];
+			for (int i = 0; i < we.length; i++) {
+				we[i] =1;
+			}
+			Node AuxNode = new Node(useHisto, we);
+			//List<String> topsTags = new ArrayList<>();
+			ArrayList<String> top5Modelo2 = new ArrayList<String>();
+			if(!imageTop10.isEmpty()){
+			
+				for (String lin : imageTop10) {
+					//System.out.println(lin);
+					
+			        int lastIndex = 0;
+
+			        lastIndex = lin.lastIndexOf("/");
+			        lastIndex++; // Si es -1 se vuelve 0 y es un valor numerico le aumento 1 para que no se incluya en la cadena nueva
+
+			        String seqName = lin.substring(lastIndex, lin.length());
+			       // System.out.println(seqName);
+			     
+			        List<String> imgtagList = new ArrayList<>();
+			        imgtagList =FileMethods.processFile(modelo2Path+seqName);
+			        
+			        ImageTags imgData = new ImageTags(seqName);
+			        for (String line : imgtagList) {
+						imgData.addTag(line);
+						}
+			         AuxNode.add(imgData);    
+			      //	topsTags.addAll(ListMethods.getTopXNodes(topModelo2, imgData.tags));
+			      	
+			        }
+				}
+			
+			top5Modelo2 = AuxNode.getTopXNodes(topModelo2);
+			virtualMap.add(AuxNode);
+			//-------------------------------------------
+			for (String tag : top5Modelo2) {
+				text +="<td>"+tag +"</td>";
+			}
+			
+			
+			text +="</tr>\n";
+			}//End of the for of the Nodes
+			
+		text += "</table>";
+		text += "\n</html>\n\n";
+
+		
+		return text;
+	}
+	
+	
+	
 	public String getNodeTagsRelation (String name, String modelPath){
 		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas
 		

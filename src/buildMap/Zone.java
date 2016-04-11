@@ -1,14 +1,13 @@
 package buildMap;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -17,12 +16,14 @@ public class Zone {
 	ArrayList<Node> areas;
 	Node representative;
 	HashMap<String, Float> ZoneHistoMean;
+	Color zoneColor;
 	
 	public Zone(String na){
 		representative = new Node();
 		areas = new ArrayList<Node>();
 		ZoneHistoMean = new HashMap<String,Float>();
 		name = na;
+		zoneColor = Color.white;
 	}
 	
 	public Zone (Node no){

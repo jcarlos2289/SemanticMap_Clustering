@@ -48,10 +48,12 @@ public class Gui extends JFrame implements ActionListener {
 	boolean original = true, showMap = true, background = true,
 			mapGenerated = false, nodesMode = false, selectNodeChanged = false, 
 			showCluster = false, tagMode = false, selectTagChanged = false, thTagMode=false,
-			zoneGenerated=false;
+			zoneGenerated=false, zoneSelectedMode=false, selectZoneChanged = false;
 	
 	int selectedNode = -1 ;
+	int selectZone = -1;
 	String selectedTag = null;
+	
 	
 	String dataSetPath="/home/jcarlos2289/Descargas/";
 	
@@ -181,12 +183,12 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiGenZone.setEnabled(false);
 	        jmOperations.add(jmiGenZone);
 	        	        
-	        jmiGenFullHierCluster = new JMenuItem("Gen Full Hierarchical Clustering");
+	        jmiGenFullHierCluster = new JMenuItem("Gen Full Hierarchical Clustering (HierClass)");
 	        jmiGenFullHierCluster.addActionListener(this);
 	        //jmiGenFullHierCluster.setEnabled(false);
 	        jmOperations.add(jmiGenFullHierCluster);
 	           
-	        jmiGenHierCluster = new JMenuItem("Gen Hierarchical Clustering");
+	        jmiGenHierCluster = new JMenuItem("Gen Hierarchical Clustering (From Map)");
 	        jmiGenHierCluster.addActionListener(this);
 	        jmiGenHierCluster.setEnabled(false);
 	        jmOperations.add(jmiGenHierCluster);
@@ -1132,7 +1134,7 @@ public class Gui extends JFrame implements ActionListener {
             
             
             if(e.getSource() == jMIPlaAlex_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 100, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq1_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();

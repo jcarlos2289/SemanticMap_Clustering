@@ -33,9 +33,6 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-
-
-
 public class Map {
 	ArrayList<Node> nodes;
 	ArrayList<Edge> edges;
@@ -45,6 +42,8 @@ public class Map {
 	ArrayList<String> catTag;
 	HashMap<String,String> catIdentifiedTags2;
 	double[][] distanceMatrix =null;
+	boolean clusterGenerated = false;
+	Cluster globalCluster;
 	
 	boolean useHisto=true;
 	float[] weights;
@@ -65,6 +64,7 @@ public class Map {
 		coefC=-1;
 		coefD=-1;
 		coefE=-1;
+		clusterGenerated= false;
 	}
 	
 	public void setWeights (int size) {
@@ -592,12 +592,10 @@ public class Map {
 		}
 		
 	}
-	
-	
+			
 	public JScrollPane getHierCluster(){
 		Cluster cluster = generateHierCluster();
-		
-		
+				
 		DendrogramPanel dp = new DendrogramPanel();
 		dp.setBackground(new Color(255,255,255));
 		dp.setSize(500, 9000);
@@ -618,10 +616,13 @@ public class Map {
 	}
 	
 	public Cluster generateHierCluster(){
+		Cluster cluster;
+				
+		if(!clusterGenerated){
 		//JScrollPane pane = new JScrollPane();
-		
+	
 		//matrix de distancias
-	//arreglo con los nombres
+     	//arreglo con los nombres
 		
 		String[] names = new String[nodes.size()];
 		for (int i = 0; i < nodes.size(); i++) {
@@ -653,16 +654,25 @@ public class Map {
 		
 		//ClusteringAlgorithm alg = new DefaultClusteringAlgorithm();
 		ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
-		Cluster cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
+		cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
+		globalCluster = new Cluster("Global");
+		globalCluster = cluster;
 		
-		
+		clusterGenerated=true;
+		return cluster;
 				
 		//cluster.toConsole(1);
 		//System.out.println(printCluster(cluster));
-		return cluster;
-	}
-	
+		}else 
+		{
+			return globalCluster;
+		}
 		
+		
+		
+		
+	}
+			
 	public String printCluster(Cluster cs, boolean fatherFound){
 		
 		//boolean found = false;
@@ -742,7 +752,7 @@ public class Map {
 		//return result;
 	}
 	
-		public ArrayList<String> getClusterArray(Cluster cs, double th1){
+	public ArrayList<String> getClusterArray(Cluster cs, double th1){
 		ArrayList<String> result= new ArrayList<String>();
 		
 		//metodo Anteriror
@@ -794,8 +804,6 @@ public class Map {
 			
 	}
 	
-	
-		
 	public float distanceOfNodes_KS(Node node1, Node node2){
 
 			Set<String> hs1;
@@ -850,7 +858,7 @@ public class Map {
 			dataset = (DefaultPieDataset) z.getChartDataset();
 			for(int i = 0; i < dataset.getItemCount();++i){
 				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), z.getName());
-			    //System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
+			    System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
 			}
 		}
 			return fullDataset;
@@ -986,6 +994,7 @@ public class Map {
 			
 			for (Zone z:zones){
 				z.udpateStatus();
+				z.zoneColor= new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
 			}
 				
 		
@@ -1078,6 +1087,7 @@ public class Map {
 				zNames.add(ram);
 				zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
 			}
+				
 			
 			
 			String text = "<html>\n";
@@ -1085,12 +1095,21 @@ public class Map {
 			text+="<h2>Number of zones: "+ zones.size()+"</h2><br>";
 						
 			text += "<table border=\"1\"   style=\"font-size:12px\"    >";
-			text +="<tr><th>Zone</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";
+			text +="<tr><th>Zone</th><th>Color</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";
 			int p = 1;
 			for(Zone z : zones){
 				text +="<tr>";
 				text +="<td>";
-				text+= String.valueOf(p) + "</td> <td>";
+				text+= String.valueOf(p) + "</td> "
+							+ "<td  style=\"color:rgb(" 
+							+ String.valueOf(z.zoneColor.getRed())+  ","
+			                + String.valueOf(z.zoneColor.getGreen())+","
+			                + String.valueOf(z.zoneColor.getBlue())+   ");\">";
+				
+				/*text+=   "rgb("+ String.valueOf(z.zoneColor.getRed())+  ","
+				               + String.valueOf(z.zoneColor.getGreen())+","
+				               + String.valueOf(z.zoneColor.getBlue())+")"   */ 			
+			    text+= "&diams;&diams;&diams;&diams;</td> <td>";
 				text+=z.name +"</td> <td>";
 				text+=String.valueOf(z.getSize()) +"</td> <td>";
 				
@@ -1111,9 +1130,6 @@ public class Map {
 			return text;
 			
 		}
-	
-	
-	
 	
 	class NodeCoef{
 		float A, B, D;
@@ -1150,8 +1166,7 @@ public class Map {
 		}
 		
 	}
-	
-	
+		
 	class Edge {
 		Node a, b;
 		

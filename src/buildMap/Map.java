@@ -1061,7 +1061,7 @@ System.out.println(text);
 			dataset = (DefaultPieDataset) z.getChartDataset();
 			for(int i = 0; i < dataset.getItemCount();++i){
 				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), z.getName());
-			    System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
+			   // System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
 			}
 		}
 			return fullDataset;

@@ -68,7 +68,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null, zoneRelationDialog = null;
 	
 	public CanvasMap (Gui ig) {
-		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_1.png"));
+		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_NotAligned.png"));
 		gui=ig;
 		xdesp=(gui.width/4.3)-65;
 		ydesp=(gui.height/2.68)-74;
@@ -256,7 +256,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 				Zone selectZone =  gui.bm.map.zones.get(gui.selectZone);
 								
 					 for(Node nd : selectZone.areas){
-						g.setColor(Color.orange);
+						g.setColor(selectZone.zoneColor);
 						g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius, radius);
 						 g.fillOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, radius, radius);
 						 g.drawOval((int)nd.representative.xcoord, (int) nd.representative.ycoord, 1, 1);
@@ -1300,6 +1300,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 				top.dispose();
 				tagCloudDialog.dispose();
 				zoneInfo.dispose();
+				zoneRelationDialog.dispose();
 				//gui.nodes.setSelectedIndex(0);
 				tags=null;
 				nodeInfo=null;
@@ -1307,6 +1308,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 				top = null;
 				tagCloudDialog=null;
 				zoneInfo=null;
+				zoneRelationDialog= null;
 				
 			}
 						

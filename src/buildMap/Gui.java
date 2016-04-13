@@ -61,9 +61,9 @@ public class Gui extends JFrame implements ActionListener {
 	Kmeans km;
 	String name ;
 	
-	 JMenu jmOperations, jmShows;
+	 JMenu jmOperations, jmShows, jmCharts;
 	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, 
-	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart;
+	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart,  jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -223,7 +223,12 @@ public class Gui extends JFrame implements ActionListener {
 	        
 	        jMIGetNodesContent = new JMenuItem();
 	        jMIGetZonesContent = new JMenuItem();
+	        
+	        jmCharts = new JMenu("View Charts");
 	        jmiShowZoneChart = new JMenuItem();
+	        jmiShowZoneChart_2 = new JMenuItem();
+	        jmiShowZoneChart_3 = new JMenuItem();
+	        jmiShowZoneChart_4 = new JMenuItem();
 	        
 	        jMIImgMX_Sq6.addActionListener(this);
 	        jMIImgAlex_Sq6.addActionListener(this);
@@ -272,10 +277,32 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIGetZonesContent.setEnabled(false);
 	        jmOperations.add(jMIGetZonesContent);
 	        
-	        jmiShowZoneChart.setText("Zones Pie Chart");
+	        jmiShowZoneChart.setText("Zones Pie Chart 1");
 	        jmiShowZoneChart.addActionListener(this);
+	        jmiShowZoneChart.setToolTipText("30 PO office");
 	        jmiShowZoneChart.setEnabled(false);
-	        jmOperations.add(jmiShowZoneChart);
+	        jmCharts.add(jmiShowZoneChart);
+	        
+	        jmiShowZoneChart_2.setText("Zones Pie Chart 2");
+	        jmiShowZoneChart_2.addActionListener(this);
+	        jmiShowZoneChart_2.setToolTipText("30 PO-1 office_1");
+	        jmiShowZoneChart_2.setEnabled(false);
+	        jmCharts.add(jmiShowZoneChart_2);
+	        
+	        jmiShowZoneChart_3.setText("Zones Pie Chart 3");
+	        jmiShowZoneChart_3.addActionListener(this);
+	        jmiShowZoneChart_3.setToolTipText("30 PO office_1");
+	        jmiShowZoneChart_3.setEnabled(false);
+	        jmCharts.add(jmiShowZoneChart_3);
+	        	        
+	        jmiShowZoneChart_4.setText("Zones Pie Chart 4");
+	        jmiShowZoneChart_4.addActionListener(this);
+	        jmiShowZoneChart_4.setToolTipText("30 PO-1 office");
+	        jmiShowZoneChart_4.setEnabled(false);
+	        jmCharts.add(jmiShowZoneChart_4);
+	        
+	         jmOperations.add(jmCharts) ;    
+	        
 	        
 	       
 	        jmShows = new JMenu("View");
@@ -1134,7 +1161,7 @@ public class Gui extends JFrame implements ActionListener {
             
             
             if(e.getSource() == jMIPlaAlex_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 100, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 1000, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq1_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1246,7 +1273,7 @@ public class Gui extends JFrame implements ActionListener {
             }
                         
             if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 100, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 100, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1257,7 +1284,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIPlaGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 1500, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 2000, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesGoogLeNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1345,7 +1372,10 @@ public class Gui extends JFrame implements ActionListener {
             	zoneCB.setSelected(true);
             	zoneCB.setEnabled(true);
             	jMIGetZonesContent.setEnabled(true);
-            	 jmiShowZoneChart.setEnabled(true);
+            	jmiShowZoneChart.setEnabled(true);
+            	jmiShowZoneChart_2.setEnabled(true);
+            	jmiShowZoneChart_3.setEnabled(true);
+            	jmiShowZoneChart_4.setEnabled(true);
             	statusLabel.setText("Zones have been generated.");
             	cm.repaint();
             }
@@ -1360,29 +1390,64 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if (e.getSource()== jMIGetZonesContent){
+            	 Date date = new Date();
+	        	 DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
+	        	 String colofon ="_"+name +"_"+bm.map.zones.size()+"_Zones_th_"+th1.getText()+ "_"+hourdateFormat.format(date);
+            	            	
+            	//Formato 1 ZoneTag # CantNodos VidriloCat1 VidriloCat2 .....VidriloCat10
             	String[] tags = {"HallEntrance","ProfessorRoom","StudentsRoom","TechnicalRoom","Toilet","Secretary","Videoconference","Warehouse","ElevatorArea","Corridor"};
-            	
             	String h="N;Zone_Tag;Num;Nodes";
             	for(String g: tags){
             		h+=";"+g;
             	}
             	h+="\n";
-            	
-            	FileMethods.saveFile(h, "ZonesContent_"+ name +"_"+bm.map.zones.size()+"_Zones", false);
-            	
+            	FileMethods.saveFile(h, "ZonesContent"+ colofon, false);
             	int g =1;
             	for(Zone z: bm.map.zones){
-            		FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n",  "ZonesContent_"+ name +"_"+bm.map.zones.size()+"_Zones" , true);
+            		FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n",  "ZonesContent"+ colofon , true);
             		g++;
             	}
+            	//Otros Formatos
+            	bm.map.printMapCategoriesInformation(new String[]{"CatDeepTag"+colofon,"CatZoneTag"+colofon,"Cat2ZoneTag"+colofon,"Cat2DeepTag"+colofon});
+            	bm.map.printZonesDataset(new String[]{"CatDeepTagSum"+colofon,"Cat2ZoneTagSum"+colofon,"CatZoneTagSum"+colofon,"Cat2DeepTagSum"+colofon});
             	
+            	//CatDeepTagSum Cat2ZoneTagSum CatZoneTagSum Cat2DeepTagSum
+            	
+            	
+            	/*//Formato 1 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("CatDeepTag"+colofon,1);
+            	
+            	//Formato 2 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("CatZoneTag"+colofon,2);
+            	
+            	
+            	//Formato 3 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("Cat2ZoneTag"+colofon,3);
+            	
+            	
+            	//Formato 4 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("Cat2DeepTag"+colofon,4);*/
+            	           	
             	
             }
             
-            if (e.getSource() ==  jmiShowZoneChart){
-            	cm.showZonesCharts();
+            if (e.getSource() ==  jmiShowZoneChart){    //30 PO office 
+            	cm.showZonesCharts(1);
             }
-          		
+     
+			if (e.getSource() ==  jmiShowZoneChart_2){  // 30 PO-1 office_1  
+            	cm.showZonesCharts(2);
+            }
+			
+			 if (e.getSource() ==  jmiShowZoneChart_3){    //30 PO office_1  30
+	            	cm.showZonesCharts(3);
+	            }
+	     
+			if (e.getSource() ==  jmiShowZoneChart_4){  //30 PO-1 office
+	            	cm.showZonesCharts(4);
+	            }
+			
+				
 	}
 
 	private void generate12ImagesMaps() {

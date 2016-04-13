@@ -96,9 +96,10 @@ public class Zone {
 		text += ";" +String.valueOf(this.areas.size());
 		
 		ArrayList<String> originalClass = new ArrayList<String>();
-		for(ImageTags imt: representative.images)
-			originalClass.add(imt.category);
-		
+		for(ImageTags imt: representative.images){
+			String[] x = imt.category.split("-");
+			originalClass.add(x[0]);
+		}
 	    
 		  for (String key :tags) 
 	    	text += ";" +Collections.frequency(originalClass, key);
@@ -157,7 +158,7 @@ public class Zone {
 		 Set<String> data = new HashSet<>(originalClass);
 
 		 
-			     DefaultPieDataset dataset = new DefaultPieDataset( );
+		  DefaultPieDataset dataset = new DefaultPieDataset( );
 		  for (String key : data) 
 	    	 dataset.setValue( key , new Double( Collections.frequency(originalClass, key) ) );
 		

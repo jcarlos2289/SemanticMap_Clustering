@@ -1155,14 +1155,14 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 	}
 	
-	public void showZonesCharts(){
+	public void showZonesCharts(int mode){
 		if(zoneChartDialog!=null){
 			zoneChartDialog.dispose();
 			zoneChartDialog=null;
 		}
 		
 		zoneChartDialog = new JDialog(gui);
-		CategoryDataset fDataset = gui.bm.map.getZonesDataset();
+		CategoryDataset fDataset = gui.bm.map.getZonesDataset(mode);
 		//fDataset = gui.bm.map.getZonesDataset();
 		
 		
@@ -1193,9 +1193,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 	       
 	        p.setBackgroundPaint(null);
 	       // p.setOutlineStroke(null);
-	        
-	        
-	        
+	               
 	        
 	        final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, true, true);
 	        //chartPanel.setPreferredSize(new java.awt.Dimension(1000, 700));

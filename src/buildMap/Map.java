@@ -1051,22 +1051,103 @@ System.out.println(text);
 					
 		}
 	
-	public CategoryDataset getZonesDataset(){
-		
-		
+	public CategoryDataset getZonesDataset(int mode){
 		DefaultCategoryDataset fullDataset = new DefaultCategoryDataset();
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
 		for(Zone z: zones){
-			String[] zn = z.getName().split(" ");
+			String[] zNameElement = z.getName().split(" ");
 			
 			dataset = (DefaultPieDataset) z.getChartDataset();
 			for(int i = 0; i < dataset.getItemCount();++i){
-				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), zn[0]); //z.getName()
-			   System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ zn[0]);	// z.getName()
+				String [] categoryElement =dataset.getKey(i).toString().split("-");
+				String tag ="", vidCat="";
+				switch (mode) {
+					case 1 : //Vidrilo Category without Number  ***30 PO office 
+						tag=  zNameElement[0];
+						vidCat=categoryElement[0];
+						break;
+						
+				 case 2 : //Vidrilo Category with Number  ***30 PO-1 office_1
+				      tag=  z.getName();
+				      vidCat=dataset.getKey(i).toString();
+						break;
+						
+				 case 3 : //Vidrilo Category without Number  ***30 PO office_1
+						tag=  z.getName();
+						vidCat=categoryElement[0];
+						break;
+						
+				 case 4 : //Vidrilo Category with Number *****30 PO-1 office
+				      tag=  zNameElement[0];
+				      vidCat=dataset.getKey(i).toString();
+						break;
+
+					default :
+						break;
+				}
+				
+				fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
+			   System.out.println(dataset.getValue(i)+" "+vidCat+" "+ tag);	// z.getName()
 			}
 		}
 			return fullDataset;
+	}
+	
+	public void printZonesDataset(String[] fileName){
+		//DefaultCategoryDataset fullDataset = new DefaultCategoryDataset();
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		
+		
+		String text= "";
+		String cab = "Cant;Vidrilo_Category;Tag\n";
+		
+		for(int i=0; i<=3;++i)
+		 FileMethods.saveFile(cab, "CSV/"+fileName[i], false);
+		
+		
+		
+		for(Zone z: zones){
+			String[] zNameElement = z.getName().split(" ");
+			
+			dataset = (DefaultPieDataset) z.getChartDataset();
+			for(int i = 0; i < dataset.getItemCount();++i){
+				String [] categoryElement =dataset.getKey(i).toString().split("-");
+				String tag ="", vidCat="";
+			
+				for(int j=1; j<=4;++j){
+				switch (j) {
+					case 1 : //Vidrilo Category without Number  ***30 PO office  CatDeepTagSum   
+						tag=  zNameElement[0];
+						vidCat=categoryElement[0];
+						break;
+						
+				 case 2 : //Vidrilo Category with Number  ***30 PO-1 office_1 Cat2ZoneTagSum
+				      tag=  z.getName();
+				      vidCat=dataset.getKey(i).toString();
+						break;
+						
+				 case 3 : //Vidrilo Category without Number  ***30 PO office_1 CatZoneTagSum
+						tag=  z.getName();
+						vidCat=categoryElement[0];
+						break;
+						
+				 case 4 : //Vidrilo Category with Number *****30 PO-1 office Cat2DeepTagSum
+				      tag=  zNameElement[0];
+				      vidCat=dataset.getKey(i).toString();
+						break;
+
+					default :
+						break;
+				}
+				
+				//fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
+			   text = dataset.getValue(i)+";"+vidCat+";"+ tag+"\n";	// z.getName()
+			   FileMethods.saveFile(text, "CSV/"+fileName[j-1], true);
+			   	}
+			}
+		}
+			//return fullDataset;
 	}
 		
 	public String generateZones(double th1){
@@ -1384,7 +1465,57 @@ System.out.println(text);
 		return text;
 	}
 	
-	
+	public void printMapCategoriesInformation(String[] fileName){
+		String text= "";
+		String cab = "idImg;Vidrilo_Category;Tag\n";
+		
+		for(int i=0; i<=3;++i)
+		 FileMethods.saveFile(cab, "CSV/"+fileName[i], false);
+		
+		
+		for(Zone z : zones){
+			String[] zn = z.getName().split(" ");
+			for(Node n : z.areas){
+				String[] d = n.representative.imageName.split("/");
+				String[] t = d[d.length-1].split("\\.");
+				
+				String[]r = n.representative.category.split("-");
+				
+				
+				
+				for(int i=0; i<=3;++i){
+				switch (i) {
+					case 0 :
+						text = t[0]+";"+r[0]+";"+zn[0]+"\n";
+						break;
+				    case 1 :
+						text = t[0]+";"+r[0]+";"+z.getName()+"\n";
+						break;
+				    case 2 :
+						text = t[0]+";"+n.representative.category+";"+z.getName()+"\n";
+						break;	
+				    case 3 :
+						text = t[0]+";"+n.representative.category+";"+zn[0]+"\n";
+						break;		
+
+					default :
+						break;
+				}	
+				FileMethods.saveFile(text, "CSV/"+fileName[i], true);
+				}
+				//text = t[0]+";"+n.representative.category+";"+zn[0]+"\n";
+				
+				
+				
+				
+				
+			}			
+			
+		}
+		
+		
+		//return text;
+	}
 	
 	
 	

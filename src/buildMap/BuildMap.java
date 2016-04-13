@@ -406,7 +406,7 @@ public class BuildMap {
 			
 		
 		
-		for (int i=1; i<sequenceLength; i++) {
+		for (int i=1; i<sequenceLength; i+=2) {
 			
 			map.createNode(imgTags.get(i));
 			

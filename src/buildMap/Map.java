@@ -1058,10 +1058,12 @@ System.out.println(text);
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
 		for(Zone z: zones){
+			String[] zn = z.getName().split(" ");
+			
 			dataset = (DefaultPieDataset) z.getChartDataset();
 			for(int i = 0; i < dataset.getItemCount();++i){
-				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), z.getName());
-			   // System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ z.getName());	
+				fullDataset.addValue(dataset.getValue(i), dataset.getKey(i), zn[0]); //z.getName()
+			   System.out.println(dataset.getValue(i)+" "+dataset.getKey(i)+" "+ zn[0]);	// z.getName()
 			}
 		}
 			return fullDataset;
@@ -1284,7 +1286,10 @@ System.out.println(text);
   			//km2.near.get(index)
   			 		*/
 			//-------------------------------------------------------
-			ArrayList<String> zNames = new ArrayList<String>();
+		
+			
+			//-------------------------Esto lo pase a una funcion aparte
+			/*ArrayList<String> zNames = new ArrayList<String>();
 			for(int i = 0; i< zones.size();i++){
 				String ram =  zones.get(i).name;
 				zNames.add(ram);
@@ -1309,9 +1314,7 @@ System.out.println(text);
 			                + String.valueOf(z.zoneColor.getGreen())+","
 			                + String.valueOf(z.zoneColor.getBlue())+   ");\">";
 				
-				/*text+=   "rgb("+ String.valueOf(z.zoneColor.getRed())+  ","
-				               + String.valueOf(z.zoneColor.getGreen())+","
-				               + String.valueOf(z.zoneColor.getBlue())+")"   */ 			
+				
 			    text+= "&diams;&diams;&diams;&diams;</td> <td>";
 				text+=z.name +"</td> <td>";
 				text+=String.valueOf(z.getSize()) +"</td> <td>";
@@ -1328,11 +1331,62 @@ System.out.println(text);
 			}
 				
 			text += "</table>";
-			text += "\n</html>\n\n";
+			text += "\n</html>\n\n";*/
 			
-			return text;
+			return printZoneResume();
 			
 		}
+	
+	public String printZoneResume(){
+		ArrayList<String> zNames = new ArrayList<String>();
+		for(int i = 0; i< zones.size();i++){
+			String ram =  zones.get(i).name;
+			zNames.add(ram);
+			zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
+		}
+			
+		
+		
+		String text = "<html>\n";
+		text +="<h1> Identified zones in the map</h1><br>";
+		text+="<h2>Number of zones: "+ zones.size()+"</h2><br>";
+					
+		text += "<table border=\"1\"   style=\"font-size:12px\"    >";
+		text +="<tr><th>Zone</th><th>Color</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";
+		int p = 1;
+		for(Zone z : zones){
+			text +="<tr>";
+			text +="<td>";
+			text+= String.valueOf(p) + "</td> "
+						+ "<td  style=\"color:rgb(" 
+						+ String.valueOf(z.zoneColor.getRed())+  ","
+		                + String.valueOf(z.zoneColor.getGreen())+","
+		                + String.valueOf(z.zoneColor.getBlue())+   ");\">";
+								
+		    text+= "&diams;&diams;&diams;&diams;</td> <td>";
+			text+=z.name +"</td> <td>";
+			text+=String.valueOf(z.getSize()) +"</td> <td>";
+			
+			int jk = 1;
+			for(Node n : z.areas){
+				if(jk%20==0)text+="<br>";
+				text+= "-"+String.valueOf(n.nodeName)+"&nbsp;";
+				jk++;
+			}
+			
+			text +="</td></tr>\n";
+			p++;
+		}
+			
+		text += "</table>";
+		text += "\n</html>\n\n";
+		
+		return text;
+	}
+	
+	
+	
+	
 	
 	class NodeCoef{
 		float A, B, D;

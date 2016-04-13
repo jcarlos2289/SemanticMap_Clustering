@@ -1167,7 +1167,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 		
 		final JFreeChart chart = ChartFactory.createMultiplePieChart(
-	            "Class composition of the Zones", fDataset, TableOrder.BY_COLUMN, true, true, false); 
+	            "Class composition of the Zones", fDataset, TableOrder.BY_ROW, true, true, false); 
 	        chart.setBackgroundPaint(Color.white);
 	        final MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
 	        final JFreeChart subchart = plot.getPieChart();
@@ -1311,13 +1311,19 @@ public class CanvasMap extends JPanel implements MouseListener {
 				zoneRelationDialog= null;
 				
 			}
-						
+			double dist = 0.0;
+			double minDist= Double.MAX_VALUE;
 			for(Zone z:gui.bm.map.zones){
+				
 				for (Node n:z.areas) {
 					//	System.out.println(distance(evt, n));
-						if (distance(evt, n) < radius) {
-							selZone=z;
-							continue;
+					dist = distance(evt, n);
+						if (dist < radius) {
+							if(dist < minDist){
+								minDist= dist;
+								selZone=z;
+							}
+							//continue;
 							//System.out.print(gui.bm.map.nodes.indexOf(n)+" ");
 						}
 					}

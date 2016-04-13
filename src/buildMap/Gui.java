@@ -1257,7 +1257,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIPlaGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 1500, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesGoogLeNet";
 	  			setTitle(name);      
             	cm.repaint();

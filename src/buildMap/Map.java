@@ -48,6 +48,7 @@ public class Map {
 	boolean useHisto=true;
 	float[] weights;
 	float coefA, coefB, coefC, coefD, coefE;
+	double cutTh;
 	
 	public Map () {
 		nodes=new ArrayList<Node>();
@@ -1063,25 +1064,25 @@ System.out.println(text);
 				String [] categoryElement =dataset.getKey(i).toString().split("-");
 				String tag ="", vidCat="";
 				switch (mode) {
-					case 1 :  //Cat1 Tag                                             
-						tag=  zNameElement[0];
+					case 1 :  //Cat1 Tag                                //Cat1 Tag     // Cat1 ZoneTag     //Cat2 Tag      //Cat2 ZoneTag         
 						vidCat=categoryElement[0];
+						tag=  zNameElement[0];
 						break;
 						
 				 case 2 : // Cat1 ZoneTag                                          
-				      tag=  z.getName();
-				      vidCat=categoryElement[0];
-						break;
+					 vidCat=categoryElement[0]; 
+					 tag=  z.getName();
+				      break;
 						
 				 case 3 : //Cat2 Tag                                                 
-						tag=  zNameElement[0];
-						vidCat=categoryElement[0];
+					 vidCat=dataset.getKey(i).toString();	
+					 tag=  zNameElement[0];
 						break;
 						
 				 case 4 : //Cat2 ZoneTag                                                 
-				      tag=  zNameElement[0];
-				      vidCat=categoryElement[0];
-						break;
+					 vidCat=dataset.getKey(i).toString(); 
+					 tag=  z.getName();
+				      	break;
 
 					default :
 						break;
@@ -1117,25 +1118,25 @@ System.out.println(text);
 			
 				for(int j=1; j<=4;++j){                
 				switch (j) {
-					case 1 :  //Cat1 Tag                                //Cat1 Tag     // Cat1 ZoneTag     //Cat2 Tag      //Cat2 Zonetag         
-						tag=  zNameElement[0];
+					case 1 :  //Cat1 Tag                                //Cat1 Tag     // Cat1 ZoneTag     //Cat2 Tag      //Cat2 ZoneTag         
 						vidCat=categoryElement[0];
+						tag=  zNameElement[0];
 						break;
 						
 				 case 2 : // Cat1 ZoneTag                                          
-				      tag=  z.getName();
-				      vidCat=categoryElement[0];
-						break;
+					 vidCat=categoryElement[0]; 
+					 tag=  z.getName();
+				      break;
 						
 				 case 3 : //Cat2 Tag                                                 
-						tag=  zNameElement[0];
-						vidCat=categoryElement[0];
+					 vidCat=dataset.getKey(i).toString();	
+					 tag=  zNameElement[0];
 						break;
 						
 				 case 4 : //Cat2 ZoneTag                                                 
-				      tag=  zNameElement[0];
-				      vidCat=categoryElement[0];
-						break;
+					 vidCat=dataset.getKey(i).toString(); 
+					 tag=  z.getName();
+				      	break;
 
 					default :
 						break;
@@ -1155,7 +1156,7 @@ System.out.println(text);
 		
 	public String generateZones(double th1){
 		
-		
+		cutTh = th1;
 		Cluster cluster = generateHierCluster();
 		
 		ArrayList<String> ol = new ArrayList<String>();

@@ -1392,7 +1392,9 @@ public class Gui extends JFrame implements ActionListener {
             if (e.getSource()== jMIGetZonesContent){
             	// Date date = new Date();
 	        	// DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
-	        	 String colofon ="_"+name +"_TH_"+ th1.getText()+"_Zones_"+ bm.map.zones.size();
+            	
+            	double thh = bm.map.cutTh;
+	        	 String colofon ="_"+name +"_TH_"+ thh+"_Zones_"+ bm.map.zones.size();
             	            	
             	//Formato 1 ZoneTag # CantNodos VidriloCat1 VidriloCat2 .....VidriloCat10
             	String[] tags = {"HallEntrance","ProfessorRoom","StudentsRoom","TechnicalRoom","Toilet","Secretary","Videoconference","Warehouse","ElevatorArea","Corridor"};

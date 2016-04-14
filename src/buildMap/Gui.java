@@ -277,33 +277,33 @@ public class Gui extends JFrame implements ActionListener {
 	        jMIGetZonesContent.setEnabled(false);
 	        jmOperations.add(jMIGetZonesContent);
 	        
-	        jmiShowZoneChart.setText("Zones Pie Chart 1");
+	        jmiShowZoneChart.setText("Zones Pie Chart Cat1-vs-Tag");
 	        jmiShowZoneChart.addActionListener(this);
-	        jmiShowZoneChart.setToolTipText("30 PO office");
+	        jmiShowZoneChart.setToolTipText("Cat1-vs-Tag");
 	        jmiShowZoneChart.setEnabled(false);
 	        jmCharts.add(jmiShowZoneChart);
 	        
-	        jmiShowZoneChart_2.setText("Zones Pie Chart 2");
+	        jmiShowZoneChart_2.setText("Zones Pie Chart Cat1-vs-ZoneTag");
 	        jmiShowZoneChart_2.addActionListener(this);
-	        jmiShowZoneChart_2.setToolTipText("30 PO-1 office_1");
+	        jmiShowZoneChart_2.setToolTipText("Cat1-vs-ZoneTag");
 	        jmiShowZoneChart_2.setEnabled(false);
 	        jmCharts.add(jmiShowZoneChart_2);
 	        
-	        jmiShowZoneChart_3.setText("Zones Pie Chart 3");
+	        jmiShowZoneChart_3.setText("Zones Pie Chart Cat2-vs-Tag");
 	        jmiShowZoneChart_3.addActionListener(this);
-	        jmiShowZoneChart_3.setToolTipText("30 PO office_1");
+	        jmiShowZoneChart_3.setToolTipText("Cat2-vs-Tag");
 	        jmiShowZoneChart_3.setEnabled(false);
 	        jmCharts.add(jmiShowZoneChart_3);
 	        	        
-	        jmiShowZoneChart_4.setText("Zones Pie Chart 4");
+	        jmiShowZoneChart_4.setText("Zones Pie Chart Cat2-vs-ZoneTag");
 	        jmiShowZoneChart_4.addActionListener(this);
-	        jmiShowZoneChart_4.setToolTipText("30 PO-1 office");
+	        jmiShowZoneChart_4.setToolTipText("Cat2-vs-ZoneTag    ");
 	        jmiShowZoneChart_4.setEnabled(false);
 	        jmCharts.add(jmiShowZoneChart_4);
 	        
 	         jmOperations.add(jmCharts) ;    
 	        
-	        
+	       //Cat1-vs-Tag     // Cat1-vs-ZoneTag     //Cat2-vs-Tag      //Cat2-vs-ZoneTag      
 	       
 	        jmShows = new JMenu("View");
 	        
@@ -1161,7 +1161,7 @@ public class Gui extends JFrame implements ActionListener {
             
             
             if(e.getSource() == jMIPlaAlex_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 1000, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq1_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1219,7 +1219,7 @@ public class Gui extends JFrame implements ActionListener {
                         
             
             if(e.getSource() == jMiHybrid_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
 	  			name= "VidriloSeq2_HybridAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1230,7 +1230,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIImgAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1241,7 +1241,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIImgCaff_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetCaffeNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetCaffeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetCaffeNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1252,7 +1252,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIImgGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetGoogLeNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1262,7 +1262,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIImgVGG_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetVGG/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetVGG/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetVGG";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1273,7 +1273,7 @@ public class Gui extends JFrame implements ActionListener {
             }
                         
             if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 100, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesAlexNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1284,7 +1284,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIPlaGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 2000, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_PlacesGoogLeNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1295,7 +1295,7 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if(e.getSource() == jMIImgMX_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetMXNet";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1306,7 +1306,7 @@ public class Gui extends JFrame implements ActionListener {
             }
                         
             if(e.getSource() == jMIImgMX21K_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K/sequence2visual", 0.0000000, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K/sequence2visual", 0.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_XY.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetMXNet21K";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1390,9 +1390,9 @@ public class Gui extends JFrame implements ActionListener {
             }
             
             if (e.getSource()== jMIGetZonesContent){
-            	 Date date = new Date();
-	        	 DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
-	        	 String colofon ="_"+name +"_"+bm.map.zones.size()+"_Zones_th_"+th1.getText()+ "_"+hourdateFormat.format(date);
+            	// Date date = new Date();
+	        	// DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
+	        	 String colofon ="_"+name +"_TH_"+ th1.getText()+"_Zones_"+ bm.map.zones.size();
             	            	
             	//Formato 1 ZoneTag # CantNodos VidriloCat1 VidriloCat2 .....VidriloCat10
             	String[] tags = {"HallEntrance","ProfessorRoom","StudentsRoom","TechnicalRoom","Toilet","Secretary","Videoconference","Warehouse","ElevatorArea","Corridor"};
@@ -1408,8 +1408,8 @@ public class Gui extends JFrame implements ActionListener {
             		g++;
             	}
             	//Otros Formatos
-            	bm.map.printMapCategoriesInformation(new String[]{"CatDeepTag"+colofon,"CatZoneTag"+colofon,"Cat2ZoneTag"+colofon,"Cat2DeepTag"+colofon});
-            	bm.map.printZonesDataset(new String[]{"CatDeepTagSum"+colofon,"Cat2ZoneTagSum"+colofon,"CatZoneTagSum"+colofon,"Cat2DeepTagSum"+colofon});
+            	bm.map.printMapCategoriesInformation(new String[]{"Cat1-vs-Tag"+colofon,"Cat1-vs-ZoneTag"+colofon,"Cat2-vs-Tag"+colofon,"Cat2-vs-ZoneTag"+colofon});
+            	bm.map.printZonesDataset(new String[]{"Cat1-vs-TagSum"+colofon,"Cat1-vs-ZoneTagSum"+colofon,"Cat2-vs-TagSum"+colofon,"Cat2-vs-ZoneTagSum"+colofon});
             	
             	//CatDeepTagSum Cat2ZoneTagSum CatZoneTagSum Cat2DeepTagSum
             	
@@ -1431,19 +1431,22 @@ public class Gui extends JFrame implements ActionListener {
             	
             }
             
-            if (e.getSource() ==  jmiShowZoneChart){    //30 PO office 
+            
+                       
+            
+            if (e.getSource() ==  jmiShowZoneChart){      //Cat1 Tag 
             	cm.showZonesCharts(1);
             }
      
-			if (e.getSource() ==  jmiShowZoneChart_2){  // 30 PO-1 office_1  
+			if (e.getSource() ==  jmiShowZoneChart_2){   // Cat1 ZoneTag  
             	cm.showZonesCharts(2);
             }
 			
-			 if (e.getSource() ==  jmiShowZoneChart_3){    //30 PO office_1  30
+			 if (e.getSource() ==  jmiShowZoneChart_3){    //Cat2 Tag 
 	            	cm.showZonesCharts(3);
 	            }
 	     
-			if (e.getSource() ==  jmiShowZoneChart_4){  //30 PO-1 office
+			if (e.getSource() ==  jmiShowZoneChart_4){  //Cat2 Zonetag    
 	            	cm.showZonesCharts(4);
 	            }
 			

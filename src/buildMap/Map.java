@@ -1063,24 +1063,24 @@ System.out.println(text);
 				String [] categoryElement =dataset.getKey(i).toString().split("-");
 				String tag ="", vidCat="";
 				switch (mode) {
-					case 1 : //Vidrilo Category without Number  ***30 PO office 
+					case 1 :  //Cat1 Tag                                             
 						tag=  zNameElement[0];
 						vidCat=categoryElement[0];
 						break;
 						
-				 case 2 : //Vidrilo Category with Number  ***30 PO-1 office_1
+				 case 2 : // Cat1 ZoneTag                                          
 				      tag=  z.getName();
-				      vidCat=dataset.getKey(i).toString();
+				      vidCat=categoryElement[0];
 						break;
 						
-				 case 3 : //Vidrilo Category without Number  ***30 PO office_1
-						tag=  z.getName();
+				 case 3 : //Cat2 Tag                                                 
+						tag=  zNameElement[0];
 						vidCat=categoryElement[0];
 						break;
 						
-				 case 4 : //Vidrilo Category with Number *****30 PO-1 office
+				 case 4 : //Cat2 ZoneTag                                                 
 				      tag=  zNameElement[0];
-				      vidCat=dataset.getKey(i).toString();
+				      vidCat=categoryElement[0];
 						break;
 
 					default :
@@ -1115,31 +1115,34 @@ System.out.println(text);
 				String [] categoryElement =dataset.getKey(i).toString().split("-");
 				String tag ="", vidCat="";
 			
-				for(int j=1; j<=4;++j){
+				for(int j=1; j<=4;++j){                
 				switch (j) {
-					case 1 : //Vidrilo Category without Number  ***30 PO office  CatDeepTagSum   
+					case 1 :  //Cat1 Tag                                //Cat1 Tag     // Cat1 ZoneTag     //Cat2 Tag      //Cat2 Zonetag         
 						tag=  zNameElement[0];
 						vidCat=categoryElement[0];
 						break;
 						
-				 case 2 : //Vidrilo Category with Number  ***30 PO-1 office_1 Cat2ZoneTagSum
+				 case 2 : // Cat1 ZoneTag                                          
 				      tag=  z.getName();
-				      vidCat=dataset.getKey(i).toString();
+				      vidCat=categoryElement[0];
 						break;
 						
-				 case 3 : //Vidrilo Category without Number  ***30 PO office_1 CatZoneTagSum
-						tag=  z.getName();
+				 case 3 : //Cat2 Tag                                                 
+						tag=  zNameElement[0];
 						vidCat=categoryElement[0];
 						break;
 						
-				 case 4 : //Vidrilo Category with Number *****30 PO-1 office Cat2DeepTagSum
+				 case 4 : //Cat2 ZoneTag                                                 
 				      tag=  zNameElement[0];
-				      vidCat=dataset.getKey(i).toString();
+				      vidCat=categoryElement[0];
 						break;
 
 					default :
 						break;
 				}
+				
+				
+				
 				
 				//fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
 			   text = dataset.getValue(i)+";"+vidCat+";"+ tag+"\n";	// z.getName()
@@ -1474,28 +1477,29 @@ System.out.println(text);
 		
 		
 		for(Zone z : zones){
-			String[] zn = z.getName().split(" ");
+			String[] tag = z.getName().split(" ");
 			for(Node n : z.areas){
 				String[] d = n.representative.imageName.split("/");
-				String[] t = d[d.length-1].split("\\.");
+				String[] imgName = d[d.length-1].split("\\.");
 				
-				String[]r = n.representative.category.split("-");
+				String[]vidCat = n.representative.category.split("-");
 				
 				
 				
 				for(int i=0; i<=3;++i){
 				switch (i) {
 					case 0 :
-						text = t[0]+";"+r[0]+";"+zn[0]+"\n";
+						text = imgName[0]+";"+vidCat[0]+";"+tag[0]+"\n";  //Cat1 Tag   
 						break;
 				    case 1 :
-						text = t[0]+";"+r[0]+";"+z.getName()+"\n";
+						text = imgName[0]+";"+vidCat[0]+";"+z.getName()+"\n";  // Cat1 ZoneTag
 						break;
 				    case 2 :
-						text = t[0]+";"+n.representative.category+";"+z.getName()+"\n";
+				    	text = imgName[0]+";"+n.representative.category+";"+tag[0]+"\n"; //Cat2 Tag
 						break;	
 				    case 3 :
-						text = t[0]+";"+n.representative.category+";"+zn[0]+"\n";
+						
+						text = imgName[0]+";"+n.representative.category+";"+z.getName()+"\n"; //Cat2 ZoneTag
 						break;		
 
 					default :

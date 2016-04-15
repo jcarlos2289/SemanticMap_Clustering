@@ -196,6 +196,14 @@ public class Map {
 		edges.add(e);
 	}
 	
+	public void setCutZoneThreshold(double th){
+		cutTh= th;
+	}
+	
+	public double getCutZoneThreshold(){
+		return cutTh;
+	}
+	
 	public float getMapDev_E(){
 		float E=0;
 		

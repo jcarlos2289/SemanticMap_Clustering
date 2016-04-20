@@ -266,7 +266,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 						//g.fillPolygon(nd.limits.getXArray(), nd.limits.getYArray(), 3);
 					}
 						 if (gui.selectZoneChanged) {
-							 System.out.println("ggg");
+							// System.out.println("ggg");
 								if (tags!=null) {
 									tags.dispose();
 									nodeInfo.dispose();

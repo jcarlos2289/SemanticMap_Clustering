@@ -133,6 +133,7 @@ public class Gui extends JFrame implements ActionListener {
     
 	
 	public Gui() {
+		
 		threshold1 = 0.5;
 		threshold2 = 0.0;
 		cutNode = 1;
@@ -737,6 +738,7 @@ public class Gui extends JFrame implements ActionListener {
 	
 
 	public static void main(String[] args) {
+		
 		Gui g = new Gui();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -749,9 +751,129 @@ public class Gui extends JFrame implements ActionListener {
 	     
 	     //Ejecucion por Consola
 	     
-	     //*******************************************************************************************************************
+	     if(!args[0].equals("gui")){
+	   	     //Seleccionar la Secuencia-----------------------------------------------------------------------
+	    	 int key = Integer.parseInt(args[0]);
+	    	 
+	   switch (key) {
+		case 1 :
+			//Seq1 Places AlexNet
+			g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+		  	g.name= "VidriloSeq1_PlacesAlexNet";
+		  	g.setTitle(g.name);      
+	        //g.cm.repaint();
+	        g.statusLabel.setText("Sequence : "+g.name+" selected.");
+	        g.seqNumber=1;
+	        g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 2 :
+			//Seq1 Places GoogLeNet
+			g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+	        g.name= "VidriloSeq1_PlacesGoogLeNet";
+	        g.setTitle(g.name);      
+	        //g.cm.repaint();
+	        g.statusLabel.setText("Sequence : "+ g.name+" selected.");
+	        g.seqNumber=1;
+	        g.jmiGenMap.setEnabled(true);
+					
+			break;
+		case 3 :
+			 //Seq2 Places AlexNet
+	        g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+	        g.name= "VidriloSeq2_PlacesAlexNet";
+	        g.setTitle(g.name);      
+			//g.cm.repaint();
+			g.statusLabel.setText("Sequence : "+g.name+" selected.");
+			g.seqNumber=2;
+			g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 4 :
+			 //Seq2 Places GoogleNet
+			g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+			g.name= "VidriloSeq2_PlacesGoogLeNet";
+			g.setTitle(g.name);      
+			//g.cm.repaint();
+			g.statusLabel.setText("Sequence : "+g.name+" selected.");
+			g.seqNumber=2;
+			g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 5 :
+			 //VidriloSeq1_ImageNetAlexNet
+		     g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+		     g.name="VidriloSeq1_ImageNetAlexNet";
+		     g.setTitle(g.name);
+		     //g.cm.repaint();
+		     g.statusLabel.setText("Sequence:"+g.name+"selected.");
+		     g.seqNumber=1;
+		     g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 6 :
+			  //VidriloSeq1_ImageNetGoogLeNet
+		     g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+		     g.name="VidriloSeq1_ImageNetGoogLeNet";
+		     g.setTitle(g.name);
+		     //g.cm.repaint();
+		     g.statusLabel.setText("Sequence:"+g.name+"selected.");
+		     g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 7 :
+			 //VidriloSeq2_ImageNetAlexNet
+			 g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+		     g.name="VidriloSeq2_ImageNetAlexNet";
+		     g.setTitle(g.name);
+		     //g.cm.repaint();
+		     g.statusLabel.setText("Sequence:"+g.name+"selected.");
+		     g.seqNumber=2;
+		     g.jmiGenMap.setEnabled(true);
+			
+			break;
+		case 8 :
+			 //VidriloSeq2_ImageNetGoogLeNet
+		     g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+		     g.name="VidriloSeq2_ImageNetGoogLeNet";
+		     g.setTitle(g.name);
+		     //g.cm.repaint();
+		     g.statusLabel.setText("Sequence:"+g.name+"selected.");
+		     g.jmiGenMap.setEnabled(true);
+		  
+		     break;
+			     
+		case 9 :
+			 //Seq1_ImageNetMXNet21K 1500
+			 g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_1500/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
+		  	 g.name= "VidriloSeq1_ImageNetMXNet21K";
+		  	 g.setTitle(g.name);      
+	         // g.cm.repaint();
+	         g.statusLabel.setText("Sequence : "+g.name+" selected.");
+	         g.seqNumber=1;
+	         g.jmiGenMap.setEnabled(true);
+			break;
+			
+		case 10 :
+			//Seq2_ImageNetMXNet21K 1500
+			g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_1500/sequence2visual", -1.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
+  			g.name= "VidriloSeq2_ImageNetMXNet21K";
+  			g.setTitle(g.name);      
+     	    //g.cm.repaint();
+	     	g.statusLabel.setText("Sequence : "+g.name+" selected.");
+	     	g.seqNumber=2;
+	     	g.jmiGenMap.setEnabled(true);
+			
+			break;
 
-	     //Seleccionar la Secuencia-----------------------------------------------------------------------
+		default :
+			break;
+	} 	 
+	    	 
+	    	 
+	    	 
+	    	 
+	    	 
 
 	    //Seq1 Places AlexNet
 	   /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
@@ -766,7 +888,7 @@ public class Gui extends JFrame implements ActionListener {
         //Seq1 Places GoogleNet
        /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
         g.name= "VidriloSeq1_PlacesGoogLeNet";
-        g.setTitle( g.name);      
+        g.setTitle(g.name);      
         //g.cm.repaint();
         g.statusLabel.setText("Sequence : "+ g.name+" selected.");
         g.seqNumber=1;
@@ -798,7 +920,7 @@ public class Gui extends JFrame implements ActionListener {
         
         //ImageNet Models
 	     //VidriloSeq1_ImageNetAlexNet
-	     /*g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+	    /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
 	     g.name="VidriloSeq1_ImageNetAlexNet";
 	     g.setTitle(g.name);
 	     //g.cm.repaint();
@@ -818,7 +940,7 @@ public class Gui extends JFrame implements ActionListener {
 	   //************************************
 
 	     //VidriloSeq2_ImageNetAlexNet
-	    /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
+	  /*   g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
 	     g.name="VidriloSeq2_ImageNetAlexNet";
 	     g.setTitle(g.name);
 	     //g.cm.repaint();
@@ -837,9 +959,26 @@ public class Gui extends JFrame implements ActionListener {
 	     g.statusLabel.setText("Sequence:"+g.name+"selected.");
 	     g.jmiGenMap.setEnabled(true);*/
 	   //************************************
-	     
-        
-           
+	    	 
+	    	 
+	   
+	   //MXNet Models
+	 /*   g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_1500/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
+	  	g.name= "VidriloSeq1_ImageNetMXNet21K";
+	  	g.setTitle(g.name);      
+       // g.cm.repaint();
+        g.statusLabel.setText("Sequence : "+g.name+" selected.");
+        g.seqNumber=1;
+        g.jmiGenMap.setEnabled(true);*/
+	    	 
+	    /*	 g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_1500/sequence2visual", -1.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
+	  			g.name= "VidriloSeq2_ImageNetMXNet21K";
+	  			g.setTitle(g.name);      
+         	//g.cm.repaint();
+         	g.statusLabel.setText("Sequence : "+g.name+" selected.");
+         	g.seqNumber=2;
+         	g.jmiGenMap.setEnabled(true);*/
+	                       
          //Generar el Mapa (nodos)----------------------------------------------------------
         g.showMap = true;
 	        		//background = true;
@@ -885,7 +1024,8 @@ public class Gui extends JFrame implements ActionListener {
 
 	  			//aki el for para los TH 
 	  			//Generar las Zonas----------------------------------------------
-        double[] thTest = {2.4 , 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5 ,3.6, 3.7,3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5}; //{0.05, 0.1, 0.2 ,0.3, 0.4, 0.5, 0.6, 0.7 ,0.8 ,0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 ,2.1 ,2.2 ,2.3};
+        double[] thTest = {0.05, 0.1, 0.2 ,0.3, 0.4, 0.5, 0.6, 0.7 ,0.8 ,0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 ,2.1 ,2.2 ,2.3, 2.4 
+        		          , 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5 ,3.6, 3.7,3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5}; //{0.05, 0.1, 0.2 ,0.3, 0.4, 0.5, 0.6, 0.7 ,0.8 ,0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 ,2.1 ,2.2 ,2.3 , 2.4 , 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5 ,3.6, 3.7,3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5};
 for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg) 
 			
 	        g.bm.map.setCutZoneThreshold(thTest[i]);
@@ -923,19 +1063,29 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             
             g.bm.map.printZonesDataset(new String[]{"Cat1-vs-TagSum"+colofon,"Cat1-vs-ZoneTagSum"+colofon,"Cat2-vs-TagSum"+colofon,"Cat2-vs-ZoneTagSum"+colofon});
             
-            g.statusLabel.setText("Test # " + (i+1) + " of " + (thTest.length+1));
+            g.statusLabel.setText("Test # " + (i+1) + " of " + (thTest.length));
             
             
             if (g.bm.map.zones.size()==1){
+            	
+            	for (int k = i+1;k < thTest.length;k++){
+            	   	 colofon ="_"+g.name +"_TH_"+ thTest[k]+"_Zones_"+ g.bm.map.zones.size();
+	            	 g.bm.map.printMapCategoriesInformation(new String[]{"Cat1-vs-Tag"+colofon,"Cat1-vs-ZoneTag"+colofon,"Cat2-vs-Tag"+colofon,"Cat2-vs-ZoneTag"+colofon});
+	                 g.bm.map.printZonesDataset(new String[]{"Cat1-vs-TagSum"+colofon,"Cat1-vs-ZoneTagSum"+colofon,"Cat2-vs-TagSum"+colofon,"Cat2-vs-ZoneTagSum"+colofon});
+	                 g.statusLabel.setText("Test # " + (k) + " of " + (thTest.length));
+            	  	}
+            	
+            	
+            	
             	break;
             }
             
             
          }//fin del format
 
-		//g.setVisible(false);
-		//g.dispose();
-	     
+		g.setVisible(false);
+		g.dispose();
+	     }   
 	     //*******************************************************************************************************************
 	     
 	    
@@ -1275,7 +1425,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             }
                         
             if(e.getSource() == jMIImgMX21K_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K/sequence1visual", 0.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_750/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq1_ImageNetMXNet21K";
 	  			setTitle(name);      
             	cm.repaint();
@@ -1387,7 +1537,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             }
                         
             if(e.getSource() == jMIImgMX21K_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K/sequence2visual", 0.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",21841, 10, 2000000000,"TrianglesPoints.txt");
+            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_750/sequence2visual", 0.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
 	  			name= "VidriloSeq2_ImageNetMXNet21K";
 	  			setTitle(name);      
             	cm.repaint();

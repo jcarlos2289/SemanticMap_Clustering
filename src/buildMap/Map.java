@@ -514,7 +514,7 @@ public class Map {
 			
 		text += "</table>";
 		text += "\n</html>\n\n";
-System.out.println(text);
+//System.out.println(text);
 		
 		return text;
 		
@@ -1258,9 +1258,28 @@ System.out.println(text);
 			for (int j = 0; j < auxFortagsLite.get(i).size(); j++) {
 				
 				if(probTopTags.containsKey(auxFortagsLite.get(i).get(j)))
-					probTopTags.replace(auxFortagsLite.get(i).get(j), probTopTags.get(auxFortagsLite.get(i).get(j))+ auxFortagsValueLite.get(i).get(j));
+					
+					
+					probTopTags.replace(auxFortagsLite.get(i).get(j), 
+							
+							
+							probTopTags.get(
+									auxFortagsLite.get(i).get(j))+ 
+									auxFortagsValueLite.get(i).get(j)/Collections.frequency(auxFortagsLite.get(i), auxFortagsLite.get(i).get(j))
+							
+							
+							
+							
+							
+							);  //  /Collections.frequency((auxFortagsLite.get(i), auxFortagsLite.get(i).get(j));
 					else
-				     probTopTags.put(auxFortagsLite.get(i).get(j), auxFortagsValueLite.get(i).get(j));
+				     probTopTags.put(
+				    		 auxFortagsLite.get(i).get(j), 
+				    		 auxFortagsValueLite.get(i).get(j)/Collections.frequency(auxFortagsLite.get(i), auxFortagsLite.get(i).get(j))
+				    		 
+				    		 
+				    		 
+				    		 );  //  /Collections.frequency((auxFortagsLite.get(i), auxFortagsLite.get(i).get(j));
 				}
 			ArrayList<String> maxTag = new ArrayList<>();
 	        maxTag = ListMethods.getTopXNodes(1, probTopTags);
@@ -1295,6 +1314,13 @@ System.out.println(text);
 				z.zoneColor= new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
 			}
 				
+			ArrayList<String> zNames = new ArrayList<String>();
+			for(int i = 0; i< zones.size();i++){
+				String ram =  zones.get(i).name;
+				zNames.add(ram);
+				zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
+			}
+			
 		
 		
 		//Metodo Dos basado en similitud y 2 thresholds---------------------------------
@@ -1431,15 +1457,7 @@ System.out.println(text);
 		}
 	
 	public String printZoneResume(){
-		ArrayList<String> zNames = new ArrayList<String>();
-		for(int i = 0; i< zones.size();i++){
-			String ram =  zones.get(i).name;
-			zNames.add(ram);
-			zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
-		}
-			
-		
-		
+				
 		String text = "<html>\n";
 		text +="<h1> Identified zones in the map</h1><br>";
 		text+="<h2>Number of zones: "+ zones.size()+"</h2><br>";

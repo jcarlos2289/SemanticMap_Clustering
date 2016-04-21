@@ -63,7 +63,8 @@ public class Gui extends JFrame implements ActionListener {
 	
 	 JMenu jmOperations, jmShows, jmCharts;
 	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, 
-	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart,  jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4;
+	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart, 
+	 			jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4, jmiCategoryMap;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -231,12 +232,16 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiShowZoneChart_3 = new JMenuItem();
 	        jmiShowZoneChart_4 = new JMenuItem();
 	        
+	        jmiCategoryMap= new JMenuItem();
+	        	        
 	        jMIImgMX_Sq6.addActionListener(this);
 	        jMIImgAlex_Sq6.addActionListener(this);
 	        jMIImgCaff_Sq6.addActionListener(this);
 	        jMIImgGNet_Sq6.addActionListener(this);
 	        jMIImgVGG_Sq6.addActionListener(this);
 	        jMIImgMX21K_Sq6.addActionListener(this);
+	        
+	        
 	        	        
 	        jmOperations.add(jSeparator1);
 
@@ -302,7 +307,13 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiShowZoneChart_4.setEnabled(false);
 	        jmCharts.add(jmiShowZoneChart_4);
 	        
-	         jmOperations.add(jmCharts) ;    
+	        jmOperations.add(jmCharts) ;    
+	        
+	        
+	        
+	        jmiCategoryMap.addActionListener(this);
+	        jmiCategoryMap.setText("Calculate Distance between Categories");
+	        jmOperations.add(jmiCategoryMap);
 	        
 	       //Cat1-vs-Tag     // Cat1-vs-ZoneTag     //Cat2-vs-Tag      //Cat2-vs-ZoneTag      
 	       
@@ -1683,6 +1694,11 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 	            	cm.showZonesCharts(4);
 	            }
 			
+			if(e.getSource()== jmiCategoryMap){
+				CatDistanceCalculator cdc = new CatDistanceCalculator(bm.imgTags);
+				cdc.createMap();
+				cdc.printMatrix(name);
+			}
 				
 	}
 

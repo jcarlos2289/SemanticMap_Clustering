@@ -77,14 +77,7 @@ public class Map {
 		}
 	}
 	
-	public Node createNode (ImageTags i) {
-		Node n=new Node(useHisto, weights);
-		n.nodeName = String.valueOf(nodes.size()+1);
-		n.add(i);
-		nodes.add(n);
-		return n;
-	}
-	
+		
 	
 	public Zone createZone(Node n){
 		Zone z = new Zone(n);
@@ -100,17 +93,26 @@ public class Map {
 		return z;
 	}
 	
-	
+	public Node createNode (ImageTags i) {
+		Node n=new Node();
+		//Node n=new Node(useHisto, weights);
+		n.nodeName = String.valueOf(nodes.size()+1);
+		n.add(i);
+		nodes.add(n);
+		return n;
+	}
 	
 	public Node createNode (String name){
-		Node n=new Node(useHisto, weights);
+		//Node n=new Node(useHisto, weights);
+		Node n=new Node();
 		n.nodeName = name;
 		nodes.add(n);
 		return n;
 	}
 	
 	public Node createNode (String name, double[]coords){
-		Node n=new Node(useHisto, weights);
+		//Node n=new Node(useHisto, weights);
+		Node n=new Node();
 		n.nodeName = name;
 		n.limits = new AreaCoords(coords);
 		nodes.add(n);
@@ -118,7 +120,8 @@ public class Map {
 	}
 	
 	public Node getNodeByName(String name){
-		Node y = new Node(true, weights);
+		//Node y = new Node(true, weights);
+		Node y = new Node();
 		for(Node x: nodes){
 			if(x.nodeName.equals(name)){
 				y = x;
@@ -584,7 +587,8 @@ public class Map {
 			for (int i = 0; i < we.length; i++) {
 				we[i] =1;
 			}
-			Node AuxNode = new Node(useHisto, we);
+			//Node AuxNode = new Node(useHisto, we);
+			Node AuxNode = new Node();
 			//List<String> topsTags = new ArrayList<>();
 			ArrayList<String> top5Modelo2 = new ArrayList<String>();
 			if(!imageTop10.isEmpty()){
@@ -684,7 +688,8 @@ public class Map {
 			for (int i = 0; i < we.length; i++) {
 				we[i] =1;
 			}
-			Node AuxNode = new Node(useHisto, we);
+			//Node AuxNode = new Node(useHisto, we);
+			Node AuxNode = new Node();
 			List<String> topsTags = new ArrayList<>();
 			ArrayList<String> top5Modelo2 = new ArrayList<String>();
 			if(!imageTop10.isEmpty()){

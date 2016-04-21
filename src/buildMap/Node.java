@@ -64,7 +64,7 @@ public class Node {
 	}
 	
 	
-	public Node(boolean hm, float[] ws) {
+	/*public Node(boolean hm, float[] ws) {
 		useHisto = true;
 		images = new ArrayList<ImageTags>();
 		if (!useHisto) {
@@ -77,7 +77,7 @@ public class Node {
 			nodeVariance =0;
 			}
 		weights = ws;
-	}
+	}*/
 
 	public int getSize() {
 		return images.size();

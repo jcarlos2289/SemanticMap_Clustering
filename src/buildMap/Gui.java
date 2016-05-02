@@ -64,7 +64,7 @@ public class Gui extends JFrame implements ActionListener {
 	 JMenu jmOperations, jmShows, jmCharts;
 	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, 
 	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart, 
-	 			jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4, jmiCategoryMap;
+	 			jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4, jmiCategoryMap, jmiZoneResume;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -212,7 +212,7 @@ public class Gui extends JFrame implements ActionListener {
 	        
 	        jmiGenAllMaps = new JMenuItem("Gen 12 Idol Maps");
 	        jmiGenAllMaps.addActionListener(this);
-	        jmOperations.add(jmiGenAllMaps);
+	       //jmOperations.add(jmiGenAllMaps);
 	        
 	        jSeparator1 = new JPopupMenu.Separator();
 	        jMRelation = new JMenu();
@@ -309,6 +309,10 @@ public class Gui extends JFrame implements ActionListener {
 	        
 	        jmOperations.add(jmCharts) ;    
 	        
+	        jmiZoneResume= new JMenuItem("Zone Information Table");
+	        jmiZoneResume.addActionListener(this);
+	        jmiZoneResume.setEnabled(false);
+	        jmOperations.add(jmiZoneResume);
 	        
 	        
 	        jmiCategoryMap.addActionListener(this);
@@ -880,116 +884,8 @@ public class Gui extends JFrame implements ActionListener {
 		default :
 			break;
 	} 	 
-	    	 
-	    	 
-	    	 
-	    	 
-	    	 
-
-	    //Seq1 Places AlexNet
-	   /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  	g.name= "VidriloSeq1_PlacesAlexNet";
-	  	g.setTitle(g.name);      
-        //g.cm.repaint();
-        g.statusLabel.setText("Sequence : "+g.name+" selected.");
-        g.seqNumber=1;
-        g.jmiGenMap.setEnabled(true);*/
-        //************************************
-        
-        //Seq1 Places GoogleNet
-       /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-        g.name= "VidriloSeq1_PlacesGoogLeNet";
-        g.setTitle(g.name);      
-        //g.cm.repaint();
-        g.statusLabel.setText("Sequence : "+ g.name+" selected.");
-        g.seqNumber=1;
-        g.jmiGenMap.setEnabled(true);*/
-       //************************************
-        
-            
-        
-        //Seq2 Places AlexNet
-        /*g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-        g.name= "VidriloSeq2_PlacesAlexNet";
-        g.setTitle(g.name);      
-		//g.cm.repaint();
-		g.statusLabel.setText("Sequence : "+g.name+" selected.");
-		g.seqNumber=2;
-		g.jmiGenMap.setEnabled(true);*/
-		//************************************
-    
-		 //Seq2 Places GoogleNet
-		/*g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-		g.name= "VidriloSeq2_PlacesGoogLeNet";
-		g.setTitle(g.name);      
-		//g.cm.repaint();
-		g.statusLabel.setText("Sequence : "+g.name+" selected.");
-		g.seqNumber=2;
-		g.jmiGenMap.setEnabled(true);*/
-		//************************************
-        
-        
-        //ImageNet Models
-	     //VidriloSeq1_ImageNetAlexNet
-	    /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
-	     g.name="VidriloSeq1_ImageNetAlexNet";
-	     g.setTitle(g.name);
-	     //g.cm.repaint();
-	     g.statusLabel.setText("Sequence:"+g.name+"selected.");
-	     g.seqNumber=1;
-	     g.jmiGenMap.setEnabled(true);*/
-	   //************************************
-
-
-	     //VidriloSeq1_ImageNetGoogLeNet
-	    /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual",-0.00000001,2389,"/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
-	     g.name="VidriloSeq1_ImageNetGoogLeNet";
-	     g.setTitle(g.name);
-	     //g.cm.repaint();
-	     g.statusLabel.setText("Sequence:"+g.name+"selected.");
-	     g.jmiGenMap.setEnabled(true);*/
-	   //************************************
-
-	     //VidriloSeq2_ImageNetAlexNet
-	  /*   g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
-	     g.name="VidriloSeq2_ImageNetAlexNet";
-	     g.setTitle(g.name);
-	     //g.cm.repaint();
-	     g.statusLabel.setText("Sequence:"+g.name+"selected.");
-	     g.seqNumber=2;
-	     g.jmiGenMap.setEnabled(true);*/
-	   //************************************
-
-
-
-	     //VidriloSeq2_ImageNetGoogLeNet
-	    /* g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual",-0.00000001,4579,"/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000,10,2000000000,"TrianglesPoints.txt");
-	     g.name="VidriloSeq2_ImageNetGoogLeNet";
-	     g.setTitle(g.name);
-	     //g.cm.repaint();
-	     g.statusLabel.setText("Sequence:"+g.name+"selected.");
-	     g.jmiGenMap.setEnabled(true);*/
-	   //************************************
-	    	 
-	    	 
-	   
-	   //MXNet Models
-	 /*   g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_1500/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
-	  	g.name= "VidriloSeq1_ImageNetMXNet21K";
-	  	g.setTitle(g.name);      
-       // g.cm.repaint();
-        g.statusLabel.setText("Sequence : "+g.name+" selected.");
-        g.seqNumber=1;
-        g.jmiGenMap.setEnabled(true);*/
-	    	 
-	    /*	 g.bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_1500/sequence2visual", -1.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1500, 10, 2000000000,"TrianglesPoints.txt");
-	  			g.name= "VidriloSeq2_ImageNetMXNet21K";
-	  			g.setTitle(g.name);      
-         	//g.cm.repaint();
-         	g.statusLabel.setText("Sequence : "+g.name+" selected.");
-         	g.seqNumber=2;
-         	g.jmiGenMap.setEnabled(true);*/
-	                       
+	   	 
+	                         
          //Generar el Mapa (nodos)----------------------------------------------------------
         g.showMap = true;
 	        		//background = true;
@@ -1355,6 +1251,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1366,6 +1263,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1377,6 +1275,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1387,6 +1286,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	cm.repaint();
             	statusLabel.setText("Sequence : "+name+" selected.");
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1398,6 +1298,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1410,6 +1311,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1421,6 +1323,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1432,6 +1335,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
                         
@@ -1443,6 +1347,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=1;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
                         
@@ -1468,6 +1373,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1479,6 +1385,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1490,6 +1397,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1500,6 +1408,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	cm.repaint();
             	statusLabel.setText("Sequence : "+name+" selected.");
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1511,6 +1420,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
                         
@@ -1522,6 +1432,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1533,6 +1444,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
             
@@ -1544,6 +1456,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
                         
@@ -1555,6 +1468,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	statusLabel.setText("Sequence : "+name+" selected.");
             	seqNumber=2;
             	jmiGenMap.setEnabled(true);
+            	resetDraw();
                 return;
             }
                         
@@ -1608,7 +1522,8 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             }
             
             if(e.getSource()== jmiGenZone){
-            	cm.showZoneInfomation( Double.parseDouble(th1.getText()));
+            	bm.map.generateZones(Double.parseDouble(th1.getText()));
+            	cm.showZoneInfomation();
             	//bm.map.generateZones();
             	zoneGenerated = true;
             	zoneCB.setSelected(true);
@@ -1618,6 +1533,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	jmiShowZoneChart_2.setEnabled(true);
             	jmiShowZoneChart_3.setEnabled(true);
             	jmiShowZoneChart_4.setEnabled(true);
+            	jmiZoneResume.setEnabled(true);
             	statusLabel.setText("Zones have been generated.");
             	cm.repaint();
             }
@@ -1675,6 +1591,10 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             	
             }
             
+            if(e.getSource()== jmiZoneResume){
+            	cm.showZoneInfomation();
+            }
+            
             
                        
             
@@ -1702,6 +1622,21 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 				
 	}
 
+	
+	public void resetDraw(){
+		mapGenerated = false; 
+		nodesMode = false; 
+		selectNodeChanged = false; 
+		showCluster = false; 
+		tagMode = false; 
+		selectTagChanged = false; 
+		thTagMode=false;
+		selectedNode = -1 ;
+		selectedTag = null;      
+		
+	}
+	
+	
 	private void generate12ImagesMaps() {
 		// TODO Auto-generated method stub
 		

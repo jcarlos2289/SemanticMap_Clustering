@@ -11,12 +11,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
+import hierClustering.*;
+
 public class Zone {
 	String name ="";
 	ArrayList<Node> areas;
 	Node representative;
 	HashMap<String, Float> ZoneHistoMean;
 	Color zoneColor;
+	Cluster clus;
+	
 	
 	public Zone(String na){
 		representative = new Node();
@@ -170,6 +174,15 @@ public class Zone {
 	    
 	     
 			
+	}
+	
+	public void setCluster(Cluster cs){
+		clus = new Cluster("aux");
+		this.clus = cs;
+	}
+	
+	public Cluster getCluster(){
+		return this.clus;
 	}
 
 }

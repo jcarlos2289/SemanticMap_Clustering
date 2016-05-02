@@ -35,6 +35,8 @@ public class CatDistanceCalculator {
 		categoryList.clear();
 		categoryList.addAll(hashSet);
 		
+		
+		
 		Collections.sort(categoryList);
 		
 		for (String cat :categoryList) {

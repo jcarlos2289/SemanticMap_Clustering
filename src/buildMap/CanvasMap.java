@@ -52,6 +52,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import hierClustering.visualization.DendrogramPanel;
+
 
 
 public class CanvasMap extends JPanel implements MouseListener {
@@ -64,11 +66,14 @@ public class CanvasMap extends JPanel implements MouseListener {
 	
 	int radius=15;
 	
-	JDialog tags=null, nodeInfo=null, top=null, nodeDetailsDialog =null, mapInfoDialog=null, tagCloudDialog=null, clusterDialog=null, zoneDialog=null, nodeRelationDialog=null, compositionDialog=null;
-	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null, zoneRelationDialog = null;
+	JDialog tags=null, nodeInfo=null, top=null, nodeDetailsDialog =null, mapInfoDialog=null, 
+			tagCloudDialog=null, clusterDialog=null, zoneDialog=null, nodeRelationDialog=null, 
+			compositionDialog=null;
+	JDialog grafDialog=null, zoneInfo=null, zoneChartDialog = null, zoneRelationDialog = null,
+			dendrogramDialog = null;
 	
 	public CanvasMap (Gui ig) {
-		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_NotAligned.png"));
+		img2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("BuildingA_Java.png"));
 		gui=ig;
 		xdesp=(gui.width/4.3)-65;
 		ydesp=(gui.height/2.68)-74;
@@ -275,6 +280,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 									tagCloudDialog.dispose();
 									zoneInfo.dispose();
 									zoneRelationDialog.dispose();
+									dendrogramDialog.dispose();
 									//gui.nodes.setSelectedIndex(0);
 									tags=null;
 									nodeInfo=null;
@@ -283,6 +289,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 									tagCloudDialog=null;
 									zoneInfo=null;
 									zoneRelationDialog= null;
+									dendrogramDialog=null;
 								}
 								showInfo(selectZone.representative);
 								gui.selectZoneChanged=false;
@@ -290,42 +297,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 					
 				
 			}else{
-			//---------------------------------------------------
-			//System.out.print("Drawing Zones");
-		/*	ArrayList<String> cats = new ArrayList<String>();
-			for(Zone zn : gui.bm.map.zones){
-				if(!cats.contains(zn.name))						
-				   cats.add(zn.name);
-			}*/
-			/*HashMap<String, Color> clave = new HashMap<String,Color>();
-			int colors[][] = new int[cats.size()][3]; */ //modifique la longuitud del arreglo anteriormente era gui.bm.map.zones.size()
-			
-		/*	for (int i = 0; i <colors.length ; i++) {
-				for (int j = 0; j < colors[i].length; j++) {
-					colors [i][j] = (int)(Math.random()*255);
-					}
-				}*/
-								
-		/*	for (int i = 0; i < cats.size(); i++) {
-				clave.put(cats.get(i), (new Color(colors[i][0],colors[i][1],colors[i][2])));
-			}*/ 
-				
-
-			
-		     
-		/*	for (java.util.Map.Entry<String, Color> entry : clave.entrySet()) {
-			  
-				g.setColor(entry.getValue());
-				g.drawOval(coord_x, coord_y, radius-1, radius-1);
-				g.fillOval(coord_x, coord_y, radius-1, radius-1);
-				g.setColor(new Color(0,0,0));
-				g.drawString(entry.getKey(), (int) (coord_x+1.5*(radius-1)), coord_y+12);
-				coord_y+= 20;
-				
-				
-				
-			}*/
-			
+					
 			Font oldFont2=getFont();
 		 //   Font fuente=new Font("Monospaced", Font.PLAIN, 12);
 			//int coord_y = 390;
@@ -753,214 +725,189 @@ public class CanvasMap extends JPanel implements MouseListener {
 			grafDialog.dispose();
 			grafDialog=null;
 		}	
-		
+
 		PieDataset dataset = selZone.getChartDataset();
-		
+
 		JFreeChart chart = ChartFactory.createPieChart3D(      
-		         "Category Distribution in the Zone",  // chart title 
-		         dataset,        // data    
-		         true,           // include legend   
-		         true, 
-		         false);
-		
-		
+				"Category Distribution in the Zone",  // chart title 
+				dataset,        // data    
+				true,           // include legend   
+				true, 
+				false);
+
+
 		PiePlot3D plot = (PiePlot3D) chart.getPlot();
-     //   plot.setStartAngle(290);
-       // plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.5f);
-       // plot.setBackgroundAlpha(1.0f);
-        
+		//   plot.setStartAngle(290);
+		// plot.setDirection(Rotation.CLOCKWISE);
+		plot.setForegroundAlpha(0.5f);
+		// plot.setBackgroundAlpha(1.0f);
+
 		chart.getPlot().setBackgroundPaint(Color.white);
 		chart.getPlot().setBackgroundAlpha(0.5f);
 		chart.getPlot().setOutlineVisible(false);
 		plot.setLabelFont(new Font("Droid Sans", Font.PLAIN, 15));
-		
+
 		final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {1}({2})");
 		plot.setLabelGenerator(labelGenerator);
-		
-		
-		 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		    ge.getAllFonts();
 
-		    Font font = new Font("Droid Sans", Font.PLAIN, 35);
-		    
-		
+
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		ge.getAllFonts();
+
+		Font font = new Font("Droid Sans", Font.PLAIN, 35);
+
+
 		chart.getTitle().setFont(font);
 		//Cuadro Leyenda
 		chart.getLegend().setItemFont(new Font("Droid Sans", Font.ITALIC, 15));
-		
-	chart.setBackgroundPaint(Color.white);
-            
-    final ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setPreferredSize(new Dimension(600, 500));
-    JButton j = new JButton("Save Image");
-    
-    j.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//System.out.println("aloha world");
-			try {
-				saveClusterImage();
-			} catch (DocumentException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+
+		chart.setBackgroundPaint(Color.white);
+
+		final ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setPreferredSize(new Dimension(600, 500));
+		JButton j = new JButton("Save Image");
+
+		j.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//System.out.println("aloha world");
+				try {
+					saveClusterImage();
+				} catch (DocumentException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
+
+			private void saveClusterImage() throws DocumentException, IOException {
+
+
+				int height = 1080; /* Height of the image */ 
+				int width = (int) (height*1.7786458333); /* Width of the image */
+
+
+				Date date = new Date();
+				DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+				String imgName = gui.name+"_Clusters_Zone_"+selZone.getName()+"_"+hourdateFormat.format(date);
+
+
+				File miDir = new File(".");
+				String c = miDir.getAbsolutePath();
+				String ruta = c.substring(0, c.length() - 1);
+				ruta += "resultados/" + imgName.trim() + ".png";
+				File fichero = new File(ruta);
+
+				try {
+					ChartUtilities.saveChartAsPNG( fichero , chart , width , height );
+					System.out.println("Image " +imgName +" Saved");
+				} catch (IOException e) {
+					System.out.println("Writing Error");
+				}
+
+			}
+		});
+
+		JPanel panel = new JPanel();
+
+		panel.setAutoscrolls(true);
+		panel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		panel.setLayout(new java.awt.BorderLayout());
+
+		chartPanel.setBackground(new java.awt.Color(20, 148, 0));
+
+		javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
+		chartPanel.setLayout(chartPanelLayout);
+		chartPanelLayout.setHorizontalGroup(
+				chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 934, Short.MAX_VALUE)
+				);
+		chartPanelLayout.setVerticalGroup(
+				chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 532, Short.MAX_VALUE)
+				);
+
+		panel.add(chartPanel, java.awt.BorderLayout.CENTER);
+
+		//j.setText("jButton1");
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
+		panel.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 0, Short.MAX_VALUE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+						.addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addContainerGap())
+				);
+
+		grafDialog = new JDialog(gui);
+		chartPanel.add(j);
+		//grafDialog.setContentPane(chartPanel);
+		grafDialog.add(panel);
+		grafDialog.setLocation(1050,650);
+		grafDialog.setSize(600, 500);
+		grafDialog.setTitle("Distribution Pie Chart");
+		grafDialog.setVisible(true);
+
+		JLabel dat = new JLabel(selZone.toWebString());
+
+		zoneInfo=new JDialog(gui);
+		zoneInfo.add(dat);
+		zoneInfo.setTitle("Zone Information");
+		zoneInfo.setSize(500, 100);
+		zoneInfo.setLocation(750,750);
+		zoneInfo.setVisible(true);
+
+
+
+		if(zoneRelationDialog!=null){
+			zoneRelationDialog.dispose();
+			zoneRelationDialog=null;
+		}
+
+		//String text = gui.bm.map.getMapInfo(gui.name, String.valueOf(gui.bm.threshold1), String.valueOf(gui.bm.threshold2), String.valueOf(gui.bm.cutNode));
+		String text = gui.bm.map.getZoneTagsRelation(name, seqNumber,selZone);
+		zoneRelationDialog = new JDialog(gui);
+		zoneRelationDialog.setSize(700, 600);
+
+		JLabel data = new JLabel(text);
+		JScrollPane scroll = new JScrollPane(data);
+		zoneRelationDialog.setTitle("Objects Identified in the Zone");
+		zoneRelationDialog.setContentPane(scroll);
+		zoneRelationDialog.setLocationRelativeTo(null);
+		zoneRelationDialog.setVisible(true);
+
 			
-		}
 
-		private void saveClusterImage() throws DocumentException, IOException {
 		
-			 
-		      int height = 1080; /* Height of the image */ 
-		      int width = (int) (height*1.7786458333); /* Width of the image */
-		      
-			        
-		      Date date = new Date();
-	        	 DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-	        	 String imgName = gui.name+"_Clusters_Zone_"+selZone.getName()+"_"+hourdateFormat.format(date);
-		      
-		      
-		      File miDir = new File(".");
-	        	 String c = miDir.getAbsolutePath();
-	        	 String ruta = c.substring(0, c.length() - 1);
-	              ruta += "resultados/" + imgName.trim() + ".png";
-	              File fichero = new File(ruta);
-	              
-		     	    try {
-		     	    	ChartUtilities.saveChartAsPNG( fichero , chart , width , height );
-		     			System.out.println("Image " +imgName +" Saved");
-		     		} catch (IOException e) {
-		     			System.out.println("Writing Error");
-		     		}
-	              
-	              
-	        	    
+		if(dendrogramDialog!=null){
+			dendrogramDialog.dispose();
+			dendrogramDialog=null;
 		}
-	});
-    
-	JPanel panel = new JPanel();
-	
-       
-   // panel2.setBackground(new java.awt.Color(20, 148, 0));
-
-   // javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(chartPanel);
- /*   panel2.setLayout(panel2Layout);
-    panel2Layout.setHorizontalGroup(
-        panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 574, Short.MAX_VALUE)
-    );
-    panel2Layout.setVerticalGroup(
-        panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 1026, Short.MAX_VALUE)
-    );*/
-/*
-    javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-    panel.setLayout(panelLayout);
-  
-    panelLayout.setHorizontalGroup(
-        panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(panelLayout.createSequentialGroup()
-            .addGap(249, 249, 249)
-            .addComponent(j)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGroup(panelLayout.createSequentialGroup()
-            .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
-    );
-    panelLayout.setVerticalGroup(
-        panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-            .addComponent(j)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-*/
-	
-   
-	   panel.setAutoscrolls(true);
-       panel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-       panel.setLayout(new java.awt.BorderLayout());
-
-       chartPanel.setBackground(new java.awt.Color(20, 148, 0));
-
-       javax.swing.GroupLayout chartPanelLayout = new javax.swing.GroupLayout(chartPanel);
-       chartPanel.setLayout(chartPanelLayout);
-       chartPanelLayout.setHorizontalGroup(
-           chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGap(0, 934, Short.MAX_VALUE)
-       );
-       chartPanelLayout.setVerticalGroup(
-           chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGap(0, 532, Short.MAX_VALUE)
-       );
-
-       panel.add(chartPanel, java.awt.BorderLayout.CENTER);
-
-       //j.setText("jButton1");
-
-       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
-       panel.setLayout(layout);
-       layout.setHorizontalGroup(
-           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-           .addGroup(layout.createSequentialGroup()
-               .addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addGap(0, 0, Short.MAX_VALUE))
-       );
-       layout.setVerticalGroup(
-           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-               .addComponent(j, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addContainerGap())
-       );
-	
-	grafDialog = new JDialog(gui);
-    chartPanel.add(j);
-    //grafDialog.setContentPane(chartPanel);
-    grafDialog.add(panel);
-    grafDialog.setLocation(1050,650);
-    grafDialog.setSize(600, 500);
-    grafDialog.setTitle("Distribution Pie Chart");
-    grafDialog.setVisible(true);
-	
-    JLabel dat = new JLabel(selZone.toWebString());
-    
-    zoneInfo=new JDialog(gui);
-    zoneInfo.add(dat);
-    zoneInfo.setTitle("Zone Information");
-    zoneInfo.setSize(500, 100);
-    zoneInfo.setLocation(750,750);
-    zoneInfo.setVisible(true);
-	
-    
-    
-    if(zoneRelationDialog!=null){
-		zoneRelationDialog.dispose();
-		zoneRelationDialog=null;
-	}
-	
-	//String text = gui.bm.map.getMapInfo(gui.name, String.valueOf(gui.bm.threshold1), String.valueOf(gui.bm.threshold2), String.valueOf(gui.bm.cutNode));
-	String text = gui.bm.map.getZoneTagsRelation(name, seqNumber,selZone);
-	zoneRelationDialog = new JDialog(gui);
-	zoneRelationDialog.setSize(700, 600);
-	
-	JLabel data = new JLabel(text);
-	JScrollPane scroll = new JScrollPane(data);
-	zoneRelationDialog.setTitle("Objects Identified in the Zone");
-	zoneRelationDialog.setContentPane(scroll);
-	zoneRelationDialog.setLocationRelativeTo(null);
-	zoneRelationDialog.setVisible(true);
-    
-    
-    
-	}
+		dendrogramDialog = new JDialog();
+		DendrogramPanel dp = new DendrogramPanel();
+		dp.setModel(selZone.getCluster());
 		
-	public void showMapInfo(){
+		dendrogramDialog.setSize(400,400);
+		dendrogramDialog.setLocationRelativeTo(null);
+		dendrogramDialog.add(dp);
+		dendrogramDialog.setVisible(true);
+
+
+	}
+		//Informacion De la Antigua Metrica
+	/*public void showMapInfo(){
 		if(mapInfoDialog!=null){
 			mapInfoDialog.dispose();
 			mapInfoDialog=null;
@@ -974,7 +921,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 			mapInfoDialog.setContentPane(scroll);
 			mapInfoDialog.setLocationRelativeTo(null);
 			mapInfoDialog.setVisible(true);
-		}
+		}*/
 		
 	public void showNodeDetails() {
 		if(nodeDetailsDialog!=null){
@@ -1137,14 +1084,14 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 	}
 		
-	public void showZoneInfomation(double th1){
+	public void showZoneInfomation(){
 		if(zoneDialog!=null){
 			zoneDialog.dispose();
 			zoneDialog=null;
 		}
 		
 		zoneDialog = new JDialog(gui);
-		JLabel dat = new JLabel(gui.bm.map.generateZones(th1));
+		JLabel dat = new JLabel(gui.bm.map.printZoneResume());
 		JScrollPane scroll = new JScrollPane(dat);
 		zoneDialog.setSize(1040, 800);
 		zoneDialog.setContentPane(scroll);
@@ -1167,40 +1114,40 @@ public class CanvasMap extends JPanel implements MouseListener {
 		
 		
 		final JFreeChart chart = ChartFactory.createMultiplePieChart(
-	            "Class composition of the Zones", fDataset, TableOrder.BY_ROW, true, true, false); 
-	        chart.setBackgroundPaint(Color.white);
-	        final MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
-	        final JFreeChart subchart = plot.getPieChart();
-//	        final StandardLegend legend = new StandardLegend();
-	  //      legend.setItemFont(new Font("SansSerif", Font.PLAIN, 8));
-	    //    legend.setAnchor(Legend.SOUTH);
-	      //  subchart.setLegend(legend);
-	        //plot.setLimit(0.10);
-	        final PiePlot p = (PiePlot) subchart.getPlot();
-	        final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {1}({2})");
+				"Class composition of the Zones", fDataset, TableOrder.BY_ROW, true, true, false); 
+		chart.setBackgroundPaint(Color.white);
+		final MultiplePiePlot plot = (MultiplePiePlot) chart.getPlot();
+		final JFreeChart subchart = plot.getPieChart();
+		//	        final StandardLegend legend = new StandardLegend();
+		//      legend.setItemFont(new Font("SansSerif", Font.PLAIN, 8));
+		//    legend.setAnchor(Legend.SOUTH);
+		//  subchart.setLegend(legend);
+		//plot.setLimit(0.10);
+		final PiePlot p = (PiePlot) subchart.getPlot();
+		final PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} = {1}({2})");
+
+		p.setLabelGenerator(labelGenerator);
+		p.setLabelFont(new Font("SansSerif", Font.PLAIN, 8));
+		p.setInteriorGap(0.30);
+
+		chart.getPlot().setBackgroundPaint(Color.white);
+		chart.getPlot().setBackgroundAlpha(0.5f);
+		chart.getPlot().setOutlineVisible(false);
+		p.setLabelFont(new Font("Droid Sans", Font.PLAIN, 8));
+		chart.getTitle().setFont(new Font("Droid Sans", Font.PLAIN, 20));
+		//chart.getCategoryPlot().setBackgroundPaint(Color.white);
 	        
-	        p.setLabelGenerator(labelGenerator);
-	        p.setLabelFont(new Font("SansSerif", Font.PLAIN, 8));
-	        p.setInteriorGap(0.30);
-	        
-	        chart.getPlot().setBackgroundPaint(Color.white);
-			chart.getPlot().setBackgroundAlpha(0.5f);
-			chart.getPlot().setOutlineVisible(false);
-			p.setLabelFont(new Font("Droid Sans", Font.PLAIN, 8));
-	        chart.getTitle().setFont(new Font("Droid Sans", Font.PLAIN, 20));
-	        //chart.getCategoryPlot().setBackgroundPaint(Color.white);
-	        
-	       
-	        p.setBackgroundPaint(null);
-	       // p.setOutlineStroke(null);
-	               
-	        
-	        final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, true, true);
-	        //chartPanel.setPreferredSize(new java.awt.Dimension(1000, 700));
-	        zoneChartDialog.setSize(800, 800);
-	        zoneChartDialog.setContentPane(chartPanel);
-	        zoneChartDialog.setLocationRelativeTo(null);
-	        zoneChartDialog.setVisible(true);
+
+		p.setBackgroundPaint(null);
+		// p.setOutlineStroke(null);
+
+
+		final ChartPanel chartPanel = new ChartPanel(chart, true, true, true, true, true);
+		//chartPanel.setPreferredSize(new java.awt.Dimension(1000, 700));
+		zoneChartDialog.setSize(800, 800);
+		zoneChartDialog.setContentPane(chartPanel);
+		zoneChartDialog.setLocationRelativeTo(null);
+		zoneChartDialog.setVisible(true);
 	        
 		
 	}
@@ -1224,26 +1171,26 @@ public class CanvasMap extends JPanel implements MouseListener {
 	public void createImage(String name) {
 
 		JPanel panel = this;
-		
-		 File miDir = new File(".");
-	     String c = miDir.getAbsolutePath();
 
-	     //elimino el punto (.) nombre del archivo(virtual) que cree para obtener la ruta de la carpeta del proyecto
-	     String ruta = c.substring(0, c.length() - 1);
-         ruta += "resultados/" + name.trim() + ".png";
-		
+		File miDir = new File(".");
+		String c = miDir.getAbsolutePath();
+
+		//elimino el punto (.) nombre del archivo(virtual) que cree para obtener la ruta de la carpeta del proyecto
+		String ruta = c.substring(0, c.length() - 1);
+		ruta += "resultados/" + name.trim() + ".png";
+
 		File fichero = new File(ruta);
-	    int w = panel.getWidth();
-	    int h = panel.getHeight();
-	    
-	    w= img2.getIconWidth();
-	    h= img2.getIconHeight();
-	    
-	    BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-	    Graphics2D g = bi.createGraphics();
-	    panel.paint(g);
-	    
-	    try {
+		int w = panel.getWidth();
+		int h = panel.getHeight();
+
+		w= img2.getIconWidth();
+		h= img2.getIconHeight();
+
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bi.createGraphics();
+		panel.paint(g);
+
+		try {
 			ImageIO.write(bi, "png", fichero);
 			System.out.println("Image " +name +" Saved");
 		} catch (IOException e) {

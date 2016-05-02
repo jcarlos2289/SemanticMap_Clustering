@@ -908,7 +908,7 @@ public class Node {
 				wordCloud.setBackground(new CircleBackground(140));
 				wordCloud.setBackgroundColor(Color.white);
 				wordCloud.setColorPalette(new ColorPalette(new Color(0x4055F1),new Color(0x00CC00), new Color(0x408DF1), new Color(0x40AAF1), new Color(0x40C5F1), new Color(0x40D3F1), new Color(0xFF3333),new Color(0xFFF00)));
-				wordCloud.setFontScalar(new SqrtFontScalar(8, 40));
+				wordCloud.setFontScalar(new SqrtFontScalar(8, 32));
 				wordCloud.build(wordFrequencies);
 				
 				BufferedImage img = wordCloud.getBufferedImage();

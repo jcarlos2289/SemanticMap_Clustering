@@ -44,27 +44,32 @@ public class Map {
 	double[][] distanceMatrix =null;
 	boolean clusterGenerated = false;
 	Cluster globalCluster;
+	ArrayList<Cluster> clusterZoneList;
+	HashMap<Integer,Cluster> clusterHM;
+	int clusterCreationIndex;
 	
 	boolean useHisto=true;
 	float[] weights;
-	float coefA, coefB, coefC, coefD, coefE;
+	//float coefA, coefB, coefC, coefD, coefE;
 	double cutTh;
 	
 	public Map () {
+		clusterCreationIndex = 0;
 		nodes=new ArrayList<Node>();
 		edges=new ArrayList<Edge>();
 		zones=new ArrayList<Zone>();
 		catIdentifiedTags2 = new HashMap<String,String>();
-		
+		clusterZoneList = new ArrayList<Cluster>();
+		clusterHM = new HashMap<Integer, Cluster>();
 		catID = new ArrayList<String>();
 		nodesByCat  = new ArrayList<String>();
 		catTag  = new ArrayList<String>();
 		
-		coefA=-1;
+		/*coefA=-1;
 		coefB=-1;
 		coefC=-1;
 		coefD=-1;
-		coefE=-1;
+		coefE=-1;*/
 		clusterGenerated= false;
 	}
 	
@@ -76,8 +81,6 @@ public class Map {
 			weights[i]=1;
 		}
 	}
-	
-		
 	
 	public Zone createZone(Node n){
 		Zone z = new Zone(n);
@@ -172,6 +175,10 @@ public class Map {
 		return nodes.size();
 	}
 	
+	public int getZoneSize(){
+		return zones.size();
+	}
+	
 	public void addNode (Node n) {
 		nodes.add(n);
 	}
@@ -181,8 +188,7 @@ public class Map {
 			return null;
 		return nodes.get(i);
 	}
-	
-	
+		
 	public Zone getZone (int i) {
 		if (i>zones.size()) 
 			return null;
@@ -207,7 +213,7 @@ public class Map {
 		return cutTh;
 	}
 	
-	public float getMapDev_E(){
+	/*public float getMapDev_E(){
 		float E=0;
 		
 		
@@ -232,10 +238,9 @@ public class Map {
 		E =  (float) Math.sqrt(Math.pow(xDev, 2)+ Math.pow(yDev, 2));
 				
 		return E;
-	}
-	
-	
-	public float getAvgEdgeDist_C(){
+	}*/
+		
+	/*public float getAvgEdgeDist_C(){
 		float C=0;
 		float distAcum=0;
 		
@@ -245,11 +250,9 @@ public class Map {
 			}
 				
 		return C;
-	}
-	
-	
-	
-	public ArrayList<NodeCoef> getNodeCoeficientsByNode(float dmax){
+	}*/
+		
+	/*public ArrayList<NodeCoef> getNodeCoeficientsByNode(float dmax){
 		ArrayList<NodeCoef> NodeMetricCoeficients = new ArrayList<NodeCoef>();
 		
 		for (Node node : nodes) {
@@ -257,9 +260,9 @@ public class Map {
 			}
 		
 		return NodeMetricCoeficients;
-	}
+	}*/
 	
-	public NodeCoef AvgCoeficients(ArrayList<NodeCoef> NodeMetricCoeficients, float dmax){
+	/*public NodeCoef AvgCoeficients(ArrayList<NodeCoef> NodeMetricCoeficients, float dmax){
 		NodeCoef AvgCoef = new NodeCoef(0,0,0);
 		
 		float acumA = 0, acumB =0, acumD=0;
@@ -274,10 +277,9 @@ public class Map {
 		AvgCoef = new NodeCoef(acumA, acumB, acumD);
 		
 		return AvgCoef;
-	}
-	
-		
-	public NodeCoef normalize(NodeCoef nodeCoef, float dmax){
+	}*/
+			
+	/*public NodeCoef normalize(NodeCoef nodeCoef, float dmax){
 		NodeCoef dat = new NodeCoef(0, 0, 0);
 		//gets the avg values for the noeficients by node to normalize 		
 		dat.setA((1-nodeCoef.getA()));
@@ -285,10 +287,9 @@ public class Map {
 		dat.setD(	(dmax/2 - nodeCoef.getD()) /(dmax/2) );
 				
 		return dat;
-	}
-	
-	
-	public String printMetricTable(float dmax){
+	}*/
+		
+	/*public String printMetricTable(float dmax){
 		String table ="<html><h2>Metrics Coeficients</h2><br> "
 				+ "<table border=\"1\"   style=\"font-size:10px\" >"
 				+ "<tr><th>Node</th><th>A</th><th>B</th><th>D</th></tr>";
@@ -341,9 +342,9 @@ public class Map {
 		return table;
 				
 		
-	}
+	}*/
 	
-	public float getMapMetric(float dmax){
+	/*public float getMapMetric(float dmax){
 		float metric=0;
 		//Get the coeficients by node in an arraylist
 		ArrayList<NodeCoef> NodeMetricCoeficients = getNodeCoeficientsByNode(dmax);
@@ -375,7 +376,7 @@ public class Map {
 		coefE=E;
 				
 		return metric;
-	}
+	}*/
 	
 	public String getMapInfo(String name, String th1, String th2, String cutNode){
 		
@@ -523,9 +524,7 @@ public class Map {
 		
 	
 	}
-	
-	
-	
+		
 	public String getFullZoneTagsRelation (String name, int seqNumber ){
 		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas
 		
@@ -634,9 +633,7 @@ public class Map {
 		
 		return text;
 	}
-	
-	
-	
+		
 	public String getNodeTagsRelation (String name, String modelPath){
 		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas
 		
@@ -780,6 +777,7 @@ public class Map {
 		return text;
 		
 	}
+	
 	public void generateDistanceMatrix(){
 		
 		distanceMatrix = new double[nodes.size()][nodes.size()];
@@ -1002,20 +1000,23 @@ public class Map {
 			ram.trim();
 			//result += "\n|"+cs.getName()+ " Leafs" +  cs.getLeafNames().size()+"| ";
 			result.addAll(nam) ;    //+= "\n|"+ram.trim()+"| ";
-			result.add("#");//+="\n------:(:-------";
+			result.add("#_"+String.valueOf(clusterCreationIndex));   System.out.println("#_"+String.valueOf(clusterCreationIndex));//+="\n------:(:-------";
+			clusterHM.put(clusterCreationIndex, cs);
+			clusterZoneList.add(cs);
+			clusterCreationIndex++;
 			return result;
 		}
-			else{
-				if(cs.countLeafs()>0){
-					for(Cluster c : cs.getChildren()){
-						result.addAll(getClusterArray(c, th1)); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
-					}
-				}else
-						result.add(cs.getName());//+="\n|"+cs.getName()+"| ";
-				
-			}
-		
-				
+		else{
+			if(cs.countLeafs()>0){
+				for(Cluster c : cs.getChildren()){
+					result.addAll(getClusterArray(c, th1)); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
+				}
+			}else
+				result.add(cs.getName());//+="\n|"+cs.getName()+"| ";
+
+		}
+
+
 		return result;	
 		
 			
@@ -1167,10 +1168,13 @@ public class Map {
 			//return fullDataset;
 	}
 		
-	public String generateZones(double th1){
+	public void generateZones(double th1){
 		
 		cutTh = th1;
 		Cluster cluster = generateHierCluster();
+		clusterZoneList.clear();
+		clusterHM.clear();
+		clusterCreationIndex = 0;
 		
 		ArrayList<String> ol = new ArrayList<String>();
 		ol = getClusterArray(cluster, th1); // gets an array list with the leafs of cluster separing cluster by #
@@ -1184,6 +1188,8 @@ public class Map {
 		catID.clear();
 		//Metodo 1 mediante analisis de dendrograma
 		int catCount = 1;
+		ArrayList<Integer> clusterOrder = new ArrayList<Integer>();
+		
 		
 		for(String hj : ol){
 			if(hj.contains("&")){
@@ -1193,7 +1199,9 @@ public class Map {
 				catID.add(String.valueOf(catCount));
 				catID.add(String.valueOf(catCount));
 				
-			}else if (hj.equals("#")){
+			}else if (hj.contains("#")){
+				String [] r = hj.split("_");
+				clusterOrder.add(Integer.parseInt(r[1]));  System.out.println("#_X_"+r[1]);			
 				catCount++;
 				continue;
 			}else{
@@ -1254,6 +1262,9 @@ public class Map {
 			
 		}
 		
+		HashMap<String, Cluster> clusterNewOrder = new HashMap<String,Cluster>();
+		
+		
 		//HashMap<String,String> catIdentifiedTags = new HashMap<String,String>();
 		
 		catIdentifiedTags2.clear();
@@ -1294,6 +1305,7 @@ public class Map {
 	      //  }
 	      //  else
 	        	 catIdentifiedTags2.put(resumeCats.get(i), maxTag.get(0));
+	        	 clusterNewOrder.put(resumeCats.get(i),clusterHM.get(i));
 			
 		}
 		
@@ -1302,15 +1314,22 @@ public class Map {
 			zones.clear();
 			Zone auxZone = new Zone("AUX");
 			//int u = 2;
-			
+			int x = 0;
 			for (Entry<String, String> entry : catIdentifiedTags2.entrySet()) {
 				auxZone = new Zone(entry.getValue());
+				
+				//auxZone.setCluster(clusterHM.get(clusterOrder.get(x)));
+				
+				//auxZone.setCluster(clusterZoneList.get(x));
+				
+				auxZone.setCluster(clusterNewOrder.get(entry.getKey()));
 				 for (int i = 0; i < catID.size(); i++) {
 					if(catID.get(i).equals(entry.getKey())){
 						auxZone.addNode(this.getNodeByName(nodesByCat.get(i)));
 					}
 				}
 				zones.add(auxZone);
+				++x;
 			}
 	
 			
@@ -1457,7 +1476,7 @@ public class Map {
 			text += "</table>";
 			text += "\n</html>\n\n";*/
 			
-			return printZoneResume();
+			//return printZoneResume();
 			
 		}
 	
@@ -1552,8 +1571,6 @@ public class Map {
 		
 		//return text;
 	}
-	
-	
 	
 	class NodeCoef{
 		float A, B, D;

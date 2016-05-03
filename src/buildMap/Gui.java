@@ -1000,7 +1000,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 
 	public void actionPerformed(ActionEvent e) {
 
-		
+
 		if (e.getSource() == th1) {
 			threshold1 = Double.parseDouble(th1.getText());
 			bm.setThreshold1(threshold1);
@@ -1021,27 +1021,27 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 			cm.repaint();
 			return;
 		}
-		
+
 		if (e.getSource()== thTagTF){
 			thTag=Double.parseDouble(thTagTF.getText());
 			return;
 		}
-			
+
 		if (e.getSource() == tagList) {
-			
-			
+
+
 			if(tagMode){
-			if (((String) tagList.getSelectedItem()).equals("Select Tag")) {
-				selectedTag = null;
-			} else {
-				selectedTag = (String) tagList.getSelectedItem();
-				selectTagChanged = true;
-				//tagMode =true;
-				nodesMode=false;
-				cm.repaint();
-			}}
-			
-			
+				if (((String) tagList.getSelectedItem()).equals("Select Tag")) {
+					selectedTag = null;
+				} else {
+					selectedTag = (String) tagList.getSelectedItem();
+					selectTagChanged = true;
+					//tagMode =true;
+					nodesMode=false;
+					cm.repaint();
+				}}
+
+
 			if(thTagMode){
 				if(!thTagTF.getText().isEmpty()){
 					thTag = Double.parseDouble(thTagTF.getText());
@@ -1051,578 +1051,562 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 					cm.repaint();
 				}
 			}
-			
+
 			return;
 		}
 		//-*----------------------------------------------
-		
-		
-		   if (e.getSource() == originalCB) {
-	            original = originalCB.isSelected();
-	            cm.repaint();
-	            return;
-	        }
-	        if (e.getSource() == graphCB) {
-	            showMap = graphCB.isSelected();
-	            cm.repaint();
-	            return;
-	        }
-	        if (e.getSource() == backCB) {
-	            background = backCB.isSelected();
-	            cm.repaint();
-	            return;
-	        }
-	        
-	         if (e.getSource() == showNodesCB) {
-	            nodesMode = showNodesCB.isSelected();
-	            selectedNode = -1;
-	            nodes.setEnabled(true);
-	            cm.repaint();
-	            return;
-	        }
-	         
-	         if(e.getSource()== highTagsCB){
-	             tagMode=highTagsCB.isSelected();
-	             //System.out.println("Evento tag");
-	        	 if(tagMode){
-	        		 //System.out.println("Tag mode en True");
-	        		 thTagMode= false;
-	        		 thTagsCB.setSelected(false);
-	        		 thTagTF.setEnabled(false);
-	             if (!((String) tagList.getSelectedItem()).equals("Select Tag")){
-	            	 selectTagChanged = true;
-	            	 //tagMode=true;
-	                 selectedTag=(String) tagList.getSelectedItem();}
-	             }
-	             cm.repaint();
-	        	 return;
-	         }
-	         
-	         if(e.getSource()== thTagsCB){
-	             thTagMode=thTagsCB.isSelected();
-	             //System.out.println("Evento tag");
-	        	 if(thTagMode){
-	        		 thTagTF.setEnabled(true);
-	        		 tagMode=false;
-	        		 highTagsCB.setSelected(false);
-	        		 thTag = Double.parseDouble(thTagTF.getText());
-	        		 //System.out.println("Tag mode en True");
-	             if (!((String) tagList.getSelectedItem()).equals("Select Tag")){
-	            	 selectTagChanged = true;
-	            	 //tagMode=true;
-	                 selectedTag=(String) tagList.getSelectedItem();}
-	             }
-	        	 else
-	        		 thTagTF.setEnabled(false);
-	             cm.repaint();
-	        	 return;
-	         }
-	                 
-	         
-	     	if (e.getSource() == clustersCB) {
-	     		zoneGenerated = true;
-				cm.repaint();
-				return;
+
+
+		if (e.getSource() == originalCB) {
+			original = originalCB.isSelected();
+			cm.repaint();
+			return;
+		}
+		if (e.getSource() == graphCB) {
+			showMap = graphCB.isSelected();
+			cm.repaint();
+			return;
+		}
+		if (e.getSource() == backCB) {
+			background = backCB.isSelected();
+			cm.repaint();
+			return;
+		}
+
+		if (e.getSource() == showNodesCB) {
+			nodesMode = showNodesCB.isSelected();
+			selectedNode = -1;
+			nodes.setEnabled(true);
+			cm.repaint();
+			return;
+		}
+
+		if(e.getSource()== highTagsCB){
+			tagMode=highTagsCB.isSelected();
+			//System.out.println("Evento tag");
+			if(tagMode){
+				//System.out.println("Tag mode en True");
+				thTagMode= false;
+				thTagsCB.setSelected(false);
+				thTagTF.setEnabled(false);
+				if (!((String) tagList.getSelectedItem()).equals("Select Tag")){
+					selectTagChanged = true;
+					//tagMode=true;
+					selectedTag=(String) tagList.getSelectedItem();}
 			}
-	     	
-	     	if (e.getSource() == zoneCB) {
-				zoneGenerated = zoneCB.isSelected();
-				cm.repaint();
-				return;
+			cm.repaint();
+			return;
+		}
+
+		if(e.getSource()== thTagsCB){
+			thTagMode=thTagsCB.isSelected();
+			//System.out.println("Evento tag");
+			if(thTagMode){
+				thTagTF.setEnabled(true);
+				tagMode=false;
+				highTagsCB.setSelected(false);
+				thTag = Double.parseDouble(thTagTF.getText());
+				//System.out.println("Tag mode en True");
+				if (!((String) tagList.getSelectedItem()).equals("Select Tag")){
+					selectTagChanged = true;
+					//tagMode=true;
+					selectedTag=(String) tagList.getSelectedItem();}
 			}
-	     	
-	     	         
-	          if (e.getSource() == jmiGenMap) {
-	        	  //original = true;
-	        		showMap = true;
-	        		//background = true;
-	        		mapGenerated = false; 
-	        		nodesMode = false; 
-	        		selectNodeChanged = false; 
-	        		showCluster = false; 
-	        		tagMode = false; 
-	        		selectTagChanged = false; 
-	        		thTagMode=false;
-	        		selectedNode = -1 ;
-	        		selectedTag = null;      
-	        	  
-	        	       	  
-	        	graphCB.setEnabled(false);
-	  			showNodesCB.setEnabled(false);
-	  			bm.buildMap();
-	  			graphCB.setEnabled(true);
-	  			showNodesCB.setEnabled(true);
-	  			//highTagsCB.setEnabled(true);
-	  			genComboNodes();
-	  			genComboTag();
-	  			tagList.setEnabled(true);
-	  			highTagsCB.setEnabled(true);
-	  			highTagsCB.setSelected(true);
-	  			thTagsCB.setEnabled(true);
-	  			thTagsCB.setSelected(false);
-	  			tagMode =true;
-	  			mapGenerated = true;
-	  			zoneGenerated = false;
-	  			cm.repaint();
-	  			Date date = new Date();
-	        	DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss");
-	        	//  String imgName = name+"_"+bm.threshold1+"_"+bm.threshold2+"_"+hourdateFormat.format(date);
-	  			statusLabel.setText("Map for : "+name+" generated at: "+hourdateFormat.format(date));
-	  			//cm.showNodeDetails();
-	  			
-	  			//cm.showMapInfo();
-	  			
-	  			 jMIGetNodesContent.setEnabled(true);
-	  			 jMRelation.setEnabled(true);
-	  			 jmiGenZone.setEnabled(true);
-	  			jmiGenHierCluster.setEnabled(true);
-	  			jmiNodeComposition.setEnabled(true);
-	  			 
-	            return;
-	        }
+			else
+				thTagTF.setEnabled(false);
+			cm.repaint();
+			return;
+		}
+
+
+		if (e.getSource() == clustersCB) {
+			zoneGenerated = true;
+			cm.repaint();
+			return;
+		}
+
+		if (e.getSource() == zoneCB) {
+			zoneGenerated = zoneCB.isSelected();
+			cm.repaint();
+			return;
+		}
+
+
+		if (e.getSource() == jmiGenMap) {
+			//original = true;
+			showMap = true;
+			//background = true;
+			mapGenerated = false; 
+			nodesMode = false; 
+			selectNodeChanged = false; 
+			showCluster = false; 
+			tagMode = false; 
+			selectTagChanged = false; 
+			thTagMode=false;
+			selectedNode = -1 ;
+			selectedTag = null;      
+
+
+			graphCB.setEnabled(false);
+			showNodesCB.setEnabled(false);
+			bm.buildMap();
+			graphCB.setEnabled(true);
+			showNodesCB.setEnabled(true);
+			//highTagsCB.setEnabled(true);
+			genComboNodes();
+			genComboTag();
+			tagList.setEnabled(true);
+			highTagsCB.setEnabled(true);
+			highTagsCB.setSelected(true);
+			thTagsCB.setEnabled(true);
+			thTagsCB.setSelected(false);
+			tagMode =true;
+			mapGenerated = true;
+			zoneGenerated = false;
+			cm.repaint();
+			Date date = new Date();
+			DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss");
+			//  String imgName = name+"_"+bm.threshold1+"_"+bm.threshold2+"_"+hourdateFormat.format(date);
+			statusLabel.setText("Map for : "+name+" generated at: "+hourdateFormat.format(date));
+			//cm.showNodeDetails();
+
+			//cm.showMapInfo();
+
+			jMIGetNodesContent.setEnabled(true);
+			jMRelation.setEnabled(true);
+			jmiGenZone.setEnabled(true);
+			jmiGenHierCluster.setEnabled(true);
+			jmiNodeComposition.setEnabled(true);
+
+			return;
+		}
 	          
-	          if (e.getSource()==jmiGenAllMaps){
-	        	  statusLabel.setText("Generating all sequences maps in process...");
-	        	  generate12ImagesMaps();
-	        	 statusLabel.setText("Generation of all Sequence Maps Ended.");
-	        	  return;
-	          }
-	          
-	          if (e.getSource() == jmiCapture) {
-	        	  Date date = new Date();
-	        	  DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-	        	  String imgName = name+"_"+bm.threshold1+"_"+bm.threshold2+"_"+bm.cutNode+"_"+hourdateFormat.format(date);
-		  			cm.createImage(imgName);
-		  			statusLabel.setText(imgName +" saved.");
-		  			return;
-		  		}
-	          
-	          if (e.getSource() == jmiGenCluster) {
-	  		    // Kmeans
-	  			int k =Integer.parseInt( JOptionPane.showInputDialog("How many clusters?","4"));
-	  			km= new Kmeans(k, bm.dimension, bm.imgTags);
-	  			km.findMeans();
-	  			//mapGenerated = false;
-	  			showCluster=true;
-	  			clustersCB.setEnabled(true);
-	  			clustersCB.setSelected(true);
-	  			cm.repaint();
-	  			return;
-	  		}
-	  			  				
-	  		if (e.getSource() == jmiGetCluster) {
-	  			Kmeans km2;
-	  			km2 = new Kmeans(1,bm.dimension, bm.imgTags);
-	  			ArrayList<Float> coef = new ArrayList<Float>();
-	  			int k=1; 
-	  			
-	  			if(k==1)
-	  				FileMethods.saveFile("K;s2\n", "K_Variances_"+name, false);
-	  			
-	  			
-	  			do {
-	  				km2.setK(k);
-	  				Float coefValue =km2.findMeansCoef();
-	  				coef.add(coefValue); 
-	  				FileMethods.saveFile(String.valueOf(k)+";"+String.valueOf(coefValue)+"\n", "K_Variances_"+name, true);
-	  				++k;
-	  				if ((k%10)==0) System.out.println("K="+k);
-	  			}
-	  			while(k<=100);
-	  			
-	  			statusLabel.setText("K Clusters for : "+name+" calculated.");
-	  			
-	  			return;
-	  		}
-	  		
-	  		
-	  		if(e.getSource()==  jmiGenFullHierCluster){
-	  			HierClustering hc = new HierClustering(bm.dimension, bm.imgTags);
-	  			cm.showHierCluster(hc.cluster());
-	  		}
-	  			 		
-            
-             //Sequence1 Vidrilo
-            if(e.getSource() == jMiHybrid_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_Hybrid/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
-	  			name= "VidriloSeq1_HybridAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgAlex_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgCaff_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetCaffeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetCaffeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgGNet_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetGoogLeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgVGG_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetVGG/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetVGG";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            
-            if(e.getSource() == jMIPlaAlex_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_PlacesAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIPlaGNet_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_PlacesGoogLeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgMX_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetMXNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-                        
-            if(e.getSource() == jMIImgMX21K_Sq1){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_750/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq1_ImageNetMXNet21K";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=1;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-                        
-            //----------------------------------Sequence 2
-            
-       /*     if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 943, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_PlacesAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-                return;
-            }*/
-                        
-            
-            if(e.getSource() == jMiHybrid_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
-	  			name= "VidriloSeq2_HybridAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgCaff_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetCaffeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetCaffeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetGoogLeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgVGG_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetVGG/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetVGG";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-                        
-            if(e.getSource() == jMIPlaAlex_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_PlacesAlexNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIPlaGNet_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_PlacesGoogLeNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-            
-            if(e.getSource() == jMIImgMX_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetMXNet";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-                        
-            if(e.getSource() == jMIImgMX21K_Sq2){
-            	bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_750/sequence2visual", 0.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
-	  			name= "VidriloSeq2_ImageNetMXNet21K";
-	  			setTitle(name);      
-            	cm.repaint();
-            	statusLabel.setText("Sequence : "+name+" selected.");
-            	seqNumber=2;
-            	jmiGenMap.setEnabled(true);
-            	resetDraw();
-                return;
-            }
-                        
-            //---------------------------------------------------SEQ2---END-------------------------------
-            
-            ///Para generacion de relacion entre modelos 
-            if(e.getSource() == jMIImgAlex_Sq6){
-            	//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/");
-            	return;
-            }
-            
-            if(e.getSource() == jMIImgCaff_Sq6){
-            	//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetCaffeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetCaffeNet/");
-            	return;
-            }
-            
-            if(e.getSource() == jMIImgGNet_Sq6){
-            	//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetGoogLeNet/");
-            	return;
-            }
-            
-            if(e.getSource() == jMIImgVGG_Sq6){
-            	//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetVGG/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetVGG/");
-            	return;
-            }
-            
-            if(e.getSource() == jMIImgMX_Sq6){
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetMXNet/");
-            	return;
-            }
-            
-            if(e.getSource() == jMIImgMX21K_Sq6){
-            	cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetMXNet21K/");
-            	return;
-            }
-            
-            //--------------------------Nodes Content
-            
-            if(e.getSource()== jMIGetNodesContent){
-            	int o = 1;
-            	for (Node nd : bm.map.nodes) {
-            		FileMethods.saveFile(nd.getNodesContentRows(), "Node_" + String.valueOf(o), false);
-            		//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean_" + String.valueOf(o), false);
-            		//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean", true);
-					o++;
-				}
-            }
-            
-            if(e.getSource()== jmiGenZone){
-            	bm.map.generateZones(Double.parseDouble(th1.getText()));
-            	cm.showZoneInfomation();
-            	//bm.map.generateZones();
-            	zoneGenerated = true;
-            	zoneCB.setSelected(true);
-            	zoneCB.setEnabled(true);
-            	jMIGetZonesContent.setEnabled(true);
-            	jmiShowZoneChart.setEnabled(true);
-            	jmiShowZoneChart_2.setEnabled(true);
-            	jmiShowZoneChart_3.setEnabled(true);
-            	jmiShowZoneChart_4.setEnabled(true);
-            	jmiZoneResume.setEnabled(true);
-            	statusLabel.setText("Zones have been generated.");
-            	cm.repaint();
-            }
-            
-            if(e.getSource()==jmiGenHierCluster){
-            	cm.showHierCluster(bm.map.getHierCluster());
-            }
-                        
-            if(e.getSource()==jmiNodeComposition){
-            	cm.showNodeComposition();
-            	//cm.showNodeDetails(); //top10
-            }
-            
-            if (e.getSource()== jMIGetZonesContent){
-            	// Date date = new Date();
-	        	// DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
-            	
-            	double thh = bm.map.cutTh;
-	        	 String colofon ="_"+name +"_TH_"+ thh+"_Zones_"+ bm.map.zones.size();
-            	            	
-            	//Formato 1 ZoneTag # CantNodos VidriloCat1 VidriloCat2 .....VidriloCat10
-            	String[] tags = {"HallEntrance","ProfessorRoom","StudentsRoom","TechnicalRoom","Toilet","Secretary","Videoconference","Warehouse","ElevatorArea","Corridor"};
-            	String h="N;Zone_Tag;Num;Nodes";
-            	for(String g: tags){
-            		h+=";"+g;
-            	}
-            	h+="\n";
-            	FileMethods.saveFile(h, "ZonesContent"+ colofon, false);
-            	int g =1;
-            	for(Zone z: bm.map.zones){
-            		FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n",  "ZonesContent"+ colofon , true);
-            		g++;
-            	}
-            	//Otros Formatos
-            	bm.map.printMapCategoriesInformation(new String[]{"Cat1-vs-Tag"+colofon,"Cat1-vs-ZoneTag"+colofon,"Cat2-vs-Tag"+colofon,"Cat2-vs-ZoneTag"+colofon});
-            	bm.map.printZonesDataset(new String[]{"Cat1-vs-TagSum"+colofon,"Cat1-vs-ZoneTagSum"+colofon,"Cat2-vs-TagSum"+colofon,"Cat2-vs-ZoneTagSum"+colofon});
-            	
-            	//CatDeepTagSum Cat2ZoneTagSum CatZoneTagSum Cat2DeepTagSum
-            	
-            	
-            	/*//Formato 1 idImg VidriloCat DeepTag
-            	bm.map.printMapCategoriesInformation("CatDeepTag"+colofon,1);
-            	
-            	//Formato 2 idImg VidriloCat DeepTag
-            	bm.map.printMapCategoriesInformation("CatZoneTag"+colofon,2);
-            	
-            	
-            	//Formato 3 idImg VidriloCat DeepTag
-            	bm.map.printMapCategoriesInformation("Cat2ZoneTag"+colofon,3);
-            	
-            	
-            	//Formato 4 idImg VidriloCat DeepTag
-            	bm.map.printMapCategoriesInformation("Cat2DeepTag"+colofon,4);*/
-            	           	
-            	
-            }
-            
-            if(e.getSource()== jmiZoneResume){
-            	cm.showZoneInfomation();
-            }
-            
-            
-                       
-            
-            if (e.getSource() ==  jmiShowZoneChart){      //Cat1 Tag 
-            	cm.showZonesCharts(1);
-            }
-     
-			if (e.getSource() ==  jmiShowZoneChart_2){   // Cat1 ZoneTag  
-            	cm.showZonesCharts(2);
-            }
-			
-			 if (e.getSource() ==  jmiShowZoneChart_3){    //Cat2 Tag 
-	            	cm.showZonesCharts(3);
-	            }
-	     
-			if (e.getSource() ==  jmiShowZoneChart_4){  //Cat2 Zonetag    
-	            	cm.showZonesCharts(4);
-	            }
-			
-			if(e.getSource()== jmiCategoryMap){
-				CatDistanceCalculator cdc = new CatDistanceCalculator(bm.imgTags);
-				cdc.createMap();
-				cdc.printMatrix(name);
+		if (e.getSource()==jmiGenAllMaps){
+			statusLabel.setText("Generating all sequences maps in process...");
+			generate12ImagesMaps();
+			statusLabel.setText("Generation of all Sequence Maps Ended.");
+			return;
+		}
+
+		if (e.getSource() == jmiCapture) {
+			Date date = new Date();
+			DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+			String imgName = name+"_"+bm.threshold1+"_"+bm.threshold2+"_"+bm.cutNode+"_"+hourdateFormat.format(date);
+			cm.createImage(imgName);
+			statusLabel.setText(imgName +" saved.");
+			return;
+		}
+
+		if (e.getSource() == jmiGenCluster) {
+			// Kmeans
+			int k =Integer.parseInt( JOptionPane.showInputDialog("How many clusters?","4"));
+			km= new Kmeans(k, bm.dimension, bm.imgTags);
+			km.findMeans();
+			//mapGenerated = false;
+			showCluster=true;
+			clustersCB.setEnabled(true);
+			clustersCB.setSelected(true);
+			cm.repaint();
+			return;
+		}
+
+		if (e.getSource() == jmiGetCluster) {
+			Kmeans km2;
+			km2 = new Kmeans(1,bm.dimension, bm.imgTags);
+			ArrayList<Float> coef = new ArrayList<Float>();
+			int k=1; 
+
+			if(k==1)
+				FileMethods.saveFile("K;s2\n", "K_Variances_"+name, false);
+
+
+			do {
+				km2.setK(k);
+				Float coefValue =km2.findMeansCoef();
+				coef.add(coefValue); 
+				FileMethods.saveFile(String.valueOf(k)+";"+String.valueOf(coefValue)+"\n", "K_Variances_"+name, true);
+				++k;
+				if ((k%10)==0) System.out.println("K="+k);
 			}
-				
-	}
+			while(k<=100);
+
+			statusLabel.setText("K Clusters for : "+name+" calculated.");
+
+			return;
+		}
+
+
+		if(e.getSource()==  jmiGenFullHierCluster){
+			HierClustering hc = new HierClustering(bm.dimension, bm.imgTags);
+			cm.showHierCluster(hc.cluster());
+		}
+
+
+		//Sequence1 Vidrilo
+		if(e.getSource() == jMiHybrid_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_Hybrid/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
+			name= "VidriloSeq1_HybridAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgAlex_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgCaff_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetCaffeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetCaffeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgGNet_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetGoogLeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgVGG_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetVGG/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetVGG";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+
+		if(e.getSource() == jMIPlaAlex_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_PlacesAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIPlaGNet_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_PlacesGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_PlacesGoogLeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetMXNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX21K_Sq1){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetMXNet21K_750/sequence1visual", -1.0000000, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq1_ImageNetMXNet21K";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=1;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
 
 	
+		if(e.getSource() == jMiHybrid_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_Hybrid/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1183, 10, 2000000000, "TrianglesPoints.txt");
+			name= "VidriloSeq2_HybridAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgAlex_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgCaff_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetCaffeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetCaffeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgGNet_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetGoogLeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgVGG_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetVGG/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetVGG";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIPlaAlex_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesAlexNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_PlacesAlexNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIPlaGNet_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_PlacesGoogLeNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",205, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_PlacesGoogLeNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet/sequence2visual", -0.00000001, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",1000, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetMXNet";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX21K_Sq2){
+			bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Vidrilo_Sequence2_ImageNetMXNet21K_750/sequence2visual", 0.0000000, 4579, "/home/jcarlos2289/Documentos/VidriloTags/Sequence2/Sequence2_CAT2.txt",750, 10, 2000000000,"TrianglesPoints.txt");
+			name= "VidriloSeq2_ImageNetMXNet21K";
+			setTitle(name);      
+			cm.repaint();
+			statusLabel.setText("Sequence : "+name+" selected.");
+			seqNumber=2;
+			jmiGenMap.setEnabled(true);
+			resetDraw();
+			return;
+		}
+
+		//---------------------------------------------------SEQ2---END-------------------------------
+
+		///Para generacion de relacion entre modelos 
+		if(e.getSource() == jMIImgAlex_Sq6){
+			//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/");
+			return;
+		}
+
+		if(e.getSource() == jMIImgCaff_Sq6){
+			//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetCaffeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetCaffeNet/");
+			return;
+		}
+
+		if(e.getSource() == jMIImgGNet_Sq6){
+			//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetGoogLeNet/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetGoogLeNet/");
+			return;
+		}
+
+		if(e.getSource() == jMIImgVGG_Sq6){
+			//bm.readTags("/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetVGG/sequence1visual", -0.00000001, 2389, "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Sequence1_CAT2.txt",1000, 10, 2000000000);
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetVGG/");
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX_Sq6){
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetMXNet/");
+			return;
+		}
+
+		if(e.getSource() == jMIImgMX21K_Sq6){
+			cm.showNodeRelation("/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetMXNet21K/");
+			return;
+		}
+
+		//--------------------------Nodes Content
+
+		if(e.getSource()== jMIGetNodesContent){
+			int o = 1;
+			for (Node nd : bm.map.nodes) {
+				FileMethods.saveFile(nd.getNodesContentRows(), "Node_" + String.valueOf(o), false);
+				//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean_" + String.valueOf(o), false);
+				//FileMethods.saveFile(nd.getNodeMeanData(), "NodeMean", true);
+				o++;
+			}
+		}
+
+		if(e.getSource()== jmiGenZone){
+			bm.map.generateZones(Double.parseDouble(th1.getText()));
+			cm.showZoneInfomation();
+			//bm.map.generateZones();
+			zoneGenerated = true;
+			zoneCB.setSelected(true);
+			zoneCB.setEnabled(true);
+			jMIGetZonesContent.setEnabled(true);
+			jmiShowZoneChart.setEnabled(true);
+			jmiShowZoneChart_2.setEnabled(true);
+			jmiShowZoneChart_3.setEnabled(true);
+			jmiShowZoneChart_4.setEnabled(true);
+			jmiZoneResume.setEnabled(true);
+			statusLabel.setText("Zones have been generated.");
+			cm.repaint();
+		}
+
+		if(e.getSource()==jmiGenHierCluster){
+			cm.showHierCluster(bm.map.getHierCluster());
+		}
+
+		if(e.getSource()==jmiNodeComposition){
+			cm.showNodeComposition();
+			//cm.showNodeDetails(); //top10
+		}
+
+		if (e.getSource()== jMIGetZonesContent){
+			// Date date = new Date();
+			// DateFormat hourdateFormat = new SimpleDateFormat("MM-dd_HH:mm");
+
+			double thh = bm.map.cutTh;
+			String colofon ="_"+name +"_TH_"+ thh+"_Zones_"+ bm.map.zones.size();
+
+			//Formato 1 ZoneTag # CantNodos VidriloCat1 VidriloCat2 .....VidriloCat10
+			String[] tags = {"HallEntrance","ProfessorRoom","StudentsRoom","TechnicalRoom","Toilet","Secretary","Videoconference","Warehouse","ElevatorArea","Corridor"};
+			String h="N;Zone_Tag;Num;Nodes";
+			for(String g: tags){
+				h+=";"+g;
+			}
+			h+="\n";
+			FileMethods.saveFile(h, "ZonesContent"+ colofon, false);
+			int g =1;
+			for(Zone z: bm.map.zones){
+				FileMethods.saveFile(String.valueOf(g) +z.getZoneContent(tags)+"\n",  "ZonesContent"+ colofon , true);
+				g++;
+			}
+			//Otros Formatos
+			bm.map.printMapCategoriesInformation(new String[]{"Cat1-vs-Tag"+colofon,"Cat1-vs-ZoneTag"+colofon,"Cat2-vs-Tag"+colofon,"Cat2-vs-ZoneTag"+colofon});
+			bm.map.printZonesDataset(new String[]{"Cat1-vs-TagSum"+colofon,"Cat1-vs-ZoneTagSum"+colofon,"Cat2-vs-TagSum"+colofon,"Cat2-vs-ZoneTagSum"+colofon});
+
+			//CatDeepTagSum Cat2ZoneTagSum CatZoneTagSum Cat2DeepTagSum
+
+
+			/*//Formato 1 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("CatDeepTag"+colofon,1);
+
+            	//Formato 2 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("CatZoneTag"+colofon,2);
+
+
+            	//Formato 3 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("Cat2ZoneTag"+colofon,3);
+
+
+            	//Formato 4 idImg VidriloCat DeepTag
+            	bm.map.printMapCategoriesInformation("Cat2DeepTag"+colofon,4);*/
+
+
+		}
+
+		if(e.getSource()== jmiZoneResume){
+			cm.showZoneInfomation();
+		}
+
+		if (e.getSource() ==  jmiShowZoneChart){      //Cat1 Tag 
+			cm.showZonesCharts(1);
+		}
+
+		if (e.getSource() ==  jmiShowZoneChart_2){   // Cat1 ZoneTag  
+			cm.showZonesCharts(2);
+		}
+
+		if (e.getSource() ==  jmiShowZoneChart_3){    //Cat2 Tag 
+			cm.showZonesCharts(3);
+		}
+
+		if (e.getSource() ==  jmiShowZoneChart_4){  //Cat2 Zonetag    
+			cm.showZonesCharts(4);
+		}
+
+		if(e.getSource()== jmiCategoryMap){
+			CatDistanceCalculator cdc = new CatDistanceCalculator(bm.imgTags);
+			cdc.createMap();
+			cdc.printMatrix(name);
+		}
+
+	}
+
+
 	public void resetDraw(){
 		mapGenerated = false; 
 		nodesMode = false; 

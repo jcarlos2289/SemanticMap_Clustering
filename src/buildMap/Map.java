@@ -1000,7 +1000,7 @@ public class Map {
 			ram.trim();
 			//result += "\n|"+cs.getName()+ " Leafs" +  cs.getLeafNames().size()+"| ";
 			result.addAll(nam) ;    //+= "\n|"+ram.trim()+"| ";
-			result.add("#_"+String.valueOf(clusterCreationIndex));   System.out.println("#_"+String.valueOf(clusterCreationIndex));//+="\n------:(:-------";
+			result.add("#_"+String.valueOf(clusterCreationIndex));   //System.out.println("#_"+String.valueOf(clusterCreationIndex));//+="\n------:(:-------";
 			clusterHM.put(clusterCreationIndex, cs);
 			clusterZoneList.add(cs);
 			clusterCreationIndex++;
@@ -1103,7 +1103,7 @@ public class Map {
 				}
 				
 				fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
-			   System.out.println(dataset.getValue(i)+" "+vidCat+" "+ tag);	// z.getName()
+			   //System.out.println(dataset.getValue(i)+" "+vidCat+" "+ tag);	// z.getName()
 			}
 		}
 			return fullDataset;
@@ -1187,9 +1187,9 @@ public class Map {
 		nodesByCat.clear();
 		catID.clear();
 		//Metodo 1 mediante analisis de dendrograma
-		int catCount = 1;
-		ArrayList<Integer> clusterOrder = new ArrayList<Integer>();
-		
+		//int catCount = 1;
+		//ArrayList<Integer> clusterOrder = new ArrayList<Integer>();
+	/*---------------------------------------------------------------------------------------------	
 		
 		for(String hj : ol){
 			if(hj.contains("&")){
@@ -1201,7 +1201,7 @@ public class Map {
 				
 			}else if (hj.contains("#")){
 				String [] r = hj.split("_");
-				clusterOrder.add(Integer.parseInt(r[1]));  System.out.println("#_X_"+r[1]);			
+				clusterOrder.add(Integer.parseInt(r[1]));  //System.out.println("#_X_"+r[1]);			
 				catCount++;
 				continue;
 			}else{
@@ -1309,12 +1309,38 @@ public class Map {
 			
 		}
 		
+		*/  //------------------------------------------------------------------
 		
-				
+		zones.clear();
+		Zone auxZone1 = new Zone("AUX");
+		
+		ArrayList<String> ramm = new ArrayList<String>();
+		for(Cluster cs: clusterZoneList){
+			ramm =(ArrayList<String>) cs.getLeafNames();
+			auxZone1 = new Zone("--");
+			for(String nodeName: ramm){
+				auxZone1.addNode(this.getNodeByName(nodeName));
+				//System.out.println(nodeName);
+			}
+			auxZone1.setCluster(cs);
+			zones.add(auxZone1);
+					
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	/*			
 			zones.clear();
 			Zone auxZone = new Zone("AUX");
 			//int u = 2;
-			int x = 0;
+			//int x = 0;
 			for (Entry<String, String> entry : catIdentifiedTags2.entrySet()) {
 				auxZone = new Zone(entry.getValue());
 				
@@ -1329,9 +1355,9 @@ public class Map {
 					}
 				}
 				zones.add(auxZone);
-				++x;
+				//++x;
 			}
-	
+	*/
 			
 			for (Zone z:zones){
 				z.udpateStatus();

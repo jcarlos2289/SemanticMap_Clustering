@@ -64,7 +64,7 @@ public class Gui extends JFrame implements ActionListener {
 	 JMenu jmOperations, jmShows, jmCharts;
 	 JMenuItem jmiGetCluster, jmiGenCluster, jmiCapture, jmiGenMap, jmiGenAllMaps, jmiVidSq1, jmiGenZone, jmiGenHierCluster, 
 	 			jmiNodeComposition,  jmiGenFullHierCluster, jMIGetNodesContent, jMIGetZonesContent, jmiShowZoneChart, 
-	 			jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4, jmiCategoryMap, jmiZoneResume;
+	 			jmiShowZoneChart_2, jmiShowZoneChart_3, jmiShowZoneChart_4, jmiCategoryMap, jmiZoneResume, jmiTagPresence;
      JCheckBoxMenuItem originalCB, graphCB, backCB, showNodesCB, clustersCB, highTagsCB, thTagsCB,zoneCB;
      JMenu jMDataSet,jMSunny,jMCloudy, jMNight;
      JMenuItem jmiCl_1, jmiCl_2, jmiCl_3, jmiCl_4, jmiNi_1, jmiNi_2, jmiNi_3, jmiNi_4, jmiSu_1, jmiSu_2, jmiSu_3, jmiSu_4;
@@ -318,6 +318,12 @@ public class Gui extends JFrame implements ActionListener {
 	        jmiCategoryMap.addActionListener(this);
 	        jmiCategoryMap.setText("Calculate Distance between Categories");
 	        jmOperations.add(jmiCategoryMap);
+	        
+	        
+	        jmiTagPresence = new JMenuItem("Get Tag Presence File");
+	        jmiTagPresence.addActionListener(this);
+	        jmiTagPresence.setEnabled(false);
+	        jmOperations.add(jmiTagPresence);
 	        
 	       //Cat1-vs-Tag     // Cat1-vs-ZoneTag     //Cat2-vs-Tag      //Cat2-vs-ZoneTag      
 	       
@@ -1521,6 +1527,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 			jmiShowZoneChart_3.setEnabled(true);
 			jmiShowZoneChart_4.setEnabled(true);
 			jmiZoneResume.setEnabled(true);
+			jmiTagPresence.setEnabled(true);
 			statusLabel.setText("Zones have been generated.");
 			cm.repaint();
 		}
@@ -1602,6 +1609,10 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
 			CatDistanceCalculator cdc = new CatDistanceCalculator(bm.imgTags);
 			cdc.createMap();
 			cdc.printMatrix(name);
+		}
+		
+		if(e.getSource()== jmiTagPresence){
+			bm.map.printObjectPresence(name+"_"+String.valueOf(bm.map.getCutZoneThreshold()), seqNumber);
 		}
 
 	}

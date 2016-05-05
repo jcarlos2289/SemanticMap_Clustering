@@ -507,10 +507,13 @@ public class Map {
 			virtualMap.add(AuxNode);
 			//-------------------------------------------
 					
-			
+			String fileName = "TagRelation_"+name+"_"+ram[ram.length-1]+"_Zname_"+selectZone.getName();
+			FileMethods.saveFile("Tag;Probability;ZoneName\n", fileName, false);
 			for (int i =0; i < top5Modelo2.size();++i) {
 				text +="<tr><td>"+String.valueOf(i+1) +"</td><td>"+top5Modelo2.get(i)+"</td><td>"+String.valueOf(topModelo2Prob.get(i)) +"</td></tr>\n";
-			}
+				String tx = top5Modelo2.get(i)+";"+ String.valueOf(topModelo2Prob.get(i))+";"+selectZone.getName()+"\n";
+				FileMethods.saveFile(tx, fileName, true);
+				}
 			
 			
 			
@@ -524,6 +527,108 @@ public class Map {
 		
 	
 	}
+	public void  printObjectPresence(String name , int seqNumber){
+		
+		String fileName = "TagRelation_"+name;
+		FileMethods.saveFile("Tag;Probability;ZoneName\n", fileName, false);
+		
+		for(Zone selectZone: zones){
+			String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+			String [] ram = modelPath.split("/");
+			//String text = "<html>\n";
+		//	text +="<h1> Sequence: "+ name+"</h1>";
+		//	text +="<h1> Relation with Sequence: <br>"+ ram[ram.length-1]+"</h1>";
+		//	text += "<h2> Zone : "+selectZone.getName()+"</h2> "
+			//	  + "<h2 style=\"color:rgb("+ String.valueOf(selectZone.zoneColor.getRed())+","+String.valueOf(selectZone.zoneColor.getGreen())+","+ String.valueOf(selectZone.zoneColor.getBlue())+ ");\"> &diams;&diams;&diams;&diams; </h2><br>\n";
+			
+			
+		//	text += "<table border=\"1\"   style=\"font-size:12px\"    >";
+		//	text += "<tr><th>#</th><th>Object</th><th>Prob</th></tr>";
+			
+			String modelo2Path = modelPath;
+			int topModelo2 = 10;
+			ArrayList<Node> virtualMap = new ArrayList<Node>();
+			
+			ArrayList<Node> representativeNodeOfZones = new ArrayList<Node>();
+			
+			//for(Zone z : zones){
+				representativeNodeOfZones.add(selectZone.representative);
+			//}
+				
+			
+			for (Iterator<Node> iterator = representativeNodeOfZones.iterator(); iterator.hasNext();) {
+				
+				Node node =  iterator.next();
+			
+				ArrayList<String> imageTop10 = new ArrayList<String>();
+							
+				for (ImageTags img : node.images ) {
+					imageTop10.add(img.imageName);
+				}
+				
+							
+				Node AuxNode = new Node();
+				//List<String> topsTags = new ArrayList<>();
+				ArrayList<String> top5Modelo2 = new ArrayList<String>();
+				ArrayList<Float> topModelo2Prob = new ArrayList<Float>();
+				if(!imageTop10.isEmpty()){
+				
+					for (String lin : imageTop10) {
+						//System.out.println(lin);
+						
+				        int lastIndex = 0;
+
+				        lastIndex = lin.lastIndexOf("/");
+				        lastIndex++; // Si es -1 se vuelve 0 y es un valor numerico le aumento 1 para que no se incluya en la cadena nueva
+
+				        String seqName = lin.substring(lastIndex, lin.length());
+				       // System.out.println(seqName);
+				     
+				        List<String> imgtagList = new ArrayList<>();
+				        imgtagList =FileMethods.processFile(modelo2Path+seqName);
+				        
+				        ImageTags imgData = new ImageTags(seqName);
+				        for (String line : imgtagList) {
+							imgData.addTag(line);
+							}
+				         AuxNode.add(imgData);    
+				      
+				      	
+				        }
+					}
+				
+				top5Modelo2 = AuxNode.getTopXNodes(topModelo2);
+				topModelo2Prob = AuxNode.getTopXNodesValues(topModelo2);
+				virtualMap.add(AuxNode);
+				//-------------------------------------------
+						
+			
+				for (int i =0; i < top5Modelo2.size();++i) {
+					//text +="<tr><td>"+String.valueOf(i+1) +"</td><td>"+top5Modelo2.get(i)+"</td><td>"+String.valueOf(topModelo2Prob.get(i)) +"</td></tr>\n";
+					String tx = top5Modelo2.get(i)+";"+ String.valueOf(topModelo2Prob.get(i))+";"+selectZone.getName()+"\n";
+					FileMethods.saveFile(tx, fileName, true);
+					}
+				
+				
+				
+				}//End of the for of the Nodes
+				
+		//	text += "</table>";
+		//	text += "\n</html>\n\n";
+	//System.out.println(text);
+			
+			
+			
+			
+			
+			
+			
+		}//end for of zones*-************************************-*-*
+		
+		
+		
+	}
+	
 		
 	public String getFullZoneTagsRelation (String name, int seqNumber ){
 		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas

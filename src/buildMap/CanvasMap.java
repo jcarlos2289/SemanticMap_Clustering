@@ -877,7 +877,7 @@ public class CanvasMap extends JPanel implements MouseListener {
 		}
 
 		//String text = gui.bm.map.getMapInfo(gui.name, String.valueOf(gui.bm.threshold1), String.valueOf(gui.bm.threshold2), String.valueOf(gui.bm.cutNode));
-		String text = gui.bm.map.getZoneTagsRelation(name, seqNumber,selZone);
+		String text = gui.bm.map.getZoneTagsRelation(name, seqNumber,selZone, gui.dataSetPath);
 		zoneRelationDialog = new JDialog(gui);
 		zoneRelationDialog.setSize(700, 600);
 

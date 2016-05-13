@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 /*
@@ -25,7 +24,7 @@ import com.apporiented.algorithm.clustering.visualization.DendrogramPanel;*/
 import hierClustering.*;
 import hierClustering.visualization.*;
 
-import java.util.Map.Entry;
+
 
 import javax.swing.JScrollPane;
 
@@ -82,12 +81,12 @@ public class Map {
 		}
 	}
 	
-	public Zone createZone(Node n){
+	/*public Zone createZone(Node n){
 		Zone z = new Zone(n);
 		zones.add(z);
 		
 		return z;
-	}
+	}*/
 	
 	public Zone createZone(String n){
 		Zone z = new Zone(n);
@@ -435,10 +434,10 @@ public class Map {
 		
 	}
 	
-	public String getZoneTagsRelation (String name, int seqNumber, Zone selectZone ){
+	public String getZoneTagsRelation (String name, int seqNumber, Zone selectZone, String dataSetPath ){
 		
 		
-		String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+		String modelPath = dataSetPath  +"VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
 		String [] ram = modelPath.split("/");
 		String text = "<html>\n";
 		text +="<h1> Sequence: "+ name+"</h1>";
@@ -527,14 +526,14 @@ public class Map {
 		
 	
 	}
-	public void  printObjectPresence(String name , int seqNumber){
+	public void  printObjectPresence(String name , int seqNumber, String dataSetPath){
 		
 		String fileName = "TagRelation_"+name;
 		FileMethods.saveFile("Tag;Probability;ZoneName\n", fileName, false);
 		
 		for(Zone selectZone: zones){
-			String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
-			String [] ram = modelPath.split("/");
+			String modelPath = dataSetPath  +"VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+			//String [] ram = modelPath.split("/");
 			//String text = "<html>\n";
 		//	text +="<h1> Sequence: "+ name+"</h1>";
 		//	text +="<h1> Relation with Sequence: <br>"+ ram[ram.length-1]+"</h1>";
@@ -630,10 +629,10 @@ public class Map {
 	}
 	
 		
-	public String getFullZoneTagsRelation (String name, int seqNumber ){
+	public String getFullZoneTagsRelation (String name, int seqNumber, String dataSetPath ){
 		// Incluir el Nombre de los Modelos que uso en  los tituos de las tablas
 		
-		String modelPath = "/home/jcarlos2289/Documentos/VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
+		String modelPath = dataSetPath  +"VidriloTags/Sequence"+String.valueOf(seqNumber)+"/Vidrilo_Sequence"+String.valueOf(seqNumber)+"_ImageNetAlexNet/";
 		String [] ram = modelPath.split("/");
 		String text = "<html>\n";
 		text +="<h1> Sequence: "+ name+"</h1><br>";
@@ -652,7 +651,7 @@ public class Map {
 		
 		
 		int h = 0;
-		//String modelo2Path = "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/";
+		//String modelo2Path = dataSetPath  +"VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/";
 		 String modelo2Path = modelPath;
 		int topModelo2 = 5;
 		ArrayList<Node> virtualMap = new ArrayList<Node>();
@@ -760,7 +759,7 @@ public class Map {
 		
 		
 		int h = 0;
-		//String modelo2Path = "/home/jcarlos2289/Documentos/VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/";
+		//String modelo2Path = dataSetPath  +"VidriloTags/Sequence1/Vidrilo_Sequence1_ImageNetAlexNet/";
 		 String modelo2Path = modelPath;
 		int topModelo2 = 5;
 		ArrayList<Node> virtualMap = new ArrayList<Node>();
@@ -1027,49 +1026,8 @@ public class Map {
 		return result;	
 				
 			
-		/*		
 		
-		if (fatherFound){  //cuando no he encontrado el padre compruebo la distancia para saber si este es padre
-			found = true;
-		}
-		 else{
-				if(cs.getDistance()!=null &&cs.getTotalDistance()> 0.12 && cs.getTotalDistance()<0.14){
-					found = true; // si la distancia cae en el umbral hago found true para que de ahora en adelante cuando se haga el llamado recursivo se sepa que ya no debe hacer comprobacion de distancia 
-					System.out.println("Encontrado es true en al cooresponder con la distancia: Total Distance "+ cs.getTotalDistance()+" Distance "+ cs.getDistance());
-					result+="Encontrado es true en al cooresponder con la distancia\n";
-					result+="\n------h-------";
-					}
-				}
 	
-		
-		if(cs.countLeafs()>2){
-				//result+="\n-------------";
-			for(Cluster c : cs.getChildren()){
-				result += printCluster(c, found); //if(c.getDistance()!=null) result += String.valueOf(cs.getDistance())+ " ";
-			}
-		}
-		else{
-			List<String> nam = new ArrayList<String>();
-			nam = cs.getLeafNames();
-			String ram = "";
-			for (String string : nam) {
-				ram+= string+" ";
-			}
-			ram.trim();
-			
-			result += "\n|"+ram+"| ";//Dist: "+ String.valueOf(cs.getDistance())+"\n";
-			//if(cs.getDistance()!=null)
-				//if(cs.getDistance()> 0.03 && cs.getDistance()<0.05)//if(!cs.isLeaf())
-				//result+="\n-------------";
-		}
-		*/
-		
-		
-			
-		
-		
-		
-		//return result;
 	}
 	
 	public ArrayList<String> getClusterArray(Cluster cs, double th1){
@@ -1176,9 +1134,42 @@ public class Map {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
 		for(Zone z: zones){
-			String[] zNameElement = z.getName().split(" ");
-			
+		//	String[] zNameElement = z.getName().split(" ");
 			dataset = (DefaultPieDataset) z.getChartDataset();
+				
+			
+			for(int i = 0; i < dataset.getItemCount();++i){
+				String [] categoryElement =dataset.getKey(i).toString().split("-");
+				String tag ="", vidCat="";
+				switch (mode) {
+				 case 1 : // Cat1 ZoneTag                                          
+					 vidCat=categoryElement[0]; 
+					 tag=  z.getName();
+				      break;
+									
+				 case 2 : //Cat2 ZoneTag                                                 
+					 vidCat=dataset.getKey(i).toString(); 
+					 tag=  z.getName();
+				      	break;
+
+					default :
+						break;
+				}
+				
+				fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
+			   //System.out.println(dataset.getValue(i)+" "+vidCat+" "+ tag);	// z.getName()
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			
 			for(int i = 0; i < dataset.getItemCount();++i){
 				String [] categoryElement =dataset.getKey(i).toString().split("-");
 				String tag ="", vidCat="";
@@ -1209,7 +1200,7 @@ public class Map {
 				
 				fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
 			   //System.out.println(dataset.getValue(i)+" "+vidCat+" "+ tag);	// z.getName()
-			}
+			}*/
 		}
 			return fullDataset;
 	}
@@ -1220,24 +1211,26 @@ public class Map {
 		
 		
 		String text= "";
-		String cab = "Cant;Vidrilo_Category;Tag\n";
+		String cab = "Cant;Vidrilo_Category;Tag;Nick\n";
 		
-		for(int i=0; i<=3;++i)
+		for(int i=0; i<=1;++i) //antes era 3
 		 FileMethods.saveFile(cab, "CSV/"+fileName[i], false);
 		
 		
 		
 		for(Zone z: zones){
-			String[] zNameElement = z.getName().split(" ");
+			//String[] zNameElement = z.getName().split(" ");
 			
 			dataset = (DefaultPieDataset) z.getChartDataset();
+					
+			/*
 			for(int i = 0; i < dataset.getItemCount();++i){
 				String [] categoryElement =dataset.getKey(i).toString().split("-");
 				String tag ="", vidCat="";
 			
 				for(int j=1; j<=4;++j){                
 				switch (j) {
-					case 1 :  //Cat1 Tag                                //Cat1 Tag     // Cat1 ZoneTag     //Cat2 Tag      //Cat2 ZoneTag         
+					case 1 :  //Cat1 Tag                                    
 						vidCat=categoryElement[0];
 						tag=  zNameElement[0];
 						break;
@@ -1259,13 +1252,32 @@ public class Map {
 
 					default :
 						break;
+				}*/
+			
+			
+			for(int i = 0; i < dataset.getItemCount();++i){
+				String [] categoryElement =dataset.getKey(i).toString().split("-");
+				String tag ="", vidCat="";
+			
+				for(int j=1; j<=2;++j){                
+				switch (j) {
+										
+				 case 1 : // Cat1 ZoneTag                                          
+					 vidCat=categoryElement[0]; 
+					 tag=  z.getName();
+				      break;
+										
+				 case 2 : //Cat2 ZoneTag                                                 
+					 vidCat=dataset.getKey(i).toString(); 
+					 tag=  z.getName();
+				      	break;
+
+					default :
+						break;
 				}
-				
-				
-				
-				
-				//fullDataset.addValue(dataset.getValue(i), vidCat, tag); //z.getName()
-			   text = dataset.getValue(i)+";"+vidCat+";"+ tag+"\n";	// z.getName()
+			
+		
+			   text = dataset.getValue(i)+";"+vidCat+";"+ tag+";"+z.getNick()+"\n";	// z.getName()
 			   FileMethods.saveFile(text, "CSV/"+fileName[j-1], true);
 			   	}
 			}
@@ -1417,12 +1429,12 @@ public class Map {
 		*/  //------------------------------------------------------------------
 		
 		zones.clear();
-		Zone auxZone1 = new Zone("AUX");
+		Zone auxZone1 = new Zone("Cluster");
 		
 		ArrayList<String> ramm = new ArrayList<String>();
 		for(Cluster cs: clusterZoneList){
 			ramm =(ArrayList<String>) cs.getLeafNames();
-			auxZone1 = new Zone("--");
+			auxZone1 = new Zone("Cluster");
 			for(String nodeName: ramm){
 				auxZone1.addNode(this.getNodeByName(nodeName));
 				//System.out.println(nodeName);
@@ -1619,18 +1631,18 @@ public class Map {
 					
 		text += "<table border=\"1\"   style=\"font-size:12px\"    >";
 		text +="<tr><th>Zone</th><th>Color</th><th>Category</th><th>#Nodes</th><th>Nodes</th></tr>\n";
-		int p = 1;
+		//int p = 1;
 		for(Zone z : zones){
 			text +="<tr>";
 			text +="<td>";
-			text+= String.valueOf(p) + "</td> "
+			text+=  z.getName()+ "</td> "
 						+ "<td  style=\"color:rgb(" 
 						+ String.valueOf(z.zoneColor.getRed())+  ","
 		                + String.valueOf(z.zoneColor.getGreen())+","
 		                + String.valueOf(z.zoneColor.getBlue())+   ");\">";
 								
 		    text+= "&diams;&diams;&diams;&diams;</td> <td>";
-			text+=z.name +"</td> <td>";
+			text+=z.getNick() +"</td> <td>";
 			text+=String.valueOf(z.getSize()) +"</td> <td>";
 			
 			int jk = 1;
@@ -1641,7 +1653,7 @@ public class Map {
 			}
 			
 			text +="</td></tr>\n";
-			p++;
+			//p++;
 		}
 			
 		text += "</table>";
@@ -1652,14 +1664,14 @@ public class Map {
 	
 	public void printMapCategoriesInformation(String[] fileName){
 		String text= "";
-		String cab = "idImg;Vidrilo_Category;Tag\n";
+		String cab = "idImg;Vidrilo_Category;Tag;Nick\n";
 		
-		for(int i=0; i<=3;++i)
+		for(int i=0; i<=1;++i)
 		 FileMethods.saveFile(cab, "CSV/"+fileName[i], false);
 		
 		
 		for(Zone z : zones){
-			String[] tag = z.getName().split(" ");
+			//String[] tag = z.getName().split(" ");
 			for(Node n : z.areas){
 				String[] d = n.representative.imageName.split("/");
 				String[] imgName = d[d.length-1].split("\\.");
@@ -1668,7 +1680,7 @@ public class Map {
 				
 				
 				
-				for(int i=0; i<=3;++i){
+			/*	for(int i=0; i<=3;++i){
 				switch (i) {
 					case 0 :
 						text = imgName[0]+";"+vidCat[0]+";"+tag[0]+"\n";  //Cat1 Tag   
@@ -1688,7 +1700,32 @@ public class Map {
 						break;
 				}	
 				FileMethods.saveFile(text, "CSV/"+fileName[i], true);
-				}
+				}*/
+				
+				
+				//Nuevo Formato
+				
+				for(int i=0; i<=1;++i){
+					switch (i) {
+						
+					    case 0 :
+							text = imgName[0]+";"+vidCat[0]+";"+z.getName()+";"+z.getNick()+"\n";  // Cat1 ZoneTag
+							break;
+					   
+					    case 1 :
+							text = imgName[0]+";"+n.representative.category+";"+z.getName()+z.getNick()+"\n"; //Cat2 ZoneTag
+							break;		
+
+						default :
+							break;
+					}	
+					FileMethods.saveFile(text, "CSV/"+fileName[i], true);
+					}
+				
+				
+				
+				
+				
 				//text = t[0]+";"+n.representative.category+";"+zn[0]+"\n";
 				
 				

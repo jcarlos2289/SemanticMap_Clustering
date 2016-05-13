@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,6 +21,7 @@ public class Zone {
 	HashMap<String, Float> ZoneHistoMean;
 	Color zoneColor;
 	Cluster clus;
+	String nickName;
 	
 	
 	public Zone(String na){
@@ -30,25 +32,26 @@ public class Zone {
 		zoneColor = Color.white;
 	}
 	
-	public Zone (Node no){
+	/*public Zone (Node no){
 		representative = new Node();
 		areas = new ArrayList<Node>();
 		ZoneHistoMean = new HashMap<String,Float>();
 		addNode(no);
-		name = calcZoneName();
-	}
+		nickName = calcZoneName();
+		name ="Cluster";
+		
+	}*/
 	
 	private String calcZoneName() {
 		// TODO Auto-generated method stub
 	    ArrayList<String> auxFortags = new ArrayList<String>();
 		ArrayList<Float> auxFortagsValue = new ArrayList<Float>();
 		
-		for (Node no : areas) {
-			auxFortags.addAll(no.getTopXNodes(3));
-			auxFortagsValue.addAll(no.getTopXNodesValues(3));
-		}
+		/*for (Node no : areas) {
+			auxFortags.addAll(no.getTopXNodes(no.representative.tags.size()));  //cambiar por la dimensionalidad del modelo
+			auxFortagsValue.addAll(no.getTopXNodesValues(no.representative.tags.size()));
+			}
 		
-				
 		ConcurrentHashMap<String, Float> probTopTags = new ConcurrentHashMap<String, Float>();
 		for (int i = 0; i < auxFortags.size(); i++) {
 						
@@ -58,11 +61,51 @@ public class Zone {
 				     probTopTags.put(auxFortags.get(i), auxFortagsValue.get(i)/Collections.frequency(auxFortags,auxFortags.get(i)));
 				
 				
-		}
-		ArrayList<String> maxTag = new ArrayList<>();
-        maxTag = ListMethods.getTopXNodes(1, probTopTags);
+		}*/
 		
-		return maxTag.get(0);
+		//-----------------------
+		
+	/*	ConcurrentHashMap<String, Float> probTopTags = new ConcurrentHashMap<String, Float>();
+		
+		for (Node no : areas) {
+			int div = no.representative.tags.size();
+			for(Entry<String, Float> e : no.histoMean.entrySet()){
+				
+				if(probTopTags.containsKey(e.getKey()))
+					probTopTags.replace(e.getKey(), probTopTags.get(e.getKey())+ e.getValue()/div);
+					else
+				     probTopTags.put(e.getKey(), e.getValue()/div);
+			}
+			
+			}
+		
+		//------------------------------------
+		
+		*/
+		
+		ArrayList<String> maxTag = new ArrayList<>();
+       // maxTag = ListMethods.getTopXNodes(5, probTopTags);
+        
+        
+        
+        String nick ="";
+        
+      /*  for(String j : maxTag){
+        	nick += j +" ";
+        }*/
+        
+        ConcurrentHashMap<String, Float> gh = new ConcurrentHashMap<String, Float>();
+        gh.putAll(representative.histoMean);
+        maxTag = ListMethods.getTopXNodes(3, gh);
+        
+     //    nick +="%%%%%";
+        
+        for(String j : maxTag){
+        	nick += j +" ";
+        }
+        
+        
+		return nick.trim();
 	}
 
 	public int getSize(){
@@ -76,7 +119,7 @@ public class Zone {
 	public String toString(){
 		String result="";
 		
-		result = "Zone Category Tag:\t " +this.getName();
+		result = "Zone Category Tags:\t " +this.getNick();
 		result +="\nNodes in this zone:\t " + String.valueOf(this.areas.size());
 			
 		
@@ -85,7 +128,7 @@ public class Zone {
 	
 	public String toWebString(){
 		String text = "<html>\n";
-		text +="<h1> Zone Asigned Class: " +this.getName() +"</h1>";
+		text +="<h1> Zone Asigned Class: " +this.getNick() +"</h1>";
 			text+="<h2>Nodes in this Zone: "+ String.valueOf(this.areas.size())+"</h2>";
 			text += "\n</html>";
 		return text;
@@ -94,7 +137,7 @@ public class Zone {
 	public String getZoneContent(String[] tags){
 		String text ="";
 		
-		text += ";" +this.getName();
+		text += ";" +this.getName()+";"+this.getNick();
 		String[]ram = this.getName().split(" ");
 		text += ";" +ram[1];
 		text += ";" +String.valueOf(this.areas.size());
@@ -121,7 +164,8 @@ public class Zone {
 	
 	public void udpateStatus(){
 		calcRepresentative();
-		   name = calcZoneName();
+		nickName = calcZoneName();
+		
 	}
 
 	private void calcRepresentative() {
@@ -132,25 +176,13 @@ public class Zone {
 		
 		for (Node no : areas) {
 			representative.add(no.representative);
-			
-			
-			
-			
-		/*	for (Entry<String, Float> g: no.histoMean.entrySet()){
-				
-				//System.out.println(g.getKey());
-				
-				if(ZoneHistoMean.containsKey(g.getKey()))
-					ZoneHistoMean.put(g.getKey(),   ( ZoneHistoMean.get(g.getKey()) + g.getValue()/areas.size()));
-				else
-				 ZoneHistoMean.put(g.getKey(),g.getValue()/areas.size()); //g.getValue()/areas.size() g.getKey()
-				
-			}*/
-				
 		}
-		//auxNode.histoMean= ZoneHistoMean;
-		//representative = auxNode;
+	
 		
+	}
+	
+	public String getNick(){
+		return this.nickName;
 	}
 	
 	public PieDataset getChartDataset(){

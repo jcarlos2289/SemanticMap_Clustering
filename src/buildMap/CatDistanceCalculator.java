@@ -153,7 +153,7 @@ private float distanceOfNodes_KS(Node node1, Node node2){
 
 
 public void printMatrix(String name){
-    for (int x=0; x < distanceMatrix.length; x++) {
+   /* for (int x=0; x < distanceMatrix.length; x++) {
         System.out.print("|");
         for (int y=0; y < distanceMatrix[x].length; y++) {
           System.out.printf ("%.4f",distanceMatrix[x][y]);
@@ -162,7 +162,7 @@ public void printMatrix(String name){
         }
         System.out.println("|");
       }
-    
+    */
     String fileName = "DistMatrix_"+name;
     String ram="";
     for(Node n: categoryMap){

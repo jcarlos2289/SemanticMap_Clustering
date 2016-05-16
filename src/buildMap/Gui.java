@@ -775,7 +775,7 @@ public class Gui extends JFrame implements ActionListener {
 	     if(!args[0].equals("gui")){
 	   	     //Seleccionar la Secuencia-----------------------------------------------------------------------
 	    	 int key = Integer.parseInt(args[0]);
-	    	key = 8;
+	    	//key = 8;
 	   switch (key) {
 		case 1 :
 			//Seq1 Places AlexNet
@@ -1015,7 +1015,7 @@ for(int i = 0; i< thTest.length; i++){	 //agreagar el guardar el cluster(jpg)
             g.statusLabel.setText("Test # " + (i+1) + " of " + (thTest.length));
             
             
-            
+            /*
             
            
             //---------------------------------------

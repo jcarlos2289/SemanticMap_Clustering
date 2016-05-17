@@ -19,6 +19,8 @@ package hierClustering;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class Cluster
 {
 
@@ -191,6 +193,7 @@ public class Cluster
         }
         String name = getName() + (isLeaf() ? " (leaf)" : "") + (distance != null ? "  distance: " + distance : "");
         System.out.println(name);
+       // FileMethods.saveFile(name+"\n", "Console", true);
         for (Cluster child : getChildren())
         {
             child.toConsole(indent + 1);

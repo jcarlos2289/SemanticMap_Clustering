@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
+//import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,8 +44,8 @@ public class Zone {
 	
 	private String calcZoneName() {
 		// TODO Auto-generated method stub
-	    ArrayList<String> auxFortags = new ArrayList<String>();
-		ArrayList<Float> auxFortagsValue = new ArrayList<Float>();
+	  //  ArrayList<String> auxFortags = new ArrayList<String>();
+	//	ArrayList<Float> auxFortagsValue = new ArrayList<Float>();
 		
 		/*for (Node no : areas) {
 			auxFortags.addAll(no.getTopXNodes(no.representative.tags.size()));  //cambiar por la dimensionalidad del modelo

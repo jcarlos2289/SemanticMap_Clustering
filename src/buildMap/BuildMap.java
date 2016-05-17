@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 
 import buildMap.Map.AreaCoords;
 
@@ -61,9 +61,9 @@ public class BuildMap {
 		ycoord= new double[sequenceLength+1];
 		cats=new String[sequenceLength+1];
 		
-		
-		List<String> matrixData = new ArrayList<>();
-		matrixData = FileMethods.processFile(zoneMatrixPath);
+	/*	
+		//List<String> matrixData = new ArrayList<>();
+	//	matrixData = FileMethods.processFile(zoneMatrixPath);
 		//-----------------------------------------------------------------------------------------------
 		zoneCoords= new double[matrixData.size()][7];
 		
@@ -81,7 +81,7 @@ public class BuildMap {
 			zoneCoords[cat] = val;
 			cat++;
 			}
-		
+		*/
 		
 	/*	for(double[] m : zoneCoords){
 			for(double f : m)

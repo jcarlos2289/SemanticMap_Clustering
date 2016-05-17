@@ -44,6 +44,7 @@ public class Map {
 	boolean clusterGenerated = false;
 	Cluster globalCluster;
 	ArrayList<Cluster> clusterZoneList;
+	List<Cluster> clusterList2;
 	HashMap<Integer,Cluster> clusterHM;
 	int clusterCreationIndex;
 	
@@ -59,6 +60,7 @@ public class Map {
 		zones=new ArrayList<Zone>();
 		catIdentifiedTags2 = new HashMap<String,String>();
 		clusterZoneList = new ArrayList<Cluster>();
+		clusterList2 = new ArrayList<Cluster>();
 		clusterHM = new HashMap<Integer, Cluster>();
 		catID = new ArrayList<String>();
 		nodesByCat  = new ArrayList<String>();
@@ -935,9 +937,11 @@ public class Map {
 	}
 	
 	public Cluster generateHierCluster(){
-		Cluster cluster;
-				
-		if(!clusterGenerated){
+		//Cluster cluster;
+		
+		
+	
+		//if(!clusterGenerated){
 		//JScrollPane pane = new JScrollPane();
 	
 		//matrix de distancias
@@ -973,23 +977,39 @@ public class Map {
 		
 		//ClusteringAlgorithm alg = new DefaultClusteringAlgorithm();
 		ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
-		cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
+		clusterZoneList.clear();
+		clusterZoneList.addAll( alg.performFlatClustering(pdistMatrix, names, new AverageLinkageStrategy(),this.cutTh));
+		
+		
+		/*cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
 		globalCluster = new Cluster("Global");
 		globalCluster = cluster;
-		
-		clusterGenerated=true;
-		return cluster;
+		clusterGenerated=true;*/
+		/*return cluster;
 				
 		//cluster.toConsole(1);
 		//System.out.println(printCluster(cluster));
 		}else 
 		{
 			return globalCluster;
+		}*/
+		
+		
+		
+		if(!clusterGenerated){
+			//cluster = alg.performClustering(pdistMatrix, names, new AverageLinkageStrategy());  //SingleLinkageStrategy() CompleteLinkageStrategy() //CompleteLinkageStrategy()
+			//globalCluster = new Cluster("Global");
+			globalCluster = null;
+
+			clusterGenerated=true;
+			return null;
+			}
+		else
+		{
+			return globalCluster;
 		}
-		
-		
-		
-		
+
+			
 	}
 			
 	public String printCluster(Cluster cs, boolean fatherFound){
@@ -1053,7 +1073,7 @@ public class Map {
 		*/
 		//-------------------------------------------------------------------------------------------------------
 		
-		if(cs.getDistance()!=null &&  cs.getTotalDistance()<th1){//cs.getTotalDistance()> 0.09 &&
+		if(cs.getDistance()!=null &&  cs.getDistance().getDistance()<th1){//cs.getTotalDistance()> 0.09 &&  getTotalDistance     ///////////cs.getTotalDistance()///////////////////
 			List<String> nam = new ArrayList<String>();
 			nam = cs.getLeafNames();
 			String ram = "";
@@ -1288,13 +1308,19 @@ public class Map {
 	public void generateZones(double th1){
 		
 		cutTh = th1;
+		@SuppressWarnings("unused")//----------------------------------------Warning
 		Cluster cluster = generateHierCluster();
+		cluster = null;
+		globalCluster = null;
+		/*---------------------------------------Mayo 17
 		clusterZoneList.clear();
 		clusterHM.clear();
 		clusterCreationIndex = 0;
 		
 		ArrayList<String> ol = new ArrayList<String>();
 		ol = getClusterArray(cluster, th1); // gets an array list with the leafs of cluster separing cluster by #
+		
+		*///Mayo 17 
 		
 	//	System.out.println(printCluster(cluster, false));//imprimir clusters separados segun la distancia
 		//System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////");
@@ -1488,6 +1514,10 @@ public class Map {
 				zones.get(i).name = ram+" "+String.valueOf(Collections.frequency(zNames, ram));
 			}
 			
+			//String clustString ="Weight Value = ";
+			//cluster.toConsole(1);
+			//clustString += String.valueOf(cluster.getWeightValue());
+			//FileMethods.saveFile(clustString, "DatosCluster", false);
 		
 		
 		//Metodo Dos basado en similitud y 2 thresholds---------------------------------
